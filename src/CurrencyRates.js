@@ -1,7 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getCurrencies} from "./state/exchangeRates";
+import { getCurrencies} from "./state/exchangeRates"
 import { FormGroup, Label, Input } from 'reactstrap'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import  moment from 'moment'
 
 /*
 Aplikacja powinna umożliwić sprawdzenie aktualnego  CURRENT_RATE_Currency(?)
@@ -20,7 +23,9 @@ Wybrane kursy można pobierać na bieżąco z API NBP.
 class CurrencyRates extends React.Component {
 
   state = {
-    selectedRate: ''
+    selectedRate: '',
+    startDate: null,
+    endDate: null
   }
 
   handleChange = event => {
@@ -29,6 +34,21 @@ class CurrencyRates extends React.Component {
       selectedRate: event.target.value
     })
   }
+
+  handleChangeStart = date => {
+    this.setState({
+      startDate: date
+    })
+    console.log('start', date.format('YYYY-MM-DD'))
+
+  }
+  handleChangeEnd = date => {
+    this.setState({
+      endDate: date
+    })
+    console.log('end', date.format('YYYY-MM-DD'))
+  }
+
 
   componentDidMount() {
     fetch('http://api.nbp.pl/api/exchangerates/tables/A?format=json')
@@ -49,6 +69,23 @@ class CurrencyRates extends React.Component {
         </FormGroup>
 
 
+        <DatePicker
+          dateFormat="YYYY/MM/DD"
+          selected={this.state.startDate}
+          selectsStart
+          startDate={this.state.startDate}
+          endDate={this.state.endDate}
+          onChange={this.handleChangeStart}
+        />
+
+        <DatePicker
+          dateFormat="YYYY/MM/DD"
+          selected={this.state.endDate}
+          selectsEnd
+          startDate={this.state.startDate}
+          endDate={this.state.endDate}
+          onChange={this.handleChangeEnd}
+        />
         {this.props.rates.filter(rate => rate.currency === this.state.selectedRate ).map( e =><p> {e.currency}  {e.mid}</p>)}
 
         <h1>###################</h1>

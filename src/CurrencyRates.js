@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { getCurrencies} from "./state/exchangeRates";
 import { FormGroup, Label, Input } from 'reactstrap'
 
 /*
@@ -19,7 +20,6 @@ Wybrane kursy można pobierać na bieżąco z API NBP.
 class CurrencyRates extends React.Component {
 
   state = {
-    rates: [],
     selectedRate: ''
   }
 
@@ -40,23 +40,34 @@ class CurrencyRates extends React.Component {
   render() {
     return (
       <div>
-        Currency Rates
+        <h1>Currency Rates</h1>
         <FormGroup>
-          <Label for="exampleSelect">Choose calculator </Label>
+          <Label for="exampleSelect">Choose currency </Label>
           <Input type="select" name="select" id="exampleSelect" onChange={this.handleChange} >
-            {this.state.rates.map(rate => <option>{rate.currency}</option>)}
+            {this.props.rates.map(rate => <option>{rate.currency}</option>)}
           </Input>
         </FormGroup>
 
 
-        {this.state.rates.filter(rate => rate.currency === this.state.selectedRate ).map( e =><p> {e.currency}  {e.mid}</p>)}
+        {this.props.rates.filter(rate => rate.currency === this.state.selectedRate ).map( e =><p> {e.currency}  {e.mid}</p>)}
 
-
+        <h1>###################</h1>
       </div>
 
     )
   }
 }
 
+const mapStateToProps = state => ({
+  rates: state.exchangeRates.data
+})
 
-export default CurrencyRates
+const mapDispatchToProps = dispatch => ({
+  getCurrencies: () => dispatch(getCurrencies())
+})
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+) (CurrencyRates)

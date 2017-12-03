@@ -17,18 +17,24 @@ Wybrane kursy można pobierać na bieżąco z API NBP.
 
 class CurrencyRates extends React.Component {
 
+  state = {
+    rates: []
+  }
 
 
   componentDidMount() {
     fetch('http://api.nbp.pl/api/exchangerates/tables/A?format=json')
       .then(
         response => response.json()
-      ).then(data => console.log(data[0].rates))
+      ).then(data => this.setState({rates: (data[0].rates)}))
   }
 
   render() {
     return (
-      <div>Currency Rates</div>
+      <div>
+        Currency Rates
+        {this.state.rates.map(rate => <li>{rate.code}</li>)}
+      </div>
 
     )
   }

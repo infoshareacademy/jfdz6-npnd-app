@@ -2,9 +2,10 @@ import { compose, createStore, combineReducers, applyMiddleware } from 'redux'
 import persistState from 'redux-localstorage'
 import thunk from 'redux-thunk'
 
+import exchangeRates from './state/exchangeRates'
 
 const reducer = combineReducers({
-
+  exchangeRates: exchangeRates
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -15,7 +16,7 @@ const enhancer = composeEnhancers(
 )
 
 const store = createStore(
-    // reducer,
+    reducer,
     enhancer
 )
 

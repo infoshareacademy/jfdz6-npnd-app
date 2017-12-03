@@ -1,21 +1,52 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux'
 
 class CalculatorInputCurrency extends Component {
+  state = {
+    userValue: null,
+    selectValue: null
+  }
+
+  handleChange = event => {
+    const formField = event.currentTarget
+    const userValue = formField.value
+    this.setState({
+      userValue
+    })
+  }
+
+  handleSelectChange = event => {
+    this.setState({
+      selectValue: event.target.value
+    })
+  }
+
   render() {
     return (
       <div>
         <form>
-          <input type='text'/>
+          <input
+            type='text'
+            value={this.state.userValue}
+            onChange={this.handleChange}
+          />
         </form>
-        <select>
-          <option value='PLN'>PLN</option>
-          <option value='USD'>USD</option>
-          <option value='EUR'>EUR</option>
-          <option value='CHF'>CHF</option>
+        <select onChange={this.handleSelectChange}>
+          {
+            this.props.rates.map(
+              rate => <option value={rate.code}>{rate.currency}</option>
+            )
+          }
         </select>
       </div>
     )
   }
 }
 
-export default CalculatorInputCurrency
+const mapStateToProps = state => ({
+  rates: state.exchangeRates.data
+})
+
+export default connect(
+  mapStateToProps
+)(CalculatorInputCurrency)

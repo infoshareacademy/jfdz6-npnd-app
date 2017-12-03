@@ -33,7 +33,9 @@ class CurrencyRates extends React.Component {
     return (
       <div>
         Currency Rates
-        {this.state.rates.map(rate => <li>{rate.code}</li>)}
+        <ul>
+        {this.state.rates.map(rate => <li>{rate.currency} {rate.code} {rate.mid}</li>)}
+        </ul>
       </div>
 
     )

@@ -12,8 +12,6 @@ lub
 historycznego kursu wybranej waluty. Historical_RATE_Currency(?)
 
 
-Currency Redux ducks
-
 Powinno być możliwe porównanie wizualne zmian kursu w wybranym
 okresie za pomocą wykresu.
 

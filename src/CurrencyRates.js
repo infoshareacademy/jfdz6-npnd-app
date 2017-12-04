@@ -11,7 +11,6 @@ Aplikacja powinna umożliwić sprawdzenie aktualnego  CURRENT_RATE_Currency(?)
 lub
 historycznego kursu wybranej waluty. Historical_RATE_Currency(?)
 
-
 Powinno być możliwe porównanie wizualne zmian kursu w wybranym
 okresie za pomocą wykresu.
 

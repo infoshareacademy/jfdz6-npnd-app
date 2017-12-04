@@ -1,6 +1,6 @@
-const BEGIN = 'GET_BEGIN'
-const SUCCESS = 'GET_SUCCESS'
-const FAIL = 'GET_FAIL'
+const BEGIN = 'historicalExchangeRates/GET_BEGIN'
+const SUCCESS = 'historicalExchangeRates/GET_SUCCESS'
+const FAIL = 'historicalExchangeRates/GET_FAIL'
 
 export const getHistoricalCurrencies = (currencyStartDate, currencyEndDate) => dispatch => {
   dispatch({ type: BEGIN })

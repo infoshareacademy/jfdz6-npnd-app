@@ -3,9 +3,11 @@ import persistState from 'redux-localstorage'
 import thunk from 'redux-thunk'
 
 import exchangeRates from './state/exchangeRates'
+import historicalExchangeRates from "./state/historicalExchangeRates";
 
 const reducer = combineReducers({
-  exchangeRates: exchangeRates
+  exchangeRates: exchangeRates,
+  historicalExchangeRates: historicalExchangeRates
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

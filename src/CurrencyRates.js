@@ -1,10 +1,10 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { getCurrencies} from "./state/exchangeRates"
-import { FormGroup, Label, Input, Button } from 'reactstrap'
+import {connect} from 'react-redux'
+import {getCurrencies} from "./state/exchangeRates"
+import {FormGroup, Label, Input, Button} from 'reactstrap'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { getHistoricalCurrencies, resetHistoricalCurrencies } from "./state/historicalExchangeRates";
+import {getHistoricalCurrencies, resetHistoricalCurrencies} from "./state/historicalExchangeRates";
 
 /*
 Aplikacja powinna umożliwić sprawdzenie aktualnego  CURRENT_RATE_Currency(?)
@@ -29,8 +29,8 @@ class CurrencyRates extends React.Component {
   }
 
   handleChange = event => {
-    console.log(event.target.value)
-    this.setState( {
+
+    this.setState({
       selectedRate: event.target.value
     })
   }
@@ -49,14 +49,13 @@ class CurrencyRates extends React.Component {
     })
   }
 
-  handleHistoricalRates = ()  => {
+  handleHistoricalRates = () => {
 
     const currencyStartDate = this.state.startDate.format('YYYY-MM-DD')
     const currencyEndDate = this.state.endDate.format('YYYY-MM-DD')
-    console.log(currencyStartDate)
-    console.log(currencyEndDate)
-    this.props.getHistoricalCurrencies(currencyStartDate, currencyEndDate)
+    const currencyId = this.props.rates.filter(e => e.currency === this.state.selectedRate).map(e => e.code)[0]
 
+    this.props.getHistoricalCurrencies(currencyStartDate, currencyEndDate, currencyId)
   }
 
   componentDidMount() {
@@ -72,12 +71,12 @@ class CurrencyRates extends React.Component {
         <h1>Currency Rates</h1>
         <FormGroup>
           <Label for="exampleSelect">Choose currency </Label>
-          <Input type="select" name="select" id="exampleSelect" onChange={this.handleChange} >
+          <Input type="select" name="select" id="exampleSelect" onChange={this.handleChange}>
             {this.props.rates.map(rate => <option>{rate.currency}</option>)}
           </Input>
         </FormGroup>
 
-          Od
+        Od
         <DatePicker
           dateFormat="YYYY/MM/DD"
           selected={this.state.startDate}
@@ -86,7 +85,7 @@ class CurrencyRates extends React.Component {
           endDate={this.state.endDate}
           onChange={this.handleChangeStart}
         />
-          Do
+        Do
         <DatePicker
           dateFormat="YYYY/MM/DD"
           selected={this.state.endDate}
@@ -99,10 +98,10 @@ class CurrencyRates extends React.Component {
         <Button onClick={this.handleHistoricalRates}>
           Show rates
         </Button>
-        {this.props.historicalRates.map( e =>  <p>{e.currency} {e.mid}</p>)}
+        {this.props.historicalRates.map(e => <p>{e.currency} {e.mid}</p>)}
 
-        {this.props.rates.filter(rate => rate.currency === this.state.selectedRate ).map( e =><p> {e.currency}  {e.mid}</p>)}
-
+        {this.props.rates.filter(rate => rate.currency === this.state.selectedRate).map(e =>
+          <p> {e.currency} {e.mid}</p>)}
 
 
         <h1>###################</h1>
@@ -119,7 +118,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getCurrencies: () => dispatch(getCurrencies()),
-  getHistoricalCurrencies: (currencyStartDate, currencyEndDate) => dispatch(getHistoricalCurrencies(currencyStartDate, currencyEndDate)),
+  getHistoricalCurrencies: (currencyStartDate, currencyEndDate, currencyId) => dispatch(getHistoricalCurrencies(currencyStartDate, currencyEndDate, currencyId)),
   removeHistory: () => dispatch(resetHistoricalCurrencies())
 })
 
@@ -127,4 +126,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-) (CurrencyRates)
+)(CurrencyRates)

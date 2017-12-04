@@ -3,14 +3,14 @@ const SUCCESS = 'historicalExchangeRates/GET_SUCCESS'
 const FAIL = 'historicalExchangeRates/GET_FAIL'
 const RESET = 'historicalExchangeRates/GET_RESET'
 
-export const getHistoricalCurrencies = (currencyStartDate, currencyEndDate) => dispatch => {
+export const getHistoricalCurrencies = (currencyStartDate, currencyEndDate, currencyId) => dispatch => {
   dispatch({ type: BEGIN })
   fetch(
-    `https://api.nbp.pl/api/exchangerates/tables/A/${currencyStartDate}/${currencyEndDate}?format=json`
+    `https://api.nbp.pl/api/exchangerates/rates/A/${currencyId}/${currencyStartDate}/${currencyEndDate}?format=json`
   ).then(
     response => response.json()
   ).then(
-    data => dispatch({ type: SUCCESS, historicalData: data[1].rates })
+    data => dispatch({ type: SUCCESS, historicalData: data.rates })
   ).catch(
     error => dispatch({ type: FAIL, error })
   )
@@ -50,13 +50,6 @@ export default (state = initialState, action = {}) => {
         data: [],
         getting: false,
         error: action.error
-      }
-    case RESET:
-      return {
-        ...state,
-        data: [],
-        historicalData: action.historicalData,
-        getting: false
       }
     default:
       return state

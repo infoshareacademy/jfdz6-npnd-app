@@ -40,19 +40,22 @@ export default (state = initialState, action = {}) => {
     case SUCCESS:
       return {
         ...state,
-        data: action.historicalData,
+        data: [],
+        historicalData: action.historicalData,
         getting: false
       }
     case FAIL:
       return {
         ...state,
+        data: [],
         getting: false,
         error: action.error
       }
     case RESET:
       return {
         ...state,
-        data: action.historicalData,
+        data: [],
+        historicalData: action.historicalData,
         getting: false
       }
     default:

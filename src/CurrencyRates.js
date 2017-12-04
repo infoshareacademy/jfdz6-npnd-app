@@ -4,7 +4,7 @@ import { getCurrencies} from "./state/exchangeRates"
 import { FormGroup, Label, Input, Button } from 'reactstrap'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { getHistoricalCurrencies } from "./state/historicalExchangeRates";
+import { getHistoricalCurrencies, resetHistoricalCurrencies } from "./state/historicalExchangeRates";
 
 /*
 Aplikacja powinna umożliwić sprawdzenie aktualnego  CURRENT_RATE_Currency(?)
@@ -62,6 +62,7 @@ class CurrencyRates extends React.Component {
   componentDidMount() {
 
     this.props.getCurrencies()
+    this.props.removeHistory()
 
   }
 
@@ -118,7 +119,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getCurrencies: () => dispatch(getCurrencies()),
-  getHistoricalCurrencies: (currencyStartDate, currencyEndDate) => dispatch(getHistoricalCurrencies(currencyStartDate, currencyEndDate))
+  getHistoricalCurrencies: (currencyStartDate, currencyEndDate) => dispatch(getHistoricalCurrencies(currencyStartDate, currencyEndDate)),
+  removeHistory: () => dispatch(resetHistoricalCurrencies())
 })
 
 

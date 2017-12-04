@@ -1,6 +1,7 @@
 const BEGIN = 'historicalExchangeRates/GET_BEGIN'
 const SUCCESS = 'historicalExchangeRates/GET_SUCCESS'
 const FAIL = 'historicalExchangeRates/GET_FAIL'
+const RESET = 'historicalExchangeRates/GET_RESET'
 
 export const getHistoricalCurrencies = (currencyStartDate, currencyEndDate) => dispatch => {
   dispatch({ type: BEGIN })
@@ -14,6 +15,11 @@ export const getHistoricalCurrencies = (currencyStartDate, currencyEndDate) => d
     error => dispatch({ type: FAIL, error })
   )
 }
+
+export const resetHistoricalCurrencies = () => ({
+  type: RESET,
+  historicalData: []
+})
 
 const initialState = {
   historicalData: [],
@@ -42,6 +48,12 @@ export default (state = initialState, action = {}) => {
         ...state,
         getting: false,
         error: action.error
+      }
+    case RESET:
+      return {
+        ...state,
+        data: action.historicalData,
+        getting: false
       }
     default:
       return state

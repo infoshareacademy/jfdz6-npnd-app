@@ -114,7 +114,7 @@ class CurrencyRates extends React.Component {
 
 const mapStateToProps = state => ({
   rates: state.exchangeRates.data,
-  historicalRates: state.historicalExchangeRates.data
+  historicalRates: state.historicalExchangeRates.historicalData
 })
 
 const mapDispatchToProps = dispatch => ({

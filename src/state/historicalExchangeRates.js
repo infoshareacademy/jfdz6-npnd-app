@@ -5,7 +5,7 @@ const FAIL = 'GET_FAIL'
 export const getHistoricalCurrencies = (currencyStartDate, currencyEndDate) => dispatch => {
   dispatch({ type: BEGIN })
   fetch(
-    `http://api.nbp.pl/api/exchangerates/tables/A/${currencyStartDate}/${currencyEndDate}?format=json`
+    `https://api.nbp.pl/api/exchangerates/tables/A/${currencyStartDate}/${currencyEndDate}?format=json`
   ).then(
     response => response.json()
   ).then(

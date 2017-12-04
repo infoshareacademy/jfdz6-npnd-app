@@ -37,17 +37,15 @@ class CurrencyRates extends React.Component {
 
 
   handleChangeStart = date => {
-    // const currencyStartDate = date.format('YYYY-MM-DD')
 
     this.setState({
-      startDate: date,
+      startDate: date
     })
 
   }
   handleChangeEnd = date => {
-    // const currencyEndDate = date.format('YYYY-MM-DD')
     this.setState({
-      endDate: date,
+      endDate: date
     })
   }
 
@@ -63,7 +61,7 @@ class CurrencyRates extends React.Component {
 
   componentDidMount() {
 
-    // this.props.getCurrencies()
+    this.props.getCurrencies()
 
   }
 
@@ -100,7 +98,7 @@ class CurrencyRates extends React.Component {
         <Button onClick={this.handleHistoricalRates}>
           Show rates
         </Button>
-        {this.props.historicalRates.map(currency => <p>{currency.mid}</p>)}
+        {/*{this.props.historicalRates.filter(currency => currency.currency === this.state.selectedRate).map( e =>  <p>{e.mid}</p>)}*/}
 
         {this.props.rates.filter(rate => rate.currency === this.state.selectedRate ).map( e =><p> {e.currency}  {e.mid}</p>)}
 
@@ -114,7 +112,7 @@ class CurrencyRates extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  rates: state.exchangeRates.data
+  rates: state.exchangeRates.data,
   historicalRates: state.historicalExchangeRates.historicalData
 })
 

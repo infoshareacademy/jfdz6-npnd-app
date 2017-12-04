@@ -9,7 +9,7 @@ export const getHistoricalCurrencies = (currencyStartDate, currencyEndDate) => d
   ).then(
     response => response.json()
   ).then(
-    data => dispatch({ type: SUCCESS, historicalData: data[0].rates })
+    data => dispatch({ type: SUCCESS, historicalData: data[1].rates })
   ).catch(
     error => dispatch({ type: FAIL, error })
   )

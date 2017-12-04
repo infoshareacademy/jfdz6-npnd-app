@@ -61,7 +61,7 @@ class CurrencyRates extends React.Component {
   componentDidMount() {
 
     this.props.getCurrencies()
-    this.props.removeHistory()
+    this.props.resetHistoricalCurrencies()
 
   }
 
@@ -119,7 +119,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getCurrencies: () => dispatch(getCurrencies()),
   getHistoricalCurrencies: (currencyStartDate, currencyEndDate, currencyId) => dispatch(getHistoricalCurrencies(currencyStartDate, currencyEndDate, currencyId)),
-  removeHistory: () => dispatch(resetHistoricalCurrencies())
+  resetHistoricalCurrencies: () => dispatch(resetHistoricalCurrencies())
 })
 
 

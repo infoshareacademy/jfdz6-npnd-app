@@ -1,10 +1,10 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {getCurrencies} from "./state/exchangeRates"
-import {FormGroup, Label, Input, Button} from 'reactstrap'
+import { connect } from 'react-redux'
+import { getCurrencies } from "./state/exchangeRates"
+import { FormGroup, Label, Input, Button } from 'reactstrap'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import {getHistoricalCurrencies, resetHistoricalCurrencies} from "./state/historicalExchangeRates";
+import { getHistoricalCurrencies, resetHistoricalCurrencies } from "./state/historicalExchangeRates";
 
 /*
 Aplikacja powinna umożliwić sprawdzenie aktualnego  CURRENT_RATE_Currency(?)

@@ -98,7 +98,7 @@ class CurrencyRates extends React.Component {
         <Button onClick={this.handleHistoricalRates}>
           Show rates
         </Button>
-        {/*{this.props.historicalRates.filter(currency => currency.currency === this.state.selectedRate).map( e =>  <p>{e.mid}</p>)}*/}
+        {this.props.historicalRates.map( e =>  <p>{e.currency} {e.mid}</p>)}
 
         {this.props.rates.filter(rate => rate.currency === this.state.selectedRate ).map( e =><p> {e.currency}  {e.mid}</p>)}
 
@@ -113,7 +113,7 @@ class CurrencyRates extends React.Component {
 
 const mapStateToProps = state => ({
   rates: state.exchangeRates.data,
-  historicalRates: state.historicalExchangeRates.historicalData
+  historicalRates: state.historicalExchangeRates.data
 })
 
 const mapDispatchToProps = dispatch => ({

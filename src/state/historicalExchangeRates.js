@@ -34,7 +34,7 @@ export default (state = initialState, action = {}) => {
     case SUCCESS:
       return {
         ...state,
-        data: action.data,
+        data: action.historicalData,
         getting: false
       }
     case FAIL:

@@ -2,14 +2,14 @@ const BEGIN = 'GET_BEGIN'
 const SUCCESS = 'GET_SUCCESS'
 const FAIL = 'GET_FAIL'
 
-export const getHistoricalCurrencies = (startDate, endDate) => dispatch => {
+export const getHistoricalCurrencies = (currencyStartDate, currencyEndDate) => dispatch => {
   dispatch({ type: BEGIN })
   fetch(
-    'http://api.nbp.pl/api/exchangerates/tables/A?format=json'
+    `http://api.nbp.pl/api/exchangerates/tables/A/${currencyStartDate}/${currencyEndDate}?format=json`
   ).then(
     response => response.json()
   ).then(
-    data => dispatch({ type: SUCCESS, data: data[0].rates })
+    data => dispatch({ type: SUCCESS, historicalData: data[0].rates })
   ).catch(
     error => dispatch({ type: FAIL, error })
   )

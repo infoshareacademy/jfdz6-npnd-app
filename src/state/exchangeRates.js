@@ -2,7 +2,7 @@ const BEGIN = 'GET_BEGIN'
 const SUCCESS = 'GET_SUCCESS'
 const FAIL = 'GET_FAIL'
 
-export const getCurrencies = () => dispatch => {
+export const  getCurrencies = () => dispatch => {
   dispatch({ type: BEGIN })
   fetch(
     'http://api.nbp.pl/api/exchangerates/tables/A?format=json'

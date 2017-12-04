@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getCurrencies} from "./state/exchangeRates"
-import { FormGroup, Label, Input } from 'reactstrap'
+import { FormGroup, Label, Input, Button } from 'reactstrap'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import  moment from 'moment'
+import { getHistoricalCurrencies } from "./state/historicalExchangeRates";
 
 /*
 Aplikacja powinna umożliwić sprawdzenie aktualnego  CURRENT_RATE_Currency(?)
@@ -35,26 +35,36 @@ class CurrencyRates extends React.Component {
     })
   }
 
+
   handleChangeStart = date => {
+    // const currencyStartDate = date.format('YYYY-MM-DD')
+
     this.setState({
-      startDate: date
+      startDate: date,
     })
-    console.log('start', date.format('YYYY-MM-DD'))
 
   }
   handleChangeEnd = date => {
+    // const currencyEndDate = date.format('YYYY-MM-DD')
     this.setState({
-      endDate: date
+      endDate: date,
     })
-    console.log('end', date.format('YYYY-MM-DD'))
   }
 
+  handleHistoricalRates = ()  => {
+
+    const currencyStartDate = this.state.startDate.format('YYYY-MM-DD')
+    const currencyEndDate = this.state.endDate.format('YYYY-MM-DD')
+    console.log(currencyStartDate)
+    console.log(currencyEndDate)
+    this.props.getHistoricalCurrencies(currencyStartDate, currencyEndDate)
+
+  }
 
   componentDidMount() {
-    fetch('http://api.nbp.pl/api/exchangerates/tables/A?format=json')
-      .then(
-        response => response.json()
-      ).then(data => this.setState({rates: (data[0].rates)}))
+
+    // this.props.getCurrencies()
+
   }
 
   render() {
@@ -68,7 +78,7 @@ class CurrencyRates extends React.Component {
           </Input>
         </FormGroup>
 
-
+          Od
         <DatePicker
           dateFormat="YYYY/MM/DD"
           selected={this.state.startDate}
@@ -77,7 +87,7 @@ class CurrencyRates extends React.Component {
           endDate={this.state.endDate}
           onChange={this.handleChangeStart}
         />
-
+          Do
         <DatePicker
           dateFormat="YYYY/MM/DD"
           selected={this.state.endDate}
@@ -86,7 +96,15 @@ class CurrencyRates extends React.Component {
           endDate={this.state.endDate}
           onChange={this.handleChangeEnd}
         />
+
+        <Button onClick={this.handleHistoricalRates}>
+          Show rates
+        </Button>
+        {this.props.historicalRates.map(currency => <p>{currency.mid}</p>)}
+
         {this.props.rates.filter(rate => rate.currency === this.state.selectedRate ).map( e =><p> {e.currency}  {e.mid}</p>)}
+
+
 
         <h1>###################</h1>
       </div>
@@ -97,10 +115,12 @@ class CurrencyRates extends React.Component {
 
 const mapStateToProps = state => ({
   rates: state.exchangeRates.data
+  historicalRates: state.historicalExchangeRates.historicalData
 })
 
 const mapDispatchToProps = dispatch => ({
-  getCurrencies: () => dispatch(getCurrencies())
+  getCurrencies: () => dispatch(getCurrencies()),
+  getHistoricalCurrencies: (currencyStartDate, currencyEndDate) => dispatch(getHistoricalCurrencies(currencyStartDate, currencyEndDate))
 })
 
 

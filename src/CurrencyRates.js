@@ -69,6 +69,7 @@ class CurrencyRates extends React.Component {
 
   }
   handleChangeEnd = date => {
+
     this.setState({
       endDate: date
     })
@@ -89,16 +90,23 @@ class CurrencyRates extends React.Component {
     this.props.resetHistoricalCurrencies()
   }
 
-  componentDidUpdate(){
-    data.datasets[0].data = this.props.historicalRates.map(e => e.mid)
-    data.labels = this.props.historicalRates.map(e => e.effectiveDate)
-    data.datasets[0].label = this.state.selectedRate
-  }
-
-
-
   render() {
+
+    const chartData = {
+      ...data,
+      labels: this.props.historicalRates.map(e => e.effectiveDate),
+      datasets: [ {
+        ...data.datasets[0],
+        data: this.props.historicalRates.map(e => e.mid),
+        label: this.state.selectedRate
+      }
+      ]
+    }
+
     return (
+
+
+
       <div>
         <h1>Currency Rates</h1>
         <FormGroup>
@@ -130,15 +138,14 @@ class CurrencyRates extends React.Component {
         <Button onClick={this.handleHistoricalRates}>
           Show rates
         </Button>
-        {this.props.historicalRates.map(e => <p> {e.mid}</p>)}
+        {/*{this.props.historicalRates.map(e => <p> {e.mid}</p>)}*/}
 
         {this.props.rates.filter(rate => rate.currency === this.state.selectedRate).map(e =>
           <p> {e.currency} {e.mid}</p>)}
 
 
-        <Line data={data} redraw />
+        <Line data={chartData} redraw />
 
-        <h1>###################</h1>
       </div>
 
     )

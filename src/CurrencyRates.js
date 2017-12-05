@@ -4,7 +4,8 @@ import { getCurrencies } from "./state/exchangeRates"
 import { FormGroup, Label, Input, Button } from 'reactstrap'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { getHistoricalCurrencies, resetHistoricalCurrencies } from "./state/historicalExchangeRates";
+import { getHistoricalCurrencies, resetHistoricalCurrencies } from "./state/historicalExchangeRates"
+import { Line } from 'react-chartjs-2';
 
 /*
 Aplikacja powinna umożliwić sprawdzenie aktualnego  CURRENT_RATE_Currency(?)
@@ -17,12 +18,39 @@ okresie za pomocą wykresu.
 Wybrane kursy można pobierać na bieżąco z API NBP.
  */
 
+const data = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [
+    {
+      label: 'My First dataset',
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: 'rgba(75,192,192,0.4)',
+      borderColor: 'rgba(75,192,192,1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: [3,4,2]
+    }
+  ]
+}
+
 class CurrencyRates extends React.Component {
 
   state = {
     selectedRate: '',
     startDate: null,
-    endDate: null
+    endDate: null,
   }
 
   handleChange = event => {
@@ -53,6 +81,12 @@ class CurrencyRates extends React.Component {
     const currencyId = this.props.rates.filter(e => e.currency === this.state.selectedRate).map(e => e.code)[0]
 
     this.props.getHistoricalCurrencies(currencyStartDate, currencyEndDate, currencyId)
+
+
+
+    console.log(this.props.historicalRates.map(e => e.mid))
+    console.log(this.props.historicalRates.map(e => e.effectiveDate))
+
   }
 
   componentDidMount() {
@@ -61,6 +95,13 @@ class CurrencyRates extends React.Component {
     this.props.resetHistoricalCurrencies()
 
   }
+
+  componentDidUpdate(){
+    data.datasets.data = this.props.historicalRates.map(e => e.mid)
+    data.labels = this.props.historicalRates.map(e => e.effectiveDate)
+  }
+
+
 
   render() {
     return (
@@ -95,11 +136,13 @@ class CurrencyRates extends React.Component {
         <Button onClick={this.handleHistoricalRates}>
           Show rates
         </Button>
-        {this.props.historicalRates.map(e => <p>{e.currency} {e.mid}</p>)}
+        {this.props.historicalRates.map(e => <p> {e.mid}</p>)}
 
         {this.props.rates.filter(rate => rate.currency === this.state.selectedRate).map(e =>
           <p> {e.currency} {e.mid}</p>)}
 
+
+        <Line data={data} redraw />
 
         <h1>###################</h1>
       </div>

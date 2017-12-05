@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 class CalculatorInputCurrency extends Component {
   state = {
     userValue: null,
-    selectValue: null
+    selectValue: 'THB'
   }
 
   handleChange = event => {

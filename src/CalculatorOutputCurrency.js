@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 
+import CalculatorInputCurrency from './CalculatorInputCurrency'
+
 class CalculatorOutputCurrency extends Component {
   render() {
     return (
       <div>
-        <form>
-          <input type='text'/>
-        </form>
-        <select>
-          <option value='PLN'>PLN</option>
-        </select>
+        <p>Podana kwota w PLN wynosi: {}</p>
       </div>
     )
   }

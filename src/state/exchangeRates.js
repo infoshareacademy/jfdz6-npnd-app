@@ -1,6 +1,13 @@
+const ADD = 'ADD'
+
 const BEGIN = 'GET_BEGIN'
 const SUCCESS = 'GET_SUCCESS'
 const FAIL = 'GET_FAIL'
+
+export const add = value => ({
+  type: ADD,
+  userValue: value
+})
 
 export const getCurrencies = () => dispatch => {
   dispatch({ type: BEGIN })
@@ -20,11 +27,18 @@ const initialState = {
   getting: false,
   adding: false,
   removing: false,
-  error: null
+  error: null,
+  userValue: null,
+  selectValue: 'THB'
 }
 
 export default (state = initialState, action = {}) => {
   switch(action.type) {
+    case ADD:
+      return {
+        ...state,
+        userValue: action.userValue
+      }
     case BEGIN:
       return {
         ...state,

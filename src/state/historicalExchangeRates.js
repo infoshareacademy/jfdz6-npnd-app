@@ -24,8 +24,6 @@ export const resetHistoricalCurrencies = () => dispatch => {
 const initialState = {
   historicalData: [],
   getting: false,
-  adding: false,
-  removing: false,
   error: null
 }
 

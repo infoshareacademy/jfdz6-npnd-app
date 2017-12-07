@@ -50,7 +50,9 @@ class CurrencyRates extends React.Component {
   state = {
     selectedRate: '',
     startDate: null,
-    endDate: null
+    endDate: null,
+    getting: false,
+    error: null
   }
 
   handleChange = event => {
@@ -111,7 +113,7 @@ class CurrencyRates extends React.Component {
         <h1>Currency Rates</h1>
         <FormGroup>
           <Label for="exampleSelect">Choose currency </Label>
-          <Input type="select" name="select" id="exampleSelect" onChange={this.handleChange}>
+          <Input type="select" name="select" id="exampleSelect" placeholder="-" onChange={this.handleChange}>
             {this.props.rates.map(rate => <option>{rate.currency}</option>)}
           </Input>
         </FormGroup>
@@ -138,13 +140,13 @@ class CurrencyRates extends React.Component {
         <Button onClick={this.handleHistoricalRates}>
           Show rates
         </Button>
-        {/*{this.props.historicalRates.map(e => <p> {e.mid}</p>)}*/}
 
-        {this.props.rates.filter(rate => rate.currency === this.state.selectedRate).map(e =>
-          <p> {e.currency} {e.mid}</p>)}
+        {
+          this.props.rates.filter(rate => rate.currency === this.state.selectedRate)
+                          .map(e => <p> {e.currency} {e.mid}</p>)
+        }
 
-
-        <Line data={chartData} redraw />
+        <Line data={chartData} />
 
       </div>
 

@@ -5,14 +5,18 @@ import CalculatorInputCurrency from './CalculatorInputCurrency'
 
 class CalculatorOutputCurrency extends Component {
 
-  calculateOutput = value => {
-    return value * this.props.rates.mid
-  }
+  // calculateOutput = this.props.userValue => {
+  //   const findMid = (this.props.selectValue) => {
+  //     return this.props.rates.find(item => item.code === this.props.selectValue).mid
+  //   }
+  //   return this.props.userValue * findMid(this.props.selectValue)
+  // }
+
 
   render() {
     return (
       <div>
-        <p>Podana kwota w PLN wynosi:{this.calculateOutput(this.props.userValue)}</p>
+        <p>Podana kwota w PLN wynosi:{this.props.userValue}</p>
       </div>
     )
   }
@@ -20,7 +24,8 @@ class CalculatorOutputCurrency extends Component {
 
 const mapStateToProps = state => ({
   rates: state.exchangeRates.data,
-  userValue: state.exchangeRates.userValue
+  userValue: state.exchangeRates.userValue,
+  selectValue: state.exchangeRates.selectValue
 })
 
 export default connect(

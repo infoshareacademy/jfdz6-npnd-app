@@ -29,10 +29,7 @@ const initialState = {
   removing: false,
   error: null,
   userValue: null,
-  selectValue: 'THB',
-  // selectRate: function() {
-  //   return this.selectValue
-  // }
+  selectValue: 'THB'
 }
 
 export default (state = initialState, action = {}) => {

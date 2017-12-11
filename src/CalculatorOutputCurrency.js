@@ -14,7 +14,7 @@ class CalculatorOutputCurrency extends Component {
 }
 
 const mapStateToProps = state => ({
-  userValue: state.userValue
+  userValue: state.exchangeRates.userValue
 })
 
 export default connect(

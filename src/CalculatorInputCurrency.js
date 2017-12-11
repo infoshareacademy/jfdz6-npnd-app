@@ -29,6 +29,9 @@ class CalculatorInputCurrency extends Component {
             value={this.props.userValue}
             onChange={this.handleChange}
           />
+          {
+            this.props.error && <p>{this.props.error.message}</p>
+          }
         </form>
         <select onChange={this.handleSelectChange}>
           {
@@ -43,7 +46,8 @@ class CalculatorInputCurrency extends Component {
 }
 
 const mapStateToProps = state => ({
-  rates: state.exchangeRates.data
+  rates: state.exchangeRates.data,
+  error: state.exchangeRates.error
 })
 
 const mapDispatchToProps = dispatch => ({

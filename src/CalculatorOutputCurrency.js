@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 
-import CalculatorInputCurrency from './CalculatorInputCurrency'
-
 class CalculatorOutputCurrency extends Component {
 
   // calculateOutput = this.props.userValue => {

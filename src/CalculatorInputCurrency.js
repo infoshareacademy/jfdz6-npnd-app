@@ -4,9 +4,6 @@ import {connect} from 'react-redux'
 import {add, changeCurrency} from './state/exchangeRates'
 
 class CalculatorInputCurrency extends Component {
-  // state = {
-  //   selectValue: 'THB'
-  // }
 
   handleChange = event => {
     const formField = event.currentTarget

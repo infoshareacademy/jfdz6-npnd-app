@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-import {add} from './state/exchangeRates'
+import {add, changeCurrency} from './state/exchangeRates'
 
 class CalculatorInputCurrency extends Component {
-  state = {
-    selectValue: 'THB'
-  }
+  // state = {
+  //   selectValue: 'THB'
+  // }
 
   handleChange = event => {
     const formField = event.currentTarget
@@ -15,9 +15,8 @@ class CalculatorInputCurrency extends Component {
   }
 
   handleSelectChange = event => {
-    this.setState({
-      selectValue: event.target.value
-    })
+    const optionField = event.target.value
+    this.props.selectCurrency(optionField)
   }
 
   render() {
@@ -33,7 +32,10 @@ class CalculatorInputCurrency extends Component {
             this.props.error && <p>{this.props.error.message}</p>
           }
         </form>
-        <select onChange={this.handleSelectChange}>
+        <select
+          onChange={this.handleSelectChange}
+          value={this.props.selectValue}
+        >
           {
             this.props.rates.map(
               rate => <option value={rate.code}>{rate.currency}</option>
@@ -51,7 +53,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  addValue: (userValue) => dispatch(add(userValue))
+  addValue: (userValue) => dispatch(add(userValue)),
+  selectCurrency: (selectValue) => dispatch(changeCurrency(selectValue))
 })
 
 export default connect(

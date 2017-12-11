@@ -4,9 +4,16 @@ const BEGIN = 'GET_BEGIN'
 const SUCCESS = 'GET_SUCCESS'
 const FAIL = 'GET_FAIL'
 
+const CHANGE_CURRENCY = 'CHANGE_CURRENCY'
+
 export const add = value => ({
   type: ADD,
   userValue: value
+})
+
+export const changeCurrency = currency => ({
+  type: CHANGE_CURRENCY,
+  selectValue: currency
 })
 
 export const getCurrencies = () => dispatch => {
@@ -62,6 +69,11 @@ export default (state = initialState, action = {}) => {
         ...state,
         getting: false,
         error: action.error
+      }
+    case CHANGE_CURRENCY:
+      return {
+        ...state,
+        selectValue: action.selectValue
       }
     default:
       return state

@@ -68,8 +68,8 @@ class Market extends React.Component {
       <div>
         <h1>Market</h1>
 
-        <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-          <ModalHeader toggle={this.toggleModal}>Buy - {this.state.selectedCurrency}</ModalHeader>
+        <Modal isOpen={this.state.modal} toggle={this.toggleModal} keyboard={false}>
+          <ModalHeader toggle={this.closeModal}>Buy - {this.state.selectedCurrency}</ModalHeader>
           <ModalBody>
             <FormGroup>
               {
@@ -84,13 +84,14 @@ class Market extends React.Component {
             }
               <Input type="number" name="number" id="exampleSelect" placeholder="How much?" onChange={this.handleChange} >
               </Input>
-              {(this.state.result !== null) ? `Będzie trza zapłacić  ${this.state.result} zł` : 'nie uda się' }
+              {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${this.state.result} zł` : 'nie uda się' }
 
 
 
             </FormGroup>
           </ModalBody>
           <ModalFooter>
+            <Button color="success" onClick={this.closeModal}>Buy</Button>
             <Button color="secondary" onClick={this.closeModal}>Close</Button>
           </ModalFooter>
         </Modal>

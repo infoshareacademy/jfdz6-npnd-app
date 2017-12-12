@@ -48,7 +48,7 @@ const data = {
 class CurrencyRates extends React.Component {
 
   state = {
-    selectedRate: '',
+    selectedCurrency: '',
     startDate: null,
     endDate: null,
     getting: false,
@@ -58,7 +58,7 @@ class CurrencyRates extends React.Component {
   handleChange = event => {
 
     this.setState({
-      selectedRate: event.target.value
+      selectedCurrency: event.target.value
     })
   }
 
@@ -81,7 +81,7 @@ class CurrencyRates extends React.Component {
 
     const currencyStartDate = this.state.startDate.format('YYYY-MM-DD')
     const currencyEndDate = this.state.endDate.format('YYYY-MM-DD')
-    const currencyId = this.props.rates.filter(e => e.currency === this.state.selectedRate).map(e => e.code)[0]
+    const currencyId = this.props.rates.filter(e => e.currency === this.state.selectedCurrency).map(e => e.code)[0]
 
     this.props.getHistoricalCurrencies(currencyStartDate, currencyEndDate, currencyId)
   }
@@ -100,7 +100,7 @@ class CurrencyRates extends React.Component {
       datasets: [ {
         ...data.datasets[0],
         data: this.props.historicalRates.map(e => e.mid),
-        label: this.state.selectedRate
+        label: this.state.selectedCurrency
       }
       ]
     }
@@ -142,7 +142,7 @@ class CurrencyRates extends React.Component {
         </Button>
 
         {
-          this.props.rates.filter(rate => rate.currency === this.state.selectedRate)
+          this.props.rates.filter(rate => rate.currency === this.state.selectedCurrency)
                           .map(e => <p> {e.currency} {e.mid}</p>)
         }
 

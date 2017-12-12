@@ -23,13 +23,22 @@ class Market extends React.Component {
   }
 
 
-  toggle = event => {
-    event = event.currentTarget
-    console.log(event.props)
+  toggleModal = event => {
+
+    const target = event.currentTarget
+    const selectedCurrency = target.dataset.itemId
 
     this.setState({
+      selectedRate: selectedCurrency,
       modal: !this.state.modal
     });
+  }
+
+  closeModal = () => {
+    this.setState({
+      modal: false,
+      selectedRate: ''
+    })
   }
 
 
@@ -38,16 +47,13 @@ class Market extends React.Component {
       <div>
         <h1>Market</h1>
 
-
-        <Modal isOpen={this.state.modal} toggle={this.toggle} >
-          <ModalHeader toggle={this.toggle}>Buy</ModalHeader>
+        <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+          <ModalHeader toggle={this.toggleModal}>Buy {this.state.selectedRate}</ModalHeader>
           <ModalBody>
             Hello there
-
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            <Button color="secondary" onClick={this.closeModal}>Close</Button>
           </ModalFooter>
         </Modal>
 
@@ -62,8 +68,9 @@ class Market extends React.Component {
           <tbody>
           {this.props.rates.map(
             rate => <tr
-              onClick={this.toggle}
               key={rate.code}
+              onClick={this.toggleModal}
+              data-item-id={rate.code}
             >
               {rate.code}
               <td>
@@ -75,7 +82,6 @@ class Market extends React.Component {
             </tr>)}
           </tbody>
         </Table>
-
 
       </div>
     )

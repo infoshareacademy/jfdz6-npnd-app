@@ -1,7 +1,10 @@
 import React from 'react';
-import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import {ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap'
+import {connect} from 'react-redux'
 
-export default class Example extends React.Component {
+import {changeCurrency} from './state/exchangeRates'
+
+class Example extends React.Component {
   constructor(props) {
     super(props);
 
@@ -17,20 +20,41 @@ export default class Example extends React.Component {
     });
   }
 
+  handleSelectChange = event => {
+    const optionField = event.target.value
+    this.props.selectCurrency(optionField)
+  }
+
   render() {
     return (
-      <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+      <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}
+                      onChange={this.handleSelectChange}
+                      value={this.props.selectValue}>
         <DropdownToggle caret>
-          Button Dropdown
+          Wybierz walutę
         </DropdownToggle>
         <DropdownMenu>
-          <DropdownItem header>Header</DropdownItem>
-          <DropdownItem disabled>Action</DropdownItem>
-          <DropdownItem>Another Action</DropdownItem>
-          <DropdownItem divider />
-          <DropdownItem>Another Action</DropdownItem>
+          {/*<DropdownItem>teks</DropdownItem>*/}
+          {
+            this.props.rates.map(
+              rate => <DropdownItem value={rate.code}>{rate.currency}</DropdownItem>
+            )
+          }
         </DropdownMenu>
       </ButtonDropdown>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  rates: state.exchangeRates.data
+})
+
+const mapDispatchToProps = dispatch => ({
+  selectCurrency: (selectValue) => dispatch(changeCurrency(selectValue))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Example)

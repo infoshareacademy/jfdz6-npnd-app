@@ -6,6 +6,7 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import store from './store'
+import 'bootstrap/dist/css/bootstrap.css'
 
 // Aplikacja powinna umożliwić szybkie przeliczenie dowolnej ilości wybranej waluty na inną.
 

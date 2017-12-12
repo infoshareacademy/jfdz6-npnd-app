@@ -10,7 +10,11 @@ class CalculatorOutputCurrency extends Component {
   render() {
     return (
       <div>
-        <p>Podana kwota w PLN wynosi:{this.calculateOutput()}</p>
+        <p>Podana kwota w PLN wynosi:
+          <h2 style={{color: 'rgb(51, 122, 183)'}}>
+          {this.calculateOutput()}
+          </h2>
+          </p>
       </div>
     )
   }

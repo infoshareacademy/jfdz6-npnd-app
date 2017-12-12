@@ -19,7 +19,9 @@ class Market extends React.Component {
 
   state = {
     modal: false,
-    selectedRate: ''
+    selectedCurrency: '',
+    selectedRate: null,
+    result: null
   }
 
 
@@ -27,17 +29,36 @@ class Market extends React.Component {
 
     const target = event.currentTarget
     const selectedCurrency = target.dataset.itemId
+    const selectedRate = this.props.rates.filter(rate =>
+      rate.code === selectedCurrency
+    ).map( e => e.mid)
+
+    console.log(selectedRate)
+    this.setState({
+      selectedCurrency: selectedCurrency,
+      modal: !this.state.modal,
+      selectedRate: selectedRate
+    });
+  }
+
+  handleChange = event => {
+
+    const currencyQuantity = event.target.value
+    const result = currencyQuantity * this.state.selectedRate
 
     this.setState({
-      selectedRate: selectedCurrency,
-      modal: !this.state.modal
-    });
+      result: result
+    })
+
+
   }
 
   closeModal = () => {
     this.setState({
       modal: false,
-      selectedRate: ''
+      selectedCurrency: '',
+      selectedRate: null,
+      result: null
     })
   }
 
@@ -48,21 +69,25 @@ class Market extends React.Component {
         <h1>Market</h1>
 
         <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-          <ModalHeader toggle={this.toggleModal}>Buy - {this.state.selectedRate}</ModalHeader>
+          <ModalHeader toggle={this.toggleModal}>Buy - {this.state.selectedCurrency}</ModalHeader>
           <ModalBody>
             <FormGroup>
               {
-                this.state.selectedRate
+                this.state.selectedCurrency
               } - {
-                this.props.rates.filter
-                    (rate =>
-                      rate.code === this.state.selectedRate
-                    ).map
-                    (e =>
-                      <span> {e.currency}</span>)
-                   }
-              <Input type="number" name="number" id="exampleSelect" placeholder="How much?">
+              this.props.rates.filter(
+                rate =>
+                  rate.code === this.state.selectedCurrency
+              ).map(
+                e =>
+                  <span> {e.currency} - {e.mid}</span>)
+            }
+              <Input type="number" name="number" id="exampleSelect" placeholder="How much?" onChange={this.handleChange} >
               </Input>
+              {(this.state.result !== null) ? `Będzie trza zapłacić  ${this.state.result} zł` : 'nie uda się' }
+
+
+
             </FormGroup>
           </ModalBody>
           <ModalFooter>

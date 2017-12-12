@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getCurrencies} from "./state/exchangeRates"
-import {Table, Modal, ModalHeader, ModalBody, ModalFooter, Button} from 'reactstrap'
+import {Table, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Input} from 'reactstrap'
 
 
 /*
@@ -48,9 +48,22 @@ class Market extends React.Component {
         <h1>Market</h1>
 
         <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-          <ModalHeader toggle={this.toggleModal}>Buy {this.state.selectedRate}</ModalHeader>
+          <ModalHeader toggle={this.toggleModal}>Buy - {this.state.selectedRate}</ModalHeader>
           <ModalBody>
-            Hello there
+            <FormGroup>
+              {
+                this.state.selectedRate
+              } - {
+                this.props.rates.filter
+                    (rate =>
+                      rate.code === this.state.selectedRate
+                    ).map
+                    (e =>
+                      <span> {e.currency}</span>)
+                   }
+              <Input type="number" name="number" id="exampleSelect" placeholder="How much?">
+              </Input>
+            </FormGroup>
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.closeModal}>Close</Button>

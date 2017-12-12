@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 class CalculatorOutputCurrency extends Component {
 
   calculateOutput = () => {
-    return this.props.userValue * this.props.rates.find(item => item.code === this.props.selectValue).mid
+    return (this.props.userValue * this.props.rates.find(item => item.code === this.props.selectValue).mid).toFixed(2)
   }
 
   render() {

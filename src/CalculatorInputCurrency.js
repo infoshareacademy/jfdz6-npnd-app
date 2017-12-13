@@ -1,14 +1,17 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import { Button } from 'reactstrap'
 
 import {add, changeCurrency} from './state/exchangeRates'
 
 class CalculatorInputCurrency extends Component {
 
-  handleChange = event => {
-    const formField = event.currentTarget
-    const userValue = formField.value
+  handleSubmit = event => {
+    event.preventDefault()
+
+    const userValue = this.userInput.value
     this.props.addValue(userValue)
+    this.userInput.value = ''
   }
 
   handleSelectChange = event => {
@@ -19,15 +22,12 @@ class CalculatorInputCurrency extends Component {
   render() {
     return (
       <div>
-        <form>
-          <input
-            type='text'
-            value={this.props.userValue}
-            onChange={this.handleChange}
-          />
+        <form onSubmit={this.handleSubmit}>
           {
             this.props.error && <p>{this.props.error.message}</p>
           }
+          <input type='text' ref={item => this.userInput = item}/>
+          <Button type="submit" bsSize="sm">Przelicz</Button>
         </form>
         <select
           onChange={this.handleSelectChange}

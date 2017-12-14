@@ -4,6 +4,7 @@ const FAIL = 'historicalExchangeRates/GET_FAIL'
 const RESET = 'historicalExchangeRates/GET_RESET'
 const BEGIN_YESTERDAY = 'historicalExchangeRates/GET_YESTERDAY'
 const SUCCESS_YESTERDAY = 'historicalExchangeRates/GET_YESTERDAY_SUCCESS'
+const FAIL_YESTERDAY = 'historicalExchangeRates/GET_YESTERDAY_FAIL'
 
 export const getHistoricalCurrencies = (currencyStartDate, currencyEndDate, currencyId) => dispatch => {
   dispatch({type: BEGIN})

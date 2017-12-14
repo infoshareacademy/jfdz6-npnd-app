@@ -2,6 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getCurrencies} from "./state/exchangeRates"
 import {Table, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Input} from 'reactstrap'
+import moment from 'moment'
+import {getYesterdayRates} from "./state/historicalExchangeRates";
 
 
 /*
@@ -21,7 +23,8 @@ class Market extends React.Component {
     modal: false,
     selectedCurrency: '',
     selectedRate: null,
-    result: null
+    result: null,
+    yesterdayDate: moment().add(-1, 'days').format('YYYY-MM-DD'),
   }
 
 
@@ -62,11 +65,20 @@ class Market extends React.Component {
     })
   }
 
+  componentDidMount() {
+
+    const yesterdayDate = this.state.yesterdayDate
+
+    this.props.getCurrencies()
+    this.props.getYesterdayRates(yesterdayDate)
+
+    console.log(this.props.yesterdayRates)
+  }
 
   render() {
     return (
       <div>
-        <h1>Market</h1>
+        <h1>Market </h1>
 
         <Modal isOpen={this.state.modal} toggle={this.toggleModal} keyboard={false}>
           <ModalHeader toggle={this.closeModal}>Buy - {this.state.selectedCurrency}</ModalHeader>
@@ -118,6 +130,12 @@ class Market extends React.Component {
                     .map(e => <span key={e.code}> {e.mid}</span>)
                 }
               </td>
+              <td>
+                {
+                  this.props.yesterdayRates.filter(item => item.code === rate.code)
+                    .map (w => <span>{(rate.mid - w.mid) > 0 ? '+' : '-' }</span>)
+                }
+              </td>
             </tr>)}
           </tbody>
         </Table>
@@ -128,11 +146,13 @@ class Market extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  rates: state.exchangeRates.data
+  rates: state.exchangeRates.data,
+  yesterdayRates: state.historicalExchangeRates.yesterdayData
 })
 
 const mapDispatchToProps = dispatch => ({
-  getCurrencies: () => dispatch(getCurrencies())
+  getCurrencies: () => dispatch(getCurrencies()),
+  getYesterdayRates: (yesterdayDate) => dispatch(getYesterdayRates(yesterdayDate))
 })
 
 

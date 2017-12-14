@@ -2,6 +2,8 @@ const BEGIN = 'historicalExchangeRates/GET_BEGIN'
 const SUCCESS = 'historicalExchangeRates/GET_SUCCESS'
 const FAIL = 'historicalExchangeRates/GET_FAIL'
 const RESET = 'historicalExchangeRates/GET_RESET'
+const BEGIN_YESTERDAY = 'historicalExchangeRates/GET_YESTERDAY'
+const SUCCESS_YESTERDAY = 'historicalExchangeRates/GET_YESTERDAY_SUCCESS'
 
 export const getHistoricalCurrencies = (currencyStartDate, currencyEndDate, currencyId) => dispatch => {
   dispatch({type: BEGIN})
@@ -21,10 +23,23 @@ export const resetHistoricalCurrencies = () => dispatch => {
 
 }
 
+export const getYesterdayRates = (yesterdayDate) => dispatch => {
+  dispatch({type: BEGIN_YESTERDAY})
+  fetch(
+    `https://api.nbp.pl/api/exchangerates/tables/A/${yesterdayDate}?format=json`
+  ).then(
+    response => response.json()
+  ).then(
+    data => dispatch({type: SUCCESS_YESTERDAY, yesterdayData: data[0].rates })
+  ).catch(
+    error => dispatch({type: FAIL, error})
+  )
+}
+
 const initialState = {
   historicalData: [],
   getting: false,
-  error: null
+  error: null,
 }
 
 export default (state = initialState, action = {}) => {
@@ -56,6 +71,25 @@ export default (state = initialState, action = {}) => {
         getting: false,
         historicalData: [],
       }
+    case BEGIN_YESTERDAY:
+      return {
+        ...state,
+        getting:true,
+    }
+    case SUCCESS_YESTERDAY:
+      return {
+        ...state,
+        yesterdayData: action.yesterdayData,
+        getting:false,
+        error:null
+      }
+    case FAIL_YESTERDAY:
+      return {
+        ...state,
+        yesterdayData: [],
+        getting: false,
+        error: action.error
+    }
     default:
       return state
   }

@@ -50,7 +50,8 @@ export default (state = initialState, action = {}) => {
       }
       return {
         ...state,
-        userValue: action.userValue
+        userValue: action.userValue,
+        error: null
       }
     case BEGIN:
       return {

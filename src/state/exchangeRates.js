@@ -42,7 +42,7 @@ const initialState = {
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case ADD:
-      if (typeof parseInt(action.userValue) !== 'number' || isNaN(action.userValue)) {
+      if (typeof parseInt(action.userValue) !== 'number' || isNaN(action.userValue) || action.userValue.trim().length === 0) {
         return {
           ...state,
           error: new Error('Proszę wpisać liczbę')

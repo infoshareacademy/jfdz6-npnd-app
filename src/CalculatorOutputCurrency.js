@@ -4,10 +4,13 @@ import {connect} from 'react-redux'
 class CalculatorOutputCurrency extends Component {
 
   calculateOutput = () => {
+    const numberWithCommas = (number) => {
+      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
     if (this.props.userValue === null) {
       return true;
     }
-    return (this.props.userValue * this.props.rates.find(item => item.code === this.props.selectValue).mid).toFixed(2)
+    return numberWithCommas((this.props.userValue * this.props.rates.find(item => item.code === this.props.selectValue).mid).toFixed(2))
   }
 
   render() {

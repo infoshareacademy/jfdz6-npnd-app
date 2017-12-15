@@ -4,6 +4,9 @@ import {connect} from 'react-redux'
 class CalculatorOutputCurrency extends Component {
 
   calculateOutput = () => {
+    if (this.props.userValue === null) {
+      return true;
+    }
     return (this.props.userValue * this.props.rates.find(item => item.code === this.props.selectValue).mid).toFixed(2)
   }
 
@@ -12,9 +15,9 @@ class CalculatorOutputCurrency extends Component {
       <div>
         <p>Podana kwota w PLN wynosi:
           <h2 style={{color: 'rgb(51, 122, 183)'}}>
-          {this.calculateOutput()}
+            {this.calculateOutput()}
           </h2>
-          </p>
+        </p>
       </div>
     )
   }

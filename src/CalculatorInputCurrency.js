@@ -9,8 +9,8 @@ class CalculatorInputCurrency extends Component {
   handleSubmit = event => {
     event.preventDefault()
 
-    const userValue = this.userInput.value
-    this.props.addValue(userValue)
+    const userInput = this.userInput.value
+    this.props.addValue(userInput)
     this.userInput.value = ''
   }
 
@@ -26,7 +26,7 @@ class CalculatorInputCurrency extends Component {
           {
             this.props.error && <p>{this.props.error.message}</p>
           }
-          <input type='text' ref={item => this.userInput = item}/>
+          <input type='text' ref={item => this.userInput = item} placeholder={this.props.userValue}/>
           <Button type="submit" bsSize="sm">Przelicz</Button>
         </form>
         <select
@@ -46,7 +46,8 @@ class CalculatorInputCurrency extends Component {
 
 const mapStateToProps = state => ({
   rates: state.exchangeRates.data,
-  error: state.exchangeRates.error
+  error: state.exchangeRates.error,
+  userValue: state.exchangeRates.userValue
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -45,6 +45,7 @@ export default (state = initialState, action = {}) => {
       if (typeof parseInt(action.userValue) !== 'number' || isNaN(action.userValue) || action.userValue.trim().length === 0) {
         return {
           ...state,
+          userValue: null,
           error: new Error('Proszę wpisać liczbę')
         }
       }

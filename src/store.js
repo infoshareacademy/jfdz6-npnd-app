@@ -4,10 +4,12 @@ import thunk from 'redux-thunk'
 
 import exchangeRates from './state/exchangeRates'
 import historicalExchangeRates from "./state/historicalExchangeRates";
+import handleTransactions from "./state/handleTransactions";
 
 const reducer = combineReducers({
   exchangeRates: exchangeRates,
-  historicalExchangeRates: historicalExchangeRates
+  historicalExchangeRates: historicalExchangeRates,
+  handleTransactions: handleTransactions
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

@@ -1,10 +1,10 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {getCurrencies} from "./state/exchangeRates"
-import {Table, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Input} from 'reactstrap'
+import { connect } from 'react-redux'
+import { getCurrencies } from "./state/exchangeRates"
+import { Table, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Input } from 'reactstrap'
 import moment from 'moment'
-import {getYesterdayRates} from "./state/historicalExchangeRates";
-
+import { getYesterdayRates } from "./state/historicalExchangeRates";
+import { buyCurrency } from "./state/handleTransactions"
 
 /*
 Zalogowany użytkownik powinien móc dodać i zarządzać swoim portfelem walut.
@@ -34,7 +34,7 @@ class Market extends React.Component {
     const selectedCurrency = target.dataset.itemId
     const selectedRate = this.props.rates.filter(rate =>
       rate.code === selectedCurrency
-    ).map( e => e.mid)
+    ).map(e => e.mid)
 
     console.log(selectedRate)
     this.setState({
@@ -50,7 +50,8 @@ class Market extends React.Component {
     const result = currencyQuantity * this.state.selectedRate
 
     this.setState({
-      result: result
+      result: result,
+      amount: currencyQuantity
     })
 
 
@@ -65,6 +66,19 @@ class Market extends React.Component {
     })
   }
 
+  handleBuy = () => {
+
+    const currencyCode = this.state.selectedCurrency
+    const currencyAmount = this.state.amount
+    const dateOfTransaction = (moment().format('YYYY-MM-DD'))
+    const transactionRate = (this.props.rates.filter(rate2 => rate2.code === this.state.selectedCurrency)
+      .map(e => e.mid))
+    const transactionId = new Date()
+
+    this.props.buyCurrency(transactionId,currencyCode,currencyAmount,transactionRate,dateOfTransaction)
+
+  }
+
   componentDidMount() {
 
     const yesterdayDate = this.state.yesterdayDate
@@ -72,7 +86,6 @@ class Market extends React.Component {
     this.props.getCurrencies()
     this.props.getYesterdayRates(yesterdayDate)
 
-    console.log(this.props.yesterdayRates)
   }
 
   render() {
@@ -81,9 +94,9 @@ class Market extends React.Component {
         <h1>Market </h1>
 
         <Modal isOpen={this.state.modal} toggle={this.toggleModal} keyboard={false}>
-          <ModalHeader toggle={this.closeModal}>Buy - {this.state.selectedCurrency}</ModalHeader>
-          <ModalBody>
-            <FormGroup>
+          <FormGroup>
+            <ModalHeader toggle={this.closeModal}>Buy - {this.state.selectedCurrency}</ModalHeader>
+            <ModalBody>
               {
                 this.state.selectedCurrency
               } - {
@@ -94,18 +107,16 @@ class Market extends React.Component {
                 e =>
                   <span> {e.currency} - {e.mid}</span>)
             }
-              <Input type="number" name="number" id="exampleSelect" placeholder="How much?" onChange={this.handleChange} >
+              <Input type="number" name="number" id="exampleSelect" placeholder="How much?"
+                     onChange={this.handleChange}>
               </Input>
-              {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${this.state.result} zł` : 'nie uda się' }
-
-
-
-            </FormGroup>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="success" onClick={this.closeModal}>Buy</Button>
-            <Button color="secondary" onClick={this.closeModal}>Close</Button>
-          </ModalFooter>
+              {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${this.state.result} zł` : 'nie uda się'}
+            </ModalBody>
+            <ModalFooter>
+              <Button color="success" onClick={this.handleBuy}>Buy</Button>
+              <Button color="secondary" onClick={this.closeModal}>Close</Button>
+            </ModalFooter>
+          </FormGroup>
         </Modal>
 
         <Table hover size="sm" responsive>
@@ -133,7 +144,7 @@ class Market extends React.Component {
               <td>
                 {
                   this.props.yesterdayRates.filter(item => item.code === rate.code)
-                    .map (w => <span>{(rate.mid - w.mid) > 0 ? '+' : '-' }</span>)
+                    .map(w => <span>{(rate.mid - w.mid) > 0 ? '+' : '-'}</span>)
                 }
               </td>
             </tr>)}
@@ -148,11 +159,13 @@ class Market extends React.Component {
 const mapStateToProps = state => ({
   rates: state.exchangeRates.data,
   yesterdayRates: state.historicalExchangeRates.yesterdayData
+  currencyCode: state.handleTransactions.currencyCode
 })
 
 const mapDispatchToProps = dispatch => ({
   getCurrencies: () => dispatch(getCurrencies()),
-  getYesterdayRates: (yesterdayDate) => dispatch(getYesterdayRates(yesterdayDate))
+  getYesterdayRates: (yesterdayDate) => dispatch(getYesterdayRates(yesterdayDate)),
+  buyCurrency: (transactionId,currencyCode,currencyAmount,transactionRate,dateOfTransaction) => dispatch(buyCurrency(transcationId,currencyCode,currencyAmount,transactionRate,dateOfTransaction))
 })
 
 

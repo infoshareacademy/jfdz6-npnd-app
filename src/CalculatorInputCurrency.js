@@ -25,7 +25,7 @@ class CalculatorInputCurrency extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <input type='text' ref={item => this.userInput = item} placeholder={this.props.error ? this.props.error.message : this.props.userValue}/>
-          <Button type="submit" bsSize="sm">Przelicz</Button>
+          <Button type="submit" bsSize="sm" style={{marginLeft: 10}}>Przelicz</Button>
         </form>
         <CurrencyList/>
       </div>

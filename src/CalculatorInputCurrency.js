@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import { Button } from 'reactstrap'
+import CurrencyList from './CurrencyList'
 
 import {add, changeCurrency} from './state/exchangeRates'
 
@@ -26,16 +27,7 @@ class CalculatorInputCurrency extends Component {
           <input type='text' ref={item => this.userInput = item} placeholder={this.props.error ? this.props.error.message : this.props.userValue}/>
           <Button type="submit" bsSize="sm">Przelicz</Button>
         </form>
-        <select
-          onChange={this.handleSelectChange}
-          value={this.props.selectValue}
-        >
-          {
-            this.props.rates.map(
-              rate => <option value={rate.code}>{rate.currency}</option>
-            )
-          }
-        </select>
+        <CurrencyList/>
       </div>
     )
   }

@@ -8,7 +8,7 @@ const CHANGE_CURRENCY = 'CHANGE_CURRENCY'
 
 export const add = value => ({
   type: ADD,
-  userValue: value
+  userValue: value.trim()
 })
 
 export const changeCurrency = currency => ({
@@ -36,7 +36,7 @@ const initialState = {
   removing: false,
   error: null,
   userValue: null,
-  selectValue: 'THB'
+  selectValue: null
 }
 
 export default (state = initialState, action = {}) => {

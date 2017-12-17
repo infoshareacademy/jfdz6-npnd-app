@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 
 import {changeCurrency} from './state/exchangeRates'
 
-class Example extends React.Component {
+class CurrencyList extends React.Component {
   constructor(props) {
     super(props);
 
@@ -20,24 +20,25 @@ class Example extends React.Component {
     });
   }
 
-  handleSelectChange = event => {
+  handleSelect = event => {
+    console.log(event.target.value)
     const optionField = event.target.value
     this.props.selectCurrency(optionField)
   }
 
   render() {
+    let selected = this.props.rates.filter( e => e.code == this.props.selectValue )[0]
     return (
-      <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}
-                      onChange={this.handleSelectChange}
+      <ButtonDropdown isOpen={this.state.dropdownOpen}
+                      toggle={this.toggle}
                       value={this.props.selectValue}>
         <DropdownToggle caret>
-          Wybierz walutę
+          { (selected && selected.currency) || 'Wybierz walutę'}
         </DropdownToggle>
         <DropdownMenu>
-          {/*<DropdownItem>teks</DropdownItem>*/}
           {
             this.props.rates.map(
-              rate => <DropdownItem value={rate.code}>{rate.currency}</DropdownItem>
+              rate => <DropdownItem value={rate.code} onClick={this.handleSelect}>{rate.currency}</DropdownItem>
             )
           }
         </DropdownMenu>
@@ -47,7 +48,8 @@ class Example extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  rates: state.exchangeRates.data
+  rates: state.exchangeRates.data,
+  selectValue: state.exchangeRates.selectValue
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -57,4 +59,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Example)
+)(CurrencyList)

@@ -6,13 +6,25 @@ import OutputCurrencyList from './OutputCurrencyList'
 class CalculatorOutputCurrency extends Component {
 
   calculateOutput = () => {
-    const calculateOutputToPLN = () => {
-      if (this.props.userValue === null) {
-        return true;
-      }
-      return (this.props.userValue * this.props.rates.find(item => item.code === this.props.selectValue).mid)
+    const { userValue, rates, selectValue, selectOutputValue } = this.props
+    if (userValue === null) {
+      return
     }
-    let result = parseFloat(calculateOutputToPLN()) / parseFloat(this.props.rates.find(item => item.code === this.props.selectOutputValue).mid)
+    if (rates.length === 0) {
+      return
+    }
+    if (selectValue === null) {
+      return
+    }
+    if (selectOutputValue === null) {
+      return
+    }
+
+    const inPLN = userValue * rates.find(item => item.code === selectValue).mid
+    const inOther = rates.find(item => item.code === this.props.selectOutputValue).mid
+
+    let result = parseFloat(inPLN) / parseFloat(inOther)
+
     return result.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 

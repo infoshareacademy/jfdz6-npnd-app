@@ -6,13 +6,14 @@ import OutputCurrencyList from './OutputCurrencyList'
 class CalculatorOutputCurrency extends Component {
 
   calculateOutput = () => {
-    const numberWithCommas = (number) => {
-      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    const calculateOutputToPLN = () => {
+      if (this.props.userValue === null) {
+        return true;
+      }
+      return (this.props.userValue * this.props.rates.find(item => item.code === this.props.selectValue).mid)
     }
-    if (this.props.userValue === null) {
-      return true;
-    }
-    return numberWithCommas((this.props.userValue * this.props.rates.find(item => item.code === this.props.selectValue).mid).toFixed(2))
+    let result = parseFloat(calculateOutputToPLN()) / parseFloat(this.props.rates.find(item => item.code === this.props.selectOutputValue).mid)
+    return result.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
   render() {
@@ -32,7 +33,8 @@ class CalculatorOutputCurrency extends Component {
 const mapStateToProps = state => ({
   rates: state.exchangeRates.data,
   userValue: state.exchangeRates.userValue,
-  selectValue: state.exchangeRates.selectValue
+  selectValue: state.exchangeRates.selectValue,
+  selectOutputValue: state.exchangeRates.selectOutputValue
 })
 
 export default connect(

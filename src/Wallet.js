@@ -28,8 +28,9 @@ class Wallet extends React.Component {
           <tr>
             <th>Currency</th>
             <th>Today rates</th>
-            <th>Date of buy</th>
-            <th>Price You paid</th>
+            <th>Rate of purchase</th>
+            <th>Amount</th>
+            <th>Date of transaction</th>
             <th>Delta</th>
             <th>Recommendation</th>
           </tr>
@@ -49,13 +50,31 @@ class Wallet extends React.Component {
               <td>
                 {
                   this.props.transactions.filter(rate2 => rate2.transactionId === rate.transactionId)
-                    .map(e => <span key={e.transactionId}> {e.dateOfTransaction}</span>)
+                    .map(e => <span key={e.transactionId}> {e.transactionRate}</span>)
                 }
               </td>
               <td>
                 {
                   this.props.transactions.filter(rate2 => rate2.transactionId === rate.transactionId)
-                    .map(e => <span key={e.transactionId}> {e.transactionRate}</span>)
+                    .map(e => <span key={e.transactionId}> {e.currencyAmount}</span>)
+                }
+              </td>
+              <td>
+                {
+                  this.props.transactions.filter(rate2 => rate2.transactionId === rate.transactionId)
+                    .map(e => <span key={e.transactionId}> {e.dateOfTransaction}</span>)
+                }
+              </td>
+              <td>
+                {
+                  this.props.rates.filter(rate2 => rate2.code === rate.currencyCode)
+                    .map(e => <span key={e.transactionId}> {e.mid - rate.transactionRate} </span>)
+                }
+              </td>
+              <td>
+                {
+                  this.props.rates.filter(rate2 => rate2.code === rate.currencyCode)
+                    .map(e => <span key={e.transactionId}> {(e.mid - rate.transactionRate) > 0 ? 'kupuj' : 'sprzedaj'} </span>)
                 }
               </td>
             </tr>)}

@@ -48,7 +48,7 @@ const data = {
 class CurrencyRates extends React.Component {
 
   state = {
-    selectedCurrency: '',
+    selectedCurrency: null,
     startDate: null,
     endDate: null,
     getting: false,
@@ -115,8 +115,10 @@ class CurrencyRates extends React.Component {
           <Label for="exampleSelect">Choose currency </Label>
           <Input type="select" name="select" id="exampleSelect" placeholder="-" onChange={this.handleChange}>
             {this.props.rates.map(rate => <option>{rate.currency}</option>)}
+            <option selected>-</option>
           </Input>
         </FormGroup>
+
 
         Od
         <DatePicker
@@ -146,7 +148,7 @@ class CurrencyRates extends React.Component {
                           .map(e => <p> {e.currency} {e.mid}</p>)
         }
 
-        <Line data={chartData} />
+        {this.state.selectedCurrency !== null && this.state.endDate !== null && this.state.startDate !== null ? <Line options={ { animation:false }} data={chartData} /> : null }
 
       </div>
 

@@ -17,9 +17,7 @@ class Calculator extends Component {
     return (
       <div>
         <CalculatorInputCurrency/>
-        {/*{this.props.rates.map(rate => <li>{rate.currency}  {rate.mid}</li>)}*/}
         <CalculatorOutputCurrency/>
-        {/*<Example/>*/}
       </div>
     )
   }

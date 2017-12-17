@@ -15,11 +15,6 @@ class CalculatorInputCurrency extends Component {
     this.userInput.value = ''
   }
 
-  handleSelectChange = event => {
-    const optionField = event.target.value
-    this.props.selectCurrency(optionField)
-  }
-
   render() {
     return (
       <div>

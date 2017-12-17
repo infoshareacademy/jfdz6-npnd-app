@@ -75,17 +75,24 @@ class Market extends React.Component {
       .map(e => e.mid))
     const transactionId = Date.now()
 
-    this.props.buyCurrency(transactionId,currencyCode,currencyAmount,transactionRate,dateOfTransaction)
+
+    this.props.buyCurrency({
+      transactionId,
+    currencyCode,
+      currencyAmount,transactionRate,dateOfTransaction
+    })
+
+    this.setState({
+      modal:false
+    })
 
   }
 
-  componentDidMount() {
-
+  componentWillMount() {
     const yesterdayDate = this.state.yesterdayDate
 
     this.props.getCurrencies()
     this.props.getYesterdayRates(yesterdayDate)
-
   }
 
   render() {
@@ -118,6 +125,7 @@ class Market extends React.Component {
             </ModalFooter>
           </FormGroup>
         </Modal>
+
 
         <Table hover size="sm" responsive>
           <thead>

@@ -1,6 +1,6 @@
 const BUY = 'handleTransaction/BUY'
 
-export const buyCurrency = (transactionId,currencyCode,currencyAmount,transactionRate,dateOfTransaction) => {
+export const buyCurrency = (transactionId,currencyCode,currencyAmount,transactionRate,dateOfTransaction) => dispatch => {
   dispatch({ type: BUY, transactionData: currencyCode  })
 }
 
@@ -11,11 +11,14 @@ const initialState = {
 
 export default ( state = initialState, action = {}) => {
   switch (action.type) {
-    case BUY:
+    case BUY: {
+      const { type, ...transaction } = action
       return {
         ...state,
-        currencyCode: action.currencyCode
+         transaction
       }
+    }
+
     default:
       return state
   }

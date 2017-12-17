@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import { Button } from 'reactstrap'
 import CurrencyList from './CurrencyList'
 
-import {add, changeCurrency} from './state/exchangeRates'
+import {add} from './state/exchangeRates'
 
 class CalculatorInputCurrency extends Component {
 
@@ -20,9 +20,10 @@ class CalculatorInputCurrency extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <input type='text' ref={item => this.userInput = item} placeholder={this.props.error ? this.props.error.message : this.props.userValue}/>
+          <CurrencyList/>
+          &#8596;
           <Button type="submit" bsSize="sm" style={{marginLeft: 10}}>Przelicz</Button>
         </form>
-        <CurrencyList/>
       </div>
     )
   }
@@ -36,7 +37,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addValue: (userValue) => dispatch(add(userValue)),
-  selectCurrency: (selectValue) => dispatch(changeCurrency(selectValue))
 })
 
 export default connect(

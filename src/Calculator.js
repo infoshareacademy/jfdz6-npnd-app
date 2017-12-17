@@ -5,7 +5,6 @@ import {getCurrencies} from "./state/exchangeRates"
 
 import CalculatorInputCurrency from './CalculatorInputCurrency'
 import CalculatorOutputCurrency from './CalculatorOutputCurrency'
-import Example from './CurrencyList'
 
 class Calculator extends Component {
 

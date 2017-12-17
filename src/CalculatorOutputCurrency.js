@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
+import OutputCurrencyList from './OutputCurrencyList'
+
 class CalculatorOutputCurrency extends Component {
 
   calculateOutput = () => {
@@ -21,6 +23,7 @@ class CalculatorOutputCurrency extends Component {
             {this.calculateOutput()}
           </h2>
         </p>
+        <OutputCurrencyList/>
       </div>
     )
   }

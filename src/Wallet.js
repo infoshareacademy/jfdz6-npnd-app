@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { getCurrencies } from "./state/exchangeRates"
 import { Table } from 'reactstrap'
 
-
 /*
 Zalogowany użytkownik powinien móc dodać i zarządzać swoim portfelem walut.
 
@@ -36,15 +35,27 @@ class Wallet extends React.Component {
           </tr>
           </thead>
           <tbody>
-          {this.props.rates.map(
+          {this.props.transactions.map(
             rate => <tr
-            key={rate.code}
+            key={rate.transactionId}
             >
-              {rate.currency}
+              {rate.currencyCode}
               <td>
                 {
-                  this.props.rates.filter(rate2 => rate2.code === rate.code)
-                    .map(e => <span key={e.code}> {e.mid}</span>)
+                  this.props.rates.filter(rate2 => rate2.code === rate.currencyCode)
+                    .map(e => <span key={e.transactionId}> {e.mid}</span>)
+                }
+              </td>
+              <td>
+                {
+                  this.props.transactions.filter(rate2 => rate2.transactionId === rate.transactionId)
+                    .map(e => <span key={e.transactionId}> {e.dateOfTransaction}</span>)
+                }
+              </td>
+              <td>
+                {
+                  this.props.transactions.filter(rate2 => rate2.transactionId === rate.transactionId)
+                    .map(e => <span key={e.transactionId}> {e.transactionRate}</span>)
                 }
               </td>
             </tr>)}
@@ -57,7 +68,8 @@ class Wallet extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  rates: state.exchangeRates.data
+  rates: state.exchangeRates.data,
+  transactions: state.handleTransactions.transactions
 })
 
 const mapDispatchToProps = dispatch => ({

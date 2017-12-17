@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-import OutputCurrencyList from './OutputCurrencyList'
+
 
 class CalculatorOutputCurrency extends Component {
 
@@ -31,12 +31,12 @@ class CalculatorOutputCurrency extends Component {
   render() {
     return (
       <div>
-        <p>Podana kwota w PLN wynosi:
+        <p>Podana kwota przeliczona z {this.props.selectValue} na {this.props.selectOutputValue} wynosi:
           <h2 style={{color: 'rgb(51, 122, 183)'}}>
             {this.calculateOutput()}
           </h2>
         </p>
-        <OutputCurrencyList/>
+
       </div>
     )
   }

@@ -4,6 +4,7 @@ import { Button } from 'reactstrap'
 import CurrencyList from './CurrencyList'
 
 import {add} from './state/exchangeRates'
+import OutputCurrencyList from './OutputCurrencyList'
 
 class CalculatorInputCurrency extends Component {
 
@@ -22,6 +23,7 @@ class CalculatorInputCurrency extends Component {
           <input type='text' ref={item => this.userInput = item} placeholder={this.props.error ? this.props.error.message : this.props.userValue}/>
           <CurrencyList/>
           &#8596;
+          <OutputCurrencyList/>
           <Button type="submit" bsSize="sm" style={{marginLeft: 10}}>Przelicz</Button>
         </form>
       </div>

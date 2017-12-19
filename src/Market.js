@@ -24,9 +24,13 @@ class Market extends React.Component {
     selectedCurrency: '',
     selectedRate: null,
     result: null,
-    yesterdayDate: moment().add(-1, 'days').format('YYYY-MM-DD'),
+    yesterdayDate: (moment().add(-1, 'days').format('dddd') === 'Sunday' ||
+      moment().add(-1, 'days').format('dddd') === 'Saturday' ) ?
+      (moment().add(-1, 'days').format('dddd') === 'Sunday' ?
+        moment().add(-3, 'days').format('YYYY-MM-DD') :
+        moment().add(-2, 'days').format('YYYY-MM-DD') ) :
+      moment().add(-1, 'days').format('YYYY-MM-DD')
   }
-
 
   toggleModal = event => {
 
@@ -36,7 +40,6 @@ class Market extends React.Component {
       rate.code === selectedCurrency
     ).map(e => e.mid)
 
-    console.log(selectedRate)
     this.setState({
       selectedCurrency: selectedCurrency,
       modal: !this.state.modal,
@@ -78,20 +81,21 @@ class Market extends React.Component {
 
     this.props.buyCurrency({
       transactionId,
-    currencyCode,
-      currencyAmount,transactionRate,dateOfTransaction
+      currencyCode,
+      currencyAmount, transactionRate, dateOfTransaction
     })
 
     this.setState({
-      modal:false
+      modal: false
     })
 
   }
 
   componentWillMount() {
+    this.props.getCurrencies()
+
     const yesterdayDate = this.state.yesterdayDate
 
-    this.props.getCurrencies()
     this.props.getYesterdayRates(yesterdayDate)
   }
 
@@ -173,7 +177,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getCurrencies: () => dispatch(getCurrencies()),
   getYesterdayRates: (yesterdayDate) => dispatch(getYesterdayRates(yesterdayDate)),
-  buyCurrency: (transactionId,currencyCode,currencyAmount,transactionRate,dateOfTransaction) => dispatch(buyCurrency(transactionId,currencyCode,currencyAmount,transactionRate,dateOfTransaction))
+  buyCurrency: (transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction) => dispatch(buyCurrency(transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction))
 })
 
 

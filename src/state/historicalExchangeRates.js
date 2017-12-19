@@ -41,6 +41,7 @@ const initialState = {
   historicalData: [],
   getting: false,
   error: null,
+  yesterdayData: []
 }
 
 export default (state = initialState, action = {}) => {

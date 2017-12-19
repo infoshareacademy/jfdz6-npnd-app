@@ -19,7 +19,7 @@ Wybrane kursy można pobierać na bieżąco z API NBP.
  */
 
 const data = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July' ],
   datasets: [
     {
       label: 'My First dataset',
@@ -40,7 +40,7 @@ const data = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [3,4,2]
+      data: [ 3, 4, 2 ]
     }
   ]
 }
@@ -86,10 +86,8 @@ class CurrencyRates extends React.Component {
     const currencyStartDate = this.state.startDate.format('YYYY-MM-DD')
     const currencyEndDate = this.state.endDate.format('YYYY-MM-DD')
 
-    console.log('to jest mój stan' + this.state.selectedCurrency)
-    const currencyId = this.props.rates.filter(e => e.currency === myState).map(e => e.code)[0]
+    const currencyId = this.props.rates.filter(e => e.currency === myState).map(e => e.code)[ 0 ]
 
-    console.log(currencyEndDate,currencyStartDate,currencyId)
     this.props.getHistoricalCurrencies(currencyStartDate, currencyEndDate, currencyId)
   }
 
@@ -105,7 +103,7 @@ class CurrencyRates extends React.Component {
       ...data,
       labels: this.props.historicalRates.map(e => e.effectiveDate),
       datasets: [ {
-        ...data.datasets[0],
+        ...data.datasets[ 0 ],
         data: this.props.historicalRates.map(e => e.mid),
         label: this.state.selectedCurrency
       }
@@ -118,7 +116,6 @@ class CurrencyRates extends React.Component {
 
       <div>
         <h1>Currency Rates</h1>
-
 
 
         Od
@@ -142,23 +139,23 @@ class CurrencyRates extends React.Component {
 
         {
           this.state.startDate !== null && this.state.endDate !== null ?
-            <FormGroup>
-              <Label for="exampleSelect">Choose currency </Label>
-              <Input type="select" name="select" id="exampleSelect" placeholder="-" onChange={this.handleChange}>
-                {this.props.rates.map(rate => <option>{rate.currency}</option>)}
-                <option selected>-</option>
-              </Input>
-            </FormGroup>
+            <div>
+              <FormGroup>
+                <Label for="exampleSelect">Choose currency </Label>
+                <Input type="select" name="select" id="exampleSelect" placeholder="-" onChange={this.handleChange}>
+                  {this.props.rates.map(rate => <option>{rate.currency}</option>)}
+                  <option selected>-</option>
+                </Input>
+              </FormGroup>
+              <Button onClick={this.handleHistoricalRates}>
+                Show rates
+              </Button>
+            </div>
             : null
         }
-        <Button onClick={this.handleHistoricalRates}>
-          Show rates
-        </Button>
-
-
         {
           this.props.rates.filter(rate => rate.currency === this.state.selectedCurrency)
-                          .map(e => <p> {e.currency} {e.mid}</p>)
+            .map(e => <p> {e.currency} {e.mid}</p>)
         }
 
         {
@@ -166,7 +163,6 @@ class CurrencyRates extends React.Component {
           this.state.endDate !== null &&
           this.state.startDate !== null ?
             <Line
-              // options={ { animation:false }}
               data={chartData}
             /> :
             null

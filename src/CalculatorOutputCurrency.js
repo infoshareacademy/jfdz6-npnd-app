@@ -1,22 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-
-
 class CalculatorOutputCurrency extends Component {
 
   calculateOutput = () => {
     const { userValue, rates, selectValue, selectOutputValue } = this.props
-    if (userValue === null) {
-      return
-    }
-    if (rates.length === 0) {
-      return
-    }
-    if (selectValue === null) {
-      return
-    }
-    if (selectOutputValue === null) {
+    if (userValue === null || rates.length === 0 || selectValue === null || selectOutputValue === null) {
       return
     }
 

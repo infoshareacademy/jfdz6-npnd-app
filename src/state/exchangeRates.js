@@ -36,7 +36,7 @@ export const getCurrencies = () => dispatch => {
 }
 
 const initialState = {
-  data: [],
+  data: [{currency: "polski złoty", code: "PLN", mid: 1}],
   getting: false,
   adding: false,
   removing: false,
@@ -68,9 +68,12 @@ export default (state = initialState, action = {}) => {
         error: null
       }
     case SUCCESS:
-      return {
+      return state.data.length === 1 ? {
         ...state,
-        data: action.data,
+        data: state.data.concat(action.data),
+        getting: false
+      } : {
+        ...state,
         getting: false
       }
     case FAIL:

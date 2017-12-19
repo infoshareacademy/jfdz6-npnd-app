@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getCurrencies } from "./state/exchangeRates"
-import { Table } from 'reactstrap'
+import { Table, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Input } from 'reactstrap'
 
 /*
 Zalogowany użytkownik powinien móc dodać i zarządzać swoim portfelem walut.
@@ -16,12 +16,71 @@ użytkownik powinien zobaczyć komunikat o potencjalnej korzyści ze sprzedaży.
 
 class Wallet extends React.Component {
 
+  state = {
+    modal: false,
+  }
 
+  openModal = () => {
+    this.setState({
+      modal: true
+    })
+  }
+
+  closeModal = () => {
+    this.setState({
+      modal: false
+    })
+  }
+
+  toggleModal = event => {
+
+    const target = event.currentTarget
+    const selectedCurrency = target.dataset.itemId
+    const selectedRate = this.props.rates.filter(rate =>
+      rate.code === selectedCurrency
+    ).map(e => e.mid)
+
+    this.setState({
+      selectedCurrency: selectedCurrency,
+      modal: !this.state.modal,
+      selectedRate: selectedRate
+    });
+  }
+
+  handleSell = () => {
+
+  }
 
   render() {
     return (
       <div>
         <h1>My Wallet</h1>
+
+        <Modal isOpen={this.state.modal} toggle={this.toggleModal} keyboard={false}>
+          <FormGroup>
+            <ModalHeader toggle={this.closeModal}>Buy - {this.state.selectedCurrency}</ModalHeader>
+            <ModalBody>
+              {
+                this.state.selectedCurrency
+              } - {
+              this.props.rates.filter(
+                rate =>
+                  rate.code === this.state.selectedCurrency
+              ).map(
+                e =>
+                  <span> {e.currency} - {e.mid}</span>)
+            }
+              <Input type="number" name="number" id="exampleSelect" placeholder="How much?"
+                     onChange={this.handleChange}>
+              </Input>
+              {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${this.state.result} zł` : 'nie uda się'}
+            </ModalBody>
+            <ModalFooter>
+              <Button color="success" onClick={this.handleSell}>Sell</Button>
+              <Button color="secondary" onClick={this.closeModal}>Close</Button>
+            </ModalFooter>
+          </FormGroup>
+        </Modal>
 
         <Table hover size="sm" responsive>
           <thead>
@@ -39,6 +98,7 @@ class Wallet extends React.Component {
           {this.props.transactions.map(
             rate => <tr
             key={rate.transactionId}
+            onClick={this.openModal}
             >
               {rate.currencyCode}
               <td>

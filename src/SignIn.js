@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import firebase from 'firebase'
 
-class SignUp extends Component {
+class SignIn extends Component {
   state ={
     login:'',
     password:''
@@ -15,9 +15,7 @@ class SignUp extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    firebase.auth().createUserWithEmailAndPassword(this.state.login, this.state.password).then(
-      user => console.log(user)
-    )
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
   }
 
   render() {
@@ -32,10 +30,10 @@ class SignUp extends Component {
           name='password'
           type="password"
           onChange={this.handleChange}/>
-        <button>Sign up</button>
+        <button>Sign in</button>
       </form>
     )
   }
 }
 
-export default SignUp
+export default SignIn

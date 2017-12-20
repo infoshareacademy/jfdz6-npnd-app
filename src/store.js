@@ -4,6 +4,7 @@ import thunk from 'redux-thunk'
 import firebase from 'firebase'
 
 import exchangeRates from './state/exchangeRates'
+import auth from'./state/auth'
 
 // Initialize Firebase
 const config = {
@@ -17,7 +18,8 @@ const config = {
 firebase.initializeApp(config);
 
 const reducer = combineReducers({
-  exchangeRates: exchangeRates
+  exchangeRates,
+  auth
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -33,6 +35,6 @@ const store = createStore(
 )
 
 window.store = store
-firebase.auth().createUserWithEmailAndPassword('p.baranski@yahoo.pl', 'password')
+// firebase.auth().createUserWithEmailAndPassword('p.baranski@yahoo.pl', 'password')
 
 export default store;

@@ -13,6 +13,14 @@ export const signUp = (email, password) => dispatch => {
   )
 }
 
+export const signIn = (email, password) => dispatch => {
+  firebase.auth().signInWithEmailAndPassword(
+    email,
+    password
+  ).then(
+    data => dispatch({type: SET_USER, data})
+  )
+}
 export default (state=initialState, action = {}) => {
   switch (action.type) {
     case SET_USER:

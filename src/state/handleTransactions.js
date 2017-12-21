@@ -1,8 +1,14 @@
 const BUY = 'handleTransaction/BUY'
+const SELL = 'handleTransaction/SELL'
 
 export const buyCurrency = (transactionData) => dispatch => {
   dispatch({ type: BUY, transactionData  })
 }
+
+export const sellCurrency = (transactionData) => dispatch => {
+  dispatch({ type: SELL, transactionData})
+}
+
 
 const initialState = {
   budget: 10000,
@@ -18,7 +24,12 @@ export default ( state = initialState, action = {}) => {
          transactions: state.transactions.concat(action.transactionData)
       }
     }
-
+    case SELL: {
+      return {
+        ...state,
+        transactions: state.transactions
+      }
+    }
     default:
       return state
   }

@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { getCurrencies } from "./state/exchangeRates"
 import { Table, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Input } from 'reactstrap'
+import { buyCurrency } from "./state/handleTransactions"
+
 
 /*
 Zalogowany użytkownik powinien móc dodać i zarządzać swoim portfelem walut.
@@ -18,12 +20,6 @@ class Wallet extends React.Component {
 
   state = {
     modal: false,
-  }
-
-  openModal = () => {
-    this.setState({
-      modal: true
-    })
   }
 
   closeModal = () => {
@@ -47,8 +43,35 @@ class Wallet extends React.Component {
     });
   }
 
+  handleChange = event => {
+
+    const currencyQuantity = event.target.value
+    const result = currencyQuantity * this.state.selectedRate
+
+
+    this.setState({
+      result: result,
+      amount: currencyQuantity
+    })
+  }
+
   handleSell = () => {
 
+      const transactionId = this.props.transactions.filter(code => code.currencyCode === this.state.selectedCurrency).map(item => item.transactionId)
+      const currencyCode = this.state.selectedCurrency
+      const currencyAmount = this.state.amount
+      const transactionRate = this.state.selectedRate
+
+    this.props.sellCurrency({
+      transactionId,
+      currencyCode,
+      currencyAmount,
+      transactionRate
+    })
+
+    this.setState({
+      modal: false
+    })
   }
 
   render() {
@@ -58,7 +81,7 @@ class Wallet extends React.Component {
 
         <Modal isOpen={this.state.modal} toggle={this.toggleModal} keyboard={false}>
           <FormGroup>
-            <ModalHeader toggle={this.closeModal}>Buy - {this.state.selectedCurrency}</ModalHeader>
+            <ModalHeader toggle={this.closeModal}>Sell - {this.state.selectedCurrency}</ModalHeader>
             <ModalBody>
               {
                 this.state.selectedCurrency
@@ -76,7 +99,7 @@ class Wallet extends React.Component {
               {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${this.state.result} zł` : 'nie uda się'}
             </ModalBody>
             <ModalFooter>
-              <Button color="success" onClick={this.handleSell}>Sell</Button>
+              <Button color="success" onClick={this.handleSell} disabled={false}>Sell</Button>
               <Button color="secondary" onClick={this.closeModal}>Close</Button>
             </ModalFooter>
           </FormGroup>
@@ -98,7 +121,8 @@ class Wallet extends React.Component {
           {this.props.transactions.map(
             rate => <tr
             key={rate.transactionId}
-            onClick={this.openModal}
+            onClick={this.toggleModal}
+            data-item-id={rate.currencyCode}
             >
               {rate.currencyCode}
               <td>
@@ -128,13 +152,13 @@ class Wallet extends React.Component {
               <td>
                 {
                   this.props.rates.filter(rate2 => rate2.code === rate.currencyCode)
-                    .map(e => <span key={e.transactionId}> {e.mid - rate.transactionRate} </span>)
+                    .map(e => <span key={e.transactionId}> {(e.mid - rate.transactionRate) * rate.currencyAmount} </span>)
                 }
               </td>
               <td>
                 {
                   this.props.rates.filter(rate2 => rate2.code === rate.currencyCode)
-                    .map(e => <span key={e.transactionId}> {(e.mid - rate.transactionRate) > 0 ? 'kupuj' : 'sprzedaj'} </span>)
+                    .map(e => <span key={e.transactionId}> {(e.mid - rate.transactionRate) > 0 ? 'Zarabiasz!' : 'Tracisz!'} </span>)
                 }
               </td>
             </tr>)}
@@ -152,7 +176,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getCurrencies: () => dispatch(getCurrencies())
+  getCurrencies: () => dispatch(getCurrencies()),
+  sellCurrency: (transactionId, currencyCode, currencyAmount, transactionRate) => dispatch(buyCurrency(transactionId, currencyCode, currencyAmount, transactionRate))
 })
 
 

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import firebase from 'firebase'
+import {signUp} from './state/auth'
+import {connect} from 'react-redux'
 
 class SignUp extends Component {
   state ={
@@ -15,14 +16,16 @@ class SignUp extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    firebase.auth().createUserWithEmailAndPassword(this.state.login, this.state.password).then(
-      user => console.log(user)
+    this.props.signUp(
+      this.state.login,
+      this.state.password
     )
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+        <p>{this.props.auth && this.props.auth.email}</p>
         Login:
         <input
           name='login'
@@ -38,4 +41,15 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+const mapDispatchToProps = dispatch => ({
+  signUp: (email, password) => dispatch(signUp(email, password))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUp)

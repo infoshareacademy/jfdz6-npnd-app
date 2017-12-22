@@ -39,9 +39,7 @@ class SignIn extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  auth: state.auth
-})
+const mapStateToProps = null
 
 const mapDispatchToProps = dispatch => ({
   signIn: (email, password) => dispatch(signIn(email, password))

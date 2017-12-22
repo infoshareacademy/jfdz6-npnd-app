@@ -34,7 +34,8 @@ const store = createStore(
     enhancer
 )
 
+store.dispatch({type: 'RESET'})
+
 window.store = store
-// firebase.auth().createUserWithEmailAndPassword('p.baranski@yahoo.pl', 'password')
 
 export default store;

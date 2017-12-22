@@ -25,7 +25,7 @@ class SignUp extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <p>{this.props.auth && this.props.auth.email}</p>
+        <p>{this.props.auth.data && this.props.auth.email}</p>
         Login:
         <input
           name='login'

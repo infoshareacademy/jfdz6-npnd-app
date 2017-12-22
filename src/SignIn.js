@@ -24,6 +24,9 @@ class SignIn extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+        {
+          this.props.auth.error && <p>{this.props.auth.error.message}</p>
+        }
         Login:
         <input
           name='login'
@@ -39,7 +42,9 @@ class SignIn extends Component {
   }
 }
 
-const mapStateToProps = null
+const mapStateToProps = state => ({
+  auth: state.auth
+})
 
 const mapDispatchToProps = dispatch => ({
   signIn: (email, password) => dispatch(signIn(email, password))

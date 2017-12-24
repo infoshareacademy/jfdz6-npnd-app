@@ -20,7 +20,7 @@ class CalculatorInputCurrency extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input type='text' ref={item => this.userInput = item} placeholder={this.props.error ? this.props.error.message : this.props.userValue}/>
+          <input type='text' ref={item => this.userInput = item} placeholder={this.props.error ? this.props.error.message : this.props.userValue} required/>
           <CurrencyList/>
           &#8596;
           <OutputCurrencyList/>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {signUp} from './state/auth'
 import {connect} from 'react-redux'
+import {Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col} from 'reactstrap'
 
 class SignUp extends Component {
   state = {
@@ -24,24 +25,35 @@ class SignUp extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <p>{this.props.auth.data && this.props.auth.email}</p>
-        <label>
-          Login:
-        </label>
-        <input
-          name='login'
-          type='text'
-          onChange={this.handleChange}/>
-        <label>
-          Password:
-        </label>
-        <input
-          name='password'
-          type="password"
-          onChange={this.handleChange}/>
-        <button type='submit'>Sign up</button>
-      </form>
+      <Container>
+        <Row>
+          <Col sm="12" md={{size: 8, offset: 2}}>
+            <Form onSubmit={this.handleSubmit}>
+              <FormGroup>
+                <p>{this.props.auth.data && this.props.auth.email}</p>
+                <Label for='userName'>
+                  Email:
+                </Label>
+                <Input
+                  name='login'
+                  type='email'
+                  onChange={this.handleChange}/>
+              </FormGroup>
+              <FormGroup>
+                <Label for='userPassword'>
+                  Hasło:
+                </Label>
+                <Input
+                  name='password'
+                  type="password"
+                  id='userPassword'
+                  onChange={this.handleChange}/>
+                <Button type='submit' color='primary' size='md'>Zarejestruj się</Button>
+              </FormGroup>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
     )
   }
 }

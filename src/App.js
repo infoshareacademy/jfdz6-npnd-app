@@ -1,16 +1,14 @@
 import React, {Component} from 'react'
 import './App.css'
-import SignUp from './SignUp'
-import SignIn from './SignIn'
 import Calculator from './Calculator'
+import WelcomeScreen from './WelcomeScreen'
 
 class App extends Component {
   render() {
     return (
       <div>
-          <Calculator/>
-          <SignUp/>
-          <SignIn/>
+        <WelcomeScreen/>
+        <Calculator/>
       </div>
     );
   }

@@ -3,6 +3,7 @@ import {signIn} from './state/auth'
 import {connect} from 'react-redux'
 import {Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col} from 'reactstrap'
 import ModalExample from './ModalSignUp'
+import './SignIn.css'
 
 class SignIn extends Component {
   state = {
@@ -25,7 +26,7 @@ class SignIn extends Component {
 
   render() {
     return (
-      <Container>
+      <Container className='container'>
         <Row>
           <Col sm='12' md={{size: 6, offset: 3}} className='border rounded'>
             <Form onSubmit={this.handleSubmit}>

@@ -48,9 +48,12 @@ class SignUp extends Component {
                   id='userPassword'
                   onChange={this.handleChange}
                 />
+                <FormText color="muted">
+                  Hasło musi zawierać co najmniej 6 znaków.
+                </FormText>
                 <p style={{color: 'red'}}>{this.props.auth.error ? this.props.auth.error.message : null}</p>
                 <div className="text-center">
-                  <Button type='submit' color='primary' size='lg' style={{marginTop: 30}}>Zarejestruj się</Button>
+                  <Button type='submit' color='primary' size='lg'style={{marginTop: 30}}>Zarejestruj się</Button>
                 </div>
               </FormGroup>
             </Form>

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {signIn} from './state/auth'
 import {connect} from 'react-redux'
 import {Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col} from 'reactstrap'
-import ModalExample from './ModalSignUp'
+import ModalSignUp from './ModalSignUp'
 import './SignIn.css'
 
 class SignIn extends Component {
@@ -56,7 +56,7 @@ class SignIn extends Component {
                   <p style={{color: 'red'}}>{this.props.auth.error ? this.props.auth.error.message : null}</p>
                 </div>
                 <p style={{marginTop: 50}} className='text-center'>Nie masz jeszcze konta? Zarejestruj się teraz!</p>
-                <ModalExample/>
+                <ModalSignUp/>
               </FormGroup>
             </Form>
           </Col>

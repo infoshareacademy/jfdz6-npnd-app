@@ -27,10 +27,9 @@ class SignUp extends Component {
     return (
       <Container>
         <Row>
-          <Col sm="12" md={{size: 6, offset: 3}}>
+          <Col sm="12" md={{size: 10, offset: 1}}>
             <Form onSubmit={this.handleSubmit}>
               <FormGroup>
-                <p>{this.props.auth.data && this.props.auth.email}</p>
                 <Label for='userName'>
                   Email:
                 </Label>
@@ -47,9 +46,11 @@ class SignUp extends Component {
                   name='password'
                   type="password"
                   id='userPassword'
-                  onChange={this.handleChange}/>
+                  onChange={this.handleChange}
+                />
+                <p style={{color: 'red'}}>{this.props.auth.error ? this.props.auth.error.message : null}</p>
                 <div className="text-center">
-                  <Button type='submit' color='primary' size='md'>Zarejestruj się</Button>
+                  <Button type='submit' color='primary' size='lg' style={{marginTop: 30}}>Zarejestruj się</Button>
                 </div>
               </FormGroup>
             </Form>

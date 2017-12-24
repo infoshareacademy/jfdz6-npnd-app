@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {signIn} from './state/auth'
 import {connect} from 'react-redux'
 import {Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col} from 'reactstrap'
+import ModalExample from './ModalSignUp'
 
 class SignIn extends Component {
   state = {
@@ -29,9 +30,6 @@ class SignIn extends Component {
           <Col sm='12' md={{size: 6, offset: 3}} className='border rounded'>
             <Form onSubmit={this.handleSubmit}>
               <FormGroup>
-                {
-                  this.props.auth.error && <p>{this.props.auth.error.message}</p>
-                }
                 <Label for="userEmail">
                   Email:
                 </Label>
@@ -40,7 +38,8 @@ class SignIn extends Component {
                   type='email'
                   id='userEmail'
                   onChange={this.handleChange}
-                  autoFocus/>
+                  autoFocus
+                />
               </FormGroup>
               <FormGroup>
                 <Label for='userPassword'>
@@ -51,10 +50,12 @@ class SignIn extends Component {
                   type='password'
                   id='userPassword'
                   onChange={this.handleChange}/>
-                <div className="text-center">
+                <div className='text-center'>
                   <Button type='submit' color='primary' size='lg' style={{marginTop: 30}}>Zaloguj się</Button>
+                  <p style={{color: 'red'}}>{this.props.auth.error ? this.props.auth.error.message : null}</p>
                 </div>
-                <p style={{marginTop: 50}}>Nie masz jeszcze konta? Zarejestruj się teraz!</p>
+                <p style={{marginTop: 50}} className='text-center'>Nie masz jeszcze konta? Zarejestruj się teraz!</p>
+                <ModalExample/>
               </FormGroup>
             </Form>
           </Col>

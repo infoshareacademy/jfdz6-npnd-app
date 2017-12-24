@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
 import SignIn from './SignIn'
-import SignUp from './SignUp'
+
 
 class Auth extends Component {
   render() {
@@ -12,7 +12,6 @@ class Auth extends Component {
           this.props.auth.data === null ?
             <div>
               <SignIn/>
-              {/*<SignUp/>*/}
             </div> :
             this.props.children
         }

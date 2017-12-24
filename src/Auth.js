@@ -12,7 +12,7 @@ class Auth extends Component {
           this.props.auth.data === null ?
             <div>
               <SignIn/>
-              <SignUp/>
+              {/*<SignUp/>*/}
             </div> :
             this.props.children
         }

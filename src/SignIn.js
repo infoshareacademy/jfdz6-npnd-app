@@ -26,7 +26,7 @@ class SignIn extends Component {
     return (
       <Container>
         <Row>
-          <Col sm='12' md={{size: 8, offset: 2}}>
+          <Col sm='12' md={{size: 6, offset: 3}} className='border rounded'>
             <Form onSubmit={this.handleSubmit}>
               <FormGroup>
                 {
@@ -51,7 +51,10 @@ class SignIn extends Component {
                   type='password'
                   id='userPassword'
                   onChange={this.handleChange}/>
-                <Button type='submit' color='primary' size='md'>Zaloguj się</Button>
+                <div className="text-center">
+                  <Button type='submit' color='primary' size='lg' style={{marginTop: 30}}>Zaloguj się</Button>
+                </div>
+                <p style={{marginTop: 50}}>Nie masz jeszcze konta? Zarejestruj się teraz!</p>
               </FormGroup>
             </Form>
           </Col>

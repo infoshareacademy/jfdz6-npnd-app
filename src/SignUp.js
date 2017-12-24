@@ -3,9 +3,9 @@ import {signUp} from './state/auth'
 import {connect} from 'react-redux'
 
 class SignUp extends Component {
-  state ={
-    login:'',
-    password:''
+  state = {
+    login: '',
+    password: ''
   }
 
   handleChange = event => {
@@ -26,16 +26,21 @@ class SignUp extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <p>{this.props.auth.data && this.props.auth.email}</p>
-        Login:
+        <label>
+          Login:
+        </label>
         <input
           name='login'
+          type='text'
           onChange={this.handleChange}/>
-        Password:
+        <label>
+          Password:
+        </label>
         <input
           name='password'
           type="password"
           onChange={this.handleChange}/>
-        <button>Sign up</button>
+        <button type='submit'>Sign up</button>
       </form>
     )
   }

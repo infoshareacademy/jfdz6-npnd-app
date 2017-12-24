@@ -22,7 +22,7 @@ class CalculatorOutputCurrency extends Component {
       <div>
         <p>Podana kwota przeliczona z {this.props.selectValue} na {this.props.selectOutputValue} wynosi:
           <h2 style={{color: 'rgb(51, 122, 183)'}}>
-            {this.calculateOutput()}
+            {this.calculateOutput() ? this.calculateOutput() : 'Proszę wpisać liczbę'}
           </h2>
         </p>
 

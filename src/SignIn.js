@@ -27,16 +27,21 @@ class SignIn extends Component {
         {
           this.props.auth.error && <p>{this.props.auth.error.message}</p>
         }
-        Login:
+        <label>
+          Login:
+        </label>
         <input
           name='login'
+          type='text'
           onChange={this.handleChange}/>
-        Password:
+        <label>
+          Password:
+        </label>
         <input
           name='password'
           type="password"
           onChange={this.handleChange}/>
-        <button>Sign in</button>
+        <button type='submit'>Sign in</button>
       </form>
     )
   }

@@ -33,7 +33,8 @@ class SignIn extends Component {
         <input
           name='login'
           type='text'
-          onChange={this.handleChange}/>
+          onChange={this.handleChange}
+          autoFocus/>
         <label>
           Password:
         </label>

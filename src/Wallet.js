@@ -59,7 +59,7 @@ class Wallet extends React.Component {
 
       const transactionId = this.props.transactions.filter(code => code.currencyCode === this.state.selectedCurrency).map(item => item.transactionId)
       const currencyCode = this.state.selectedCurrency
-      const currencyAmount = this.state.amount
+      const currencyAmount = (-1) * this.state.amount
       const transactionRate = this.state.selectedRate
 
     this.props.sellCurrency({
@@ -152,7 +152,7 @@ class Wallet extends React.Component {
               <td>
                 {
                   this.props.rates.filter(rate2 => rate2.code === rate.currencyCode)
-                    .map(e => <span key={e.transactionId}> {(e.mid - rate.transactionRate) * rate.currencyAmount} </span>)
+                    .map(e => <span key={e.transactionId}> {Math.round(((e.mid - rate.transactionRate) * rate.currencyAmount) * 10000)/10000} </span>)
                 }
               </td>
               <td>

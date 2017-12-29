@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { getCurrencies } from "./state/exchangeRates"
 import { Table, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Input } from 'reactstrap'
-import { buyCurrency } from "./state/handleTransactions"
+import { sellCurrency } from "./state/handleTransactions"
 
 
 /*
@@ -177,7 +177,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getCurrencies: () => dispatch(getCurrencies()),
-  sellCurrency: (transactionId, currencyCode, currencyAmount, transactionRate) => dispatch(buyCurrency(transactionId, currencyCode, currencyAmount, transactionRate))
+  sellCurrency: (transactionId, currencyCode, currencyAmount, transactionRate) => dispatch(sellCurrency(transactionId, currencyCode, currencyAmount, transactionRate))
 })
 
 

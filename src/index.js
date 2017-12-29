@@ -6,14 +6,19 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import store from './store'
+import 'bootstrap/dist/css/bootstrap.css'
+import Auth from './Auth'
+
+// Aplikacja powinna umożliwić szybkie przeliczenie dowolnej ilości wybranej waluty na inną.
 
 ReactDOM.render(
-    <Provider store={store}>
-      <Router>
-        <Route path="/" component={App} />
-      </Router>
-    </Provider>,
-    document.getElementById('root')
-
+  <Provider store={store}>
+    <Router>
+      <Auth>
+        <Route path="/" component={App}/>
+      </Auth>
+    </Router>
+  </Provider>,
+  document.getElementById('root')
 );
 registerServiceWorker()

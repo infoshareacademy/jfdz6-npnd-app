@@ -79,7 +79,7 @@ class Wallet extends React.Component {
       <div>
         <h1>My Wallet</h1>
 
-        <Modal isOpen={this.state.modal} toggle={this.toggleModal} keyboard={false}>
+        <Modal isOpen={this.state.modal} toggle={this.closeModal} keyboard={false}>
           <FormGroup>
             <ModalHeader toggle={this.closeModal}>Sell - {this.state.selectedCurrency}</ModalHeader>
             <ModalBody>

@@ -70,7 +70,8 @@ class Wallet extends React.Component {
     })
 
     this.setState({
-      modal: false
+      modal: false,
+      result: null
     })
   }
 

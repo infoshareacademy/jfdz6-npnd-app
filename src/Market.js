@@ -125,7 +125,7 @@ class Market extends React.Component {
               {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${this.state.result} zł` : 'nie uda się'}
             </ModalBody>
             <ModalFooter>
-              <Button color="success" onClick={this.handleBuy}>Buy</Button>
+              <Button color="success" onClick={this.handleBuy} disabled={this.state.amount > 0 ? false : true}>Buy</Button>
               <Button color="secondary" onClick={this.closeModal}>Close</Button>
             </ModalFooter>
           </FormGroup>

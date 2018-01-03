@@ -100,7 +100,7 @@ class Wallet extends React.Component {
               {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${this.state.result} zł` : 'nie uda się'}
             </ModalBody>
             <ModalFooter>
-              <Button color="success" onClick={this.handleSell} disabled={false}>Sell</Button>
+              <Button color="success" onClick={this.handleSell} disabled={this.state.amount > 0 ? false : true}>Sell</Button>
               <Button color="secondary" onClick={this.closeModal}>Close</Button>
             </ModalFooter>
           </FormGroup>

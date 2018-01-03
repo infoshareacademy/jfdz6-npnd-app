@@ -29,7 +29,7 @@ export const getCurrencies = () => dispatch => {
   ).then(
     response => response.json()
   ).then(
-    data => dispatch({type: SUCCESS, data: data[0].rates})
+    data => dispatch({type: SUCCESS, data: initialState.data.concat(data[0].rates)})
   ).catch(
     error => dispatch({type: FAIL, error})
   )
@@ -68,11 +68,7 @@ export default (state = initialState, action = {}) => {
         error: null
       }
     case SUCCESS:
-      return state.data.length === 1 ? {
-        ...state,
-        data: state.data.concat(action.data),
-        getting: false
-      } : {
+      return {
         ...state,
         data: action.data,
         getting: false

@@ -74,6 +74,7 @@ export default (state = initialState, action = {}) => {
         getting: false
       } : {
         ...state,
+        data: action.data,
         getting: false
       }
     case FAIL:

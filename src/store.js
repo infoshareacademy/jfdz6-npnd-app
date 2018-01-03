@@ -5,6 +5,8 @@ import firebase from 'firebase'
 
 import exchangeRates from './state/exchangeRates'
 import auth from'./state/auth'
+import historicalExchangeRates from "./state/historicalExchangeRates";
+import handleTransactions from "./state/handleTransactions";
 
 // Initialize Firebase
 const config = {
@@ -17,7 +19,10 @@ const config = {
 };
 firebase.initializeApp(config);
 
+
 const reducer = combineReducers({
+  historicalExchangeRates: historicalExchangeRates,
+  handleTransactions: handleTransactions,
   exchangeRates,
   auth
 })

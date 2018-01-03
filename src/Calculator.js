@@ -5,6 +5,7 @@ import {getCurrencies} from "./state/exchangeRates"
 
 import CalculatorInputCurrency from './CalculatorInputCurrency'
 import CalculatorOutputCurrency from './CalculatorOutputCurrency'
+import SignOut from './SignOut'
 
 class Calculator extends Component {
 
@@ -17,6 +18,7 @@ class Calculator extends Component {
       <div>
         <CalculatorInputCurrency/>
         <CalculatorOutputCurrency/>
+        <SignOut/>
       </div>
     )
   }

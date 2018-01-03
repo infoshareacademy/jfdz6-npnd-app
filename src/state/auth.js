@@ -2,6 +2,7 @@ import firebase from 'firebase'
 
 const SET_USER = 'auth/SET_USER'
 const ERROR = 'auth/ERROR'
+const LOG_OUT = 'auth/LOG_OUT'
 
 const initialState = {
   data: null,
@@ -29,6 +30,17 @@ export const signIn = (email, password) => dispatch => {
     error => dispatch({type: ERROR, error})
   )
 }
+
+export const signOut = () => dispatch => {
+
+    firebase.auth().signOut().then(
+      data => dispatch({type: LOG_OUT, data})
+    ).catch(
+      error => dispatch({type: ERROR, error})
+    )
+  }
+
+
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'RESET':
@@ -47,6 +59,8 @@ export default (state = initialState, action = {}) => {
         ...state,
         error: action.error
       }
+    case LOG_OUT:
+      return initialState
     default:
       return state
   }

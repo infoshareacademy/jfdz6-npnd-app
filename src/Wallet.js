@@ -35,11 +35,13 @@ class Wallet extends React.Component {
     const selectedRate = this.props.rates.filter(rate =>
       rate.code === selectedCurrency
     ).map(e => e.mid)
+    const myCurrency = target.dataset.itemAmount
 
     this.setState({
       selectedCurrency: selectedCurrency,
       modal: !this.state.modal,
-      selectedRate: selectedRate
+      selectedRate: selectedRate,
+      curr: myCurrency
     });
   }
 
@@ -47,7 +49,6 @@ class Wallet extends React.Component {
 
     const currencyQuantity = event.target.value
     const result = currencyQuantity * this.state.selectedRate
-
 
     this.setState({
       result: result,
@@ -97,10 +98,10 @@ class Wallet extends React.Component {
               <Input type="number" name="number" id="exampleSelect" placeholder="How much?"
                      onChange={this.handleChange}>
               </Input>
-              {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${this.state.result} zł` : 'nie uda się'}
+              {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${(Math.round(this.state.result*10000)/10000)} zł` : 'nie uda się'}
             </ModalBody>
             <ModalFooter>
-              <Button color="success" onClick={this.handleSell} disabled={this.state.amount > 0 ? false : true}>Sell</Button>
+              <Button color="success" onClick={this.handleSell} disabled={((this.state.amount*1) > 0 && (this.state.amount*1) <= (this.state.curr*1)) ? false : true}>Sell</Button>
               <Button color="secondary" onClick={this.closeModal}>Close</Button>
             </ModalFooter>
           </FormGroup>
@@ -124,6 +125,7 @@ class Wallet extends React.Component {
             key={rate.transactionId}
             onClick={this.toggleModal}
             data-item-id={rate.currencyCode}
+            data-item-amount={rate.currencyAmount}
             >
               {rate.currencyCode}
               <td>

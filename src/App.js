@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
 import CurrencyRates from './CurrencyRates'
 import Wallet from './Wallet'
@@ -7,57 +6,78 @@ import Calculator from './Calculator'
 import Market from './Market'
 import {
   BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
-import { Nav, NavItem, NavLink, Navbar } from 'reactstrap';
+  Route } from 'react-router-dom'
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from 'reactstrap';
 import SignOut from './SignOut'
 
 
+class App extends Component {
 
-const App = () => (
-      <Router>
-        <div>
-          <Navbar full light>
-            <SignOut/>
-            <Nav className="pull-xs-right" navbar>
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      isOpen: false
+    };
+  }
+
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
+  render() {
+    return (
+    <Router>
+      <div>
+        <SignOut/>
+        <Navbar color="faded" light expand="md">
+          <NavbarBrand href="/">reactstrap</NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink tag={Link} to="/Wallet">Wallet</NavLink>
+                <NavLink href="/calculator">Kalkulator</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/Market">Market</NavLink>
+                <NavLink href="/currencyRates">Kursy walut</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/CurrencyRates">Currency Rates</NavLink>
+                <NavLink href="/wallet">Portfel</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/Calculator">Calculator</NavLink>
+                <NavLink href="/market">Rynek</NavLink>
               </NavItem>
+
+
             </Nav>
-          </Navbar>
+          </Collapse>
+        </Navbar>
 
-          <hr/>
+        <Route path="/calculator" component={Calculator}/>
+        <Route path="/currencyRates" component={CurrencyRates}/>
+        <Route path="/wallet" component={Wallet}/>
+        <Route path="/market" component={Market}/>
 
-          <Route exact path="/" component={Home}/>
-          <Route path="/Wallet" component={Wallet}/>
-          <Route path="/Market" component={Market}/>
-          <Route path="/CurrencyRates" component={CurrencyRates}/>
-          <Route path="/Calculator" component={Calculator}/>
-        </div>
-      </Router>
-)
-
-      const Home = () => (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
       </div>
-      )
+    </Router>
+    )
+  }
 
+}
 
 export default App;

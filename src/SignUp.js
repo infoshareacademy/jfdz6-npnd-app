@@ -53,7 +53,7 @@ class SignUp extends Component {
                 </FormText>
                 <p style={{color: 'red'}}>{this.props.auth.error ? this.props.auth.error.message : null}</p>
                 <div className="text-center">
-                  <Button type='submit' color='primary' size='lg'style={{marginTop: 30}}>Zarejestruj się</Button>
+                  <Button type='submit' color='primary' size='lg'style={{marginTop: 30, cursor: 'pointer'}}>Zarejestruj się</Button>
                 </div>
               </FormGroup>
             </Form>

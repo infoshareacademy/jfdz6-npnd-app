@@ -11,6 +11,7 @@ import {
   Link
 } from 'react-router-dom'
 import { Nav, NavItem, NavLink, Navbar } from 'reactstrap';
+import SignOut from './SignOut'
 
 
 
@@ -18,6 +19,7 @@ const App = () => (
       <Router>
         <div>
           <Navbar full light>
+            <SignOut/>
             <Nav className="pull-xs-right" navbar>
               <NavItem>
                 <NavLink tag={Link} to="/Wallet">Wallet</NavLink>

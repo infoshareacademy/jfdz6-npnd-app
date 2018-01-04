@@ -21,7 +21,7 @@ class ModalSignUp extends React.Component {
   render() {
     return (
       <div className='text-center'>
-        <Button color="danger" onClick={this.toggle}>Zarejestruj się</Button>
+        <Button color="danger" onClick={this.toggle} style={{cursor: 'pointer'}}>Zarejestruj się</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Witamy!</ModalHeader>
           <ModalBody>

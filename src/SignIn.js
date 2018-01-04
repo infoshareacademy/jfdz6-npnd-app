@@ -52,7 +52,7 @@ class SignIn extends Component {
                   id='userPassword'
                   onChange={this.handleChange}/>
                 <div className='text-center'>
-                  <Button type='submit' color='primary' size='lg' style={{marginTop: 30}}>Zaloguj się</Button>
+                  <Button type='submit' color='primary' size='lg' style={{marginTop: 30, cursor: 'pointer'}}>Zaloguj się</Button>
                   <p style={{color: 'red'}}>{this.props.auth.error ? this.props.auth.error.message : null}</p>
                 </div>
                 <p style={{marginTop: 50}} className='text-center'>Nie masz jeszcze konta? Zarejestruj się teraz!</p>

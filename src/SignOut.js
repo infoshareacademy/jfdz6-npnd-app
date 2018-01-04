@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {signOut} from './state/auth'
 import {connect} from 'react-redux'
+import {Button} from 'reactstrap'
+import './SignOut.css'
 
 class SignOut extends Component {
 
@@ -10,7 +12,7 @@ class SignOut extends Component {
 
   render() {
     return (
-      <button type='submit' onClick={this.handleSignOut}>Wyloguj się</button>
+      <Button id='signOutButton' type='submit' color='primary' size='lg' onClick={this.handleSignOut}>Wyloguj się</Button>
     )
   }
 }

@@ -44,9 +44,9 @@ class App extends Component {
     return (
     <Router>
       <div>
-        <SignOut/>
+
         <Navbar color="faded" light expand="md">
-          <NavbarBrand href="/">reactstrap</NavbarBrand>
+          <SignOut/>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

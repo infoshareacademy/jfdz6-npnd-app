@@ -72,7 +72,7 @@ class Market extends React.Component {
   handleBuy = () => {
 
     const currencyCode = this.state.selectedCurrency
-    const currencyAmount = this.state.amount
+    const currencyAmount = this.state.amount*1
     const dateOfTransaction = (moment().format('YYYY-MM-DD'))
     const transactionRate = (this.props.rates.filter(rate2 => rate2.code === this.state.selectedCurrency)
       .map(e => e.mid)[0])

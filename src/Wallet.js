@@ -58,11 +58,11 @@ class Wallet extends React.Component {
 
   handleSell = () => {
 
-      const transactionId = Date.now()
-      const currencyCode = this.state.selectedCurrency
-      const currencyAmount = (-1) * this.state.amount
-      const transactionRate = this.state.selectedRate*1
-      const dateOfTransaction = (moment().format('YYYY-MM-DD'))
+    const transactionId = Date.now()
+    const currencyCode = this.state.selectedCurrency
+    const currencyAmount = (-1) * this.state.amount
+    const transactionRate = this.state.selectedRate * 1
+    const dateOfTransaction = (moment().format('YYYY-MM-DD'))
 
     this.props.sellCurrency({
       transactionId,
@@ -117,10 +117,11 @@ class Wallet extends React.Component {
               <Input type="number" name="number" id="exampleSelect" placeholder="How much?"
                      onChange={this.handleChange}>
               </Input>
-              {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${(Math.round(this.state.result*10000)/10000)} zł` : 'nie uda się'}
+              {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${(Math.round(this.state.result * 10000) / 10000)} zł` : 'nie uda się'}
             </ModalBody>
             <ModalFooter>
-              <Button color="success" onClick={this.handleSell} disabled={((this.state.amount*1) > 0 && (this.state.amount*1) <= (this.state.curr*1)) ? false : true}>Sell</Button>
+              <Button color="success" onClick={this.handleSell}
+                      disabled={((this.state.amount * 1) > 0 && (this.state.amount * 1) <= (this.state.curr * 1)) ? false : true}>Sell</Button>
               <Button color="secondary" onClick={this.closeModal}>Close</Button>
             </ModalFooter>
           </FormGroup>
@@ -139,14 +140,14 @@ class Wallet extends React.Component {
           </thead>
           <tbody>
           {this.state.transactions.sort(
-            (a,b) => a.currencyCode > b.currencyCode
-                                 ).map(
+            (a, b) => a.currencyCode > b.currencyCode
+          ).map(
             rate => <tr
-            key={rate.transactionId}
-            onClick={this.toggleModal}
-            data-item-id={rate.currencyCode}
-            data-item-amount={rate.currencyAmount}
-            data-item-rate={rate.transactionRate}
+              key={rate.transactionId}
+              onClick={this.toggleModal}
+              data-item-id={rate.currencyCode}
+              data-item-amount={rate.currencyAmount}
+              data-item-rate={rate.transactionRate}
             >
               {rate.currencyCode}
               <td>
@@ -157,7 +158,7 @@ class Wallet extends React.Component {
               </td>
               <td>
                 {
-                  this.state.transactions.filter(rate2 => rate2.currencyCode === rate.currencyCode && rate2.transactionRate === rate.transactionRate )
+                  this.state.transactions.filter(rate2 => rate2.currencyCode === rate.currencyCode && rate2.transactionRate === rate.transactionRate)
                     .map(e => <span key={e.transactionId}> {e.transactionRate}</span>)
                 }
               </td>
@@ -170,13 +171,15 @@ class Wallet extends React.Component {
               <td>
                 {
                   this.props.rates.filter(rate2 => rate2.code === rate.currencyCode)
-                    .map(e => <span key={e.transactionId}> {Math.round(((e.mid - rate.transactionRate) * rate.currencyAmount) * 10000)/10000} </span>)
+                    .map(e => <span
+                      key={e.transactionId}> {Math.round(((e.mid - rate.transactionRate) * rate.currencyAmount) * 10000) / 10000} </span>)
                 }
               </td>
               <td>
                 {
                   this.props.rates.filter(rate2 => rate2.code === rate.currencyCode)
-                    .map(e => <span key={e.transactionId}> {(e.mid - rate.transactionRate) > 0 ? 'Zarabiasz!' : 'Tracisz!'} </span>)
+                    .map(e => <span
+                      key={e.transactionId}> {(e.mid - rate.transactionRate) > 0 ? 'Zarabiasz!' : 'Tracisz!'} </span>)
                 }
               </td>
             </tr>)}

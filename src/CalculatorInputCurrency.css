@@ -1,3 +1,8 @@
+.submit-button {
+    display: block !important;
+    margin: 0 auto !important;
+}
+
 @media screen and (min-width: 780px) {
 
     .flex-container {
@@ -12,10 +17,5 @@
 
     .currency-list {
         width: 39%;
-    }
-
-    .submit-button {
-        display: block;
-        margin: 0 auto;
     }
 }

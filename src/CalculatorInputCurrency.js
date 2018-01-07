@@ -36,7 +36,7 @@ class CalculatorInputCurrency extends Component {
               <OutputCurrencyList/>
             </div>
             <div className='submit-button'>
-              <Button type="submit" bsSize="lg" style={{marginLeft: 10}}>Przelicz</Button>
+              <Button type="submit" bsSize="lg">Przelicz</Button>
             </div>
           </div>
         </Form>

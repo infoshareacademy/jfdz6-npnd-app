@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {signOut} from './state/auth'
-import {connect} from 'react-redux'
-import {Button} from 'reactstrap'
+import React, { Component } from 'react'
+import { signOut } from './state/auth'
+import { connect } from 'react-redux'
+import { Button } from 'reactstrap'
 import './SignOut.css'
 
 class SignOut extends Component {

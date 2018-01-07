@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, FormGroup, Label, Input } from 'reactstrap'
-import {connect} from 'react-redux'
-import {changeCurrency} from './state/exchangeRates'
+import { connect } from 'react-redux'
+import { changeCurrency } from './state/exchangeRates'
 
 class CurrencyList extends React.Component {
 

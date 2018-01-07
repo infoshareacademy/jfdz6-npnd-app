@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import CurrencyRates from './CurrencyRates'
 import Wallet from './Wallet'

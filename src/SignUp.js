@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {signUp} from './state/auth'
-import {connect} from 'react-redux'
-import {Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col} from 'reactstrap'
+import React, { Component } from 'react'
+import { signUp } from './state/auth'
+import { connect } from 'react-redux'
+import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col } from 'reactstrap'
 
 class SignUp extends Component {
   state = {

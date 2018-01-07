@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {Button, Form, Input, Label} from 'reactstrap'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Button, Form, Input, Label } from 'reactstrap'
 import CurrencyList from './CurrencyList'
 
 import {add} from './state/exchangeRates'

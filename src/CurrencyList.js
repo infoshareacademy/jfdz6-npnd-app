@@ -21,7 +21,11 @@ class CurrencyList extends React.Component {
                  onChange={this.handleSelect}>
             {
               this.props.rates.map(
-                rate => <option value={rate.code}>{rate.currency}</option>
+                rate => <option
+                  value={rate.code}
+                  key={rate.code}>
+                  {rate.currency}
+                  </option>
               )
             }
           </Input>

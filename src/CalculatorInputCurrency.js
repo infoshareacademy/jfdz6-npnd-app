@@ -1,10 +1,11 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import { Button } from 'reactstrap'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Button, Form, Input, Label } from 'reactstrap'
 import CurrencyList from './CurrencyList'
 
 import {add} from './state/exchangeRates'
 import OutputCurrencyList from './OutputCurrencyList'
+import './CalculatorInputCurrency.css'
 
 class CalculatorInputCurrency extends Component {
 
@@ -19,13 +20,26 @@ class CalculatorInputCurrency extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <input type='text' ref={item => this.userInput = item} placeholder={this.props.error ? this.props.error.message : this.props.userValue}/>
-          <CurrencyList/>
-          &#8596;
-          <OutputCurrencyList/>
-          <Button type="submit" bsSize="sm" style={{marginLeft: 10}}>Przelicz</Button>
-        </form>
+        <Form onSubmit={this.handleSubmit}>
+          <div className='flex-container'>
+            <div className='input-field'>
+              <Label for="input">Wpisz kwotę</Label>
+              <Input id='input'
+                     type='text'
+                     ref={item => this.userInput = item}
+                     placeholder={this.props.error ? this.props.error.message : this.props.userValue} required/>
+            </div>
+            <div className='currency-list'>
+              <CurrencyList/>
+            </div>
+            <div className='currency-list'>
+              <OutputCurrencyList/>
+            </div>
+            <div className='submit-button'>
+              <Button type="submit" bsSize="lg" style={{marginLeft: 10}}>Przelicz</Button>
+            </div>
+          </div>
+        </Form>
       </div>
     )
   }

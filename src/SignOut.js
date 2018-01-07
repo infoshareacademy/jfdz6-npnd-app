@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-import { signOut } from './state/auth'
+import Media from 'react-media'
 import { connect } from 'react-redux'
 import { Button } from 'reactstrap'
+import Octicon from 'react-octicon'
+
+import { signOut } from './state/auth'
 import './SignOut.css'
 
 class SignOut extends Component {
@@ -12,7 +15,13 @@ class SignOut extends Component {
 
   render() {
     return (
-      <Button id='signOutButton' type='submit' color='primary' size='lg' onClick={this.handleSignOut}>Wyloguj się</Button>
+      <Media query="(max-width: 576px)">
+        {matches => matches ? (
+          <Button id='signOutButton' type='submit' color='primary' size='md'
+                  onClick={this.handleSignOut}><Octicon name='sign-out'/></Button>) : (
+          <Button id='signOutButton' type='submit' color='primary' size='lg' onClick={this.handleSignOut}>Wyloguj
+            się</Button>)}
+      </Media>
     )
   }
 }

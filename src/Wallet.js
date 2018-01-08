@@ -4,6 +4,7 @@ import { getCurrencies } from "./state/exchangeRates"
 import { Table, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Input } from 'reactstrap'
 import { sellCurrency } from "./state/handleTransactions"
 import moment from 'moment'
+import getTransactions from './utils'
 
 
 /*
@@ -20,8 +21,7 @@ użytkownik powinien zobaczyć komunikat o potencjalnej korzyści ze sprzedaży.
 class Wallet extends React.Component {
 
   state = {
-    modal: false,
-    transactions: []
+    modal: false
   }
 
   closeModal = () => {
@@ -36,12 +36,14 @@ class Wallet extends React.Component {
     const selectedCurrency = target.dataset.itemId
     const selectedRate = target.dataset.itemRate
     const myCurrency = target.dataset.itemAmount
+    const transactionKey = selectedCurrency + selectedRate
 
     this.setState({
       selectedCurrency: selectedCurrency,
       modal: !this.state.modal,
       selectedRate: selectedRate,
-      curr: myCurrency
+      curr: myCurrency,
+      transactionKey: transactionKey
     });
   }
 
@@ -63,35 +65,20 @@ class Wallet extends React.Component {
     const currencyAmount = (-1) * this.state.amount
     const transactionRate = this.state.selectedRate * 1
     const dateOfTransaction = (moment().format('YYYY-MM-DD'))
+    const transactionKey = this.state.transactionKey
 
     this.props.sellCurrency({
       transactionId,
       currencyCode,
       currencyAmount,
       transactionRate,
-      dateOfTransaction
+      dateOfTransaction,
+      transactionKey
     })
 
     this.setState({
       modal: false,
-      result: null
-    })
-  }
-
-  componentDidMount() {
-
-    this.setState({
-      transactions: this.props.transactions.reduce((result, next) => {
-        result.filter(e => e.currencyCode === next.currencyCode && e.transactionRate === next.transactionRate).length > 0 ?
-          result[result.findIndex(item => item.currencyCode === next.currencyCode && item.transactionRate === next.transactionRate)].currencyAmount = result[result.findIndex(item => item.currencyCode === next.currencyCode && item.transactionRate === next.transactionRate)].currencyAmount + next.currencyAmount
-          :
-          result.push({
-            currencyCode: next.currencyCode,
-            currencyAmount: next.currencyAmount,
-            transactionRate: next.transactionRate
-          })
-        return result
-      }, [])
+      result: null,
     })
   }
 
@@ -139,7 +126,8 @@ class Wallet extends React.Component {
           </tr>
           </thead>
           <tbody>
-          {this.state.transactions.sort(
+          {
+            getTransactions(this.props.transactions).sort(
             (a, b) => a.currencyCode > b.currencyCode
           ).map(
             rate => <tr
@@ -158,13 +146,13 @@ class Wallet extends React.Component {
               </td>
               <td>
                 {
-                  this.state.transactions.filter(rate2 => rate2.currencyCode === rate.currencyCode && rate2.transactionRate === rate.transactionRate)
+                  getTransactions(this.props.transactions).filter(rate2 => rate2.transactionKey === rate.transactionKey)
                     .map(e => <span key={e.transactionId}> {e.transactionRate}</span>)
                 }
               </td>
               <td>
                 {
-                  this.state.transactions.filter(rate2 => rate2.currencyCode === rate.currencyCode && rate2.transactionRate === rate.transactionRate)
+                  getTransactions(this.props.transactions).filter(rate2 => rate2.transactionKey === rate.transactionKey)
                     .map(e => <span key={e.transactionId}> {e.currencyAmount}</span>)
                 }
               </td>
@@ -198,7 +186,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getCurrencies: () => dispatch(getCurrencies()),
-  sellCurrency: (transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction) => dispatch(sellCurrency(transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction))
+  sellCurrency: (transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction, transactionKey) => dispatch(sellCurrency(transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction, transactionKey))
 })
 
 

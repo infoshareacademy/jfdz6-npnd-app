@@ -27,7 +27,7 @@ export default ( state = initialState, action = {}) => {
     case SELL: {
       return {
         ...state,
-        transactions: state.transactions
+        transactions: state.transactions.concat(action.transactionData)
       }
     }
     default:

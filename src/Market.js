@@ -72,7 +72,7 @@ class Market extends React.Component {
   handleBuy = () => {
 
     const currencyCode = this.state.selectedCurrency
-    const currencyAmount = this.state.amount
+    const currencyAmount = this.state.amount*1
     const dateOfTransaction = (moment().format('YYYY-MM-DD'))
     const transactionRate = (this.props.rates.filter(rate2 => rate2.code === this.state.selectedCurrency)
       .map(e => e.mid)[0])
@@ -86,7 +86,8 @@ class Market extends React.Component {
     })
 
     this.setState({
-      modal: false
+      modal: false,
+      result: null
     })
 
   }
@@ -104,7 +105,7 @@ class Market extends React.Component {
       <div>
         <h1>Market </h1>
 
-        <Modal isOpen={this.state.modal} toggle={this.toggleModal} keyboard={false}>
+        <Modal isOpen={this.state.modal} toggle={this.closeModal} keyboard={false}>
           <FormGroup>
             <ModalHeader toggle={this.closeModal}>Buy - {this.state.selectedCurrency}</ModalHeader>
             <ModalBody>
@@ -121,10 +122,10 @@ class Market extends React.Component {
               <Input type="number" name="number" id="exampleSelect" placeholder="How much?"
                      onChange={this.handleChange}>
               </Input>
-              {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${this.state.result} zł` : 'nie uda się'}
+              {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${(Math.round(this.state.result*10000)/10000)} zł` : 'nie uda się'}
             </ModalBody>
             <ModalFooter>
-              <Button color="success" onClick={this.handleBuy}>Buy</Button>
+              <Button color="success" onClick={this.handleBuy} disabled={this.state.amount > 0 ? false : true}>Buy</Button>
               <Button color="secondary" onClick={this.closeModal}>Close</Button>
             </ModalFooter>
           </FormGroup>

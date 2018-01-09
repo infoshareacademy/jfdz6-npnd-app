@@ -4,7 +4,7 @@ import { getCurrencies } from "./state/exchangeRates"
 import { Table, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Input } from 'reactstrap'
 import moment from 'moment'
 import { getYesterdayRates } from "./state/historicalExchangeRates";
-import { buyCurrency } from "./state/handleTransactions"
+import { buyCurrency, writeTransactionData } from "./state/handleTransactions"
 
 /*
 Zalogowany użytkownik powinien móc dodać i zarządzać swoim portfelem walut.
@@ -89,7 +89,6 @@ class Market extends React.Component {
       modal: false,
       result: null
     })
-
   }
 
   componentWillMount() {
@@ -125,7 +124,12 @@ class Market extends React.Component {
               {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${(Math.round(this.state.result*10000)/10000)} zł` : 'nie uda się'}
             </ModalBody>
             <ModalFooter>
-              <Button color="success" onClick={this.handleBuy} disabled={this.state.amount > 0 ? false : true}>Buy</Button>
+              <Button color="success"
+                      onClick={this.handleBuy}
+                      data-value={this.props.transactions}
+                      disabled={this.state.amount > 0 ? false : true}>
+                Buy
+              </Button>
               <Button color="secondary" onClick={this.closeModal}>Close</Button>
             </ModalFooter>
           </FormGroup>
@@ -172,13 +176,15 @@ class Market extends React.Component {
 const mapStateToProps = state => ({
   rates: state.exchangeRates.data,
   yesterdayRates: state.historicalExchangeRates.yesterdayData,
-  currencyCode: state.handleTransactions.currencyCode
+  currencyCode: state.handleTransactions.currencyCode,
+  transactions: state.handleTransactions.transactions
 })
 
 const mapDispatchToProps = dispatch => ({
   getCurrencies: () => dispatch(getCurrencies()),
   getYesterdayRates: (yesterdayDate) => dispatch(getYesterdayRates(yesterdayDate)),
-  buyCurrency: (transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction) => dispatch(buyCurrency(transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction))
+  buyCurrency: (transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction) => dispatch(buyCurrency(transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction)),
+  writeTransactionData: (event) => dispatch(writeTransactionData(event.target.dataset.value))
 })
 
 

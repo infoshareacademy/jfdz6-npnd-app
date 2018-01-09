@@ -1,5 +1,14 @@
+import firebase from 'firebase'
+
 const BUY = 'handleTransaction/BUY'
 const SELL = 'handleTransaction/SELL'
+
+export const writeTransactionData = transactionData => dispatch => {
+  const userId = firebase.auth().currentUser.uid
+  firebase.database().ref('/wallet/' + userId).set({
+    transactionData: transactionData
+  })
+}
 
 export const buyCurrency = (transactionData) => dispatch => {
   dispatch({ type: BUY, transactionData  })

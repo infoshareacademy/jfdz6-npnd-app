@@ -5,13 +5,14 @@ const SELL = 'handleTransaction/SELL'
 
 export const writeTransactionData = transactionData => dispatch => {
   const userId = firebase.auth().currentUser.uid
-  firebase.database().ref('/wallet/' + userId).set({
+  firebase.database().ref('/wallet/' + userId).push({
     transactionData: transactionData
   })
 }
 
 export const buyCurrency = (transactionData) => dispatch => {
   dispatch({ type: BUY, transactionData  })
+  dispatch(writeTransactionData(transactionData))
 }
 
 export const sellCurrency = (transactionData) => dispatch => {
@@ -23,7 +24,6 @@ const initialState = {
   budget: 10000,
   transactions: []
 }
-
 
 export default ( state = initialState, action = {}) => {
   switch (action.type) {

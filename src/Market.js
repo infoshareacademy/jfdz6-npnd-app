@@ -4,7 +4,7 @@ import { getCurrencies } from "./state/exchangeRates"
 import { Table, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Input } from 'reactstrap'
 import moment from 'moment'
 import { getYesterdayRates } from "./state/historicalExchangeRates";
-import { buyCurrency, writeTransactionData } from "./state/handleTransactions"
+import { buyCurrency } from "./state/handleTransactions"
 
 /*
 Zalogowany użytkownik powinien móc dodać i zarządzać swoim portfelem walut.
@@ -56,8 +56,6 @@ class Market extends React.Component {
       result: result,
       amount: currencyQuantity
     })
-
-
   }
 
   closeModal = () => {
@@ -126,7 +124,6 @@ class Market extends React.Component {
             <ModalFooter>
               <Button color="success"
                       onClick={this.handleBuy}
-                      data-value={this.props.transactions}
                       disabled={this.state.amount > 0 ? false : true}>
                 Buy
               </Button>
@@ -134,7 +131,6 @@ class Market extends React.Component {
             </ModalFooter>
           </FormGroup>
         </Modal>
-
 
         <Table hover size="sm" responsive>
           <thead>
@@ -167,7 +163,6 @@ class Market extends React.Component {
             </tr>)}
           </tbody>
         </Table>
-
       </div>
     )
   }
@@ -184,7 +179,6 @@ const mapDispatchToProps = dispatch => ({
   getCurrencies: () => dispatch(getCurrencies()),
   getYesterdayRates: (yesterdayDate) => dispatch(getYesterdayRates(yesterdayDate)),
   buyCurrency: (transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction) => dispatch(buyCurrency(transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction)),
-  writeTransactionData: (event) => dispatch(writeTransactionData(event.target.dataset.value))
 })
 
 

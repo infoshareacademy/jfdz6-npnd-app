@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import './App.css';
 import CurrencyRates from './CurrencyRates'
 import Wallet from './Wallet'
@@ -77,7 +78,10 @@ class App extends Component {
     </Router>
     )
   }
-
 }
 
-export default App;
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps)(App)

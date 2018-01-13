@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 import firebase from 'firebase'
 
 import exchangeRates from './state/exchangeRates'
-import auth from'./state/auth'
+import auth, { enableSync } from'./state/auth'
 import historicalExchangeRates from "./state/historicalExchangeRates";
 import handleTransactions from "./state/handleTransactions";
 
@@ -42,5 +42,6 @@ const store = createStore(
 store.dispatch({type: 'RESET'})
 
 window.store = store
+store.dispatch(enableSync())
 
 export default store;

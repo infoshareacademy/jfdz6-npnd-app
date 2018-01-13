@@ -17,6 +17,7 @@ export const buyCurrency = (transactionData) => dispatch => {
 
 export const sellCurrency = (transactionData) => dispatch => {
   dispatch({ type: SELL, transactionData})
+  dispatch(writeTransactionData(transactionData))
 }
 
 

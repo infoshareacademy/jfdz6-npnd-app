@@ -33,7 +33,7 @@ class CalculatorInputCurrency extends Component {
             <Label for="input">Wpisz kwotę</Label>
             <Input id='input'
                    type='text'
-                   ref={item => this.userInput = item}
+                   innerRef={item => this.userInput = item}
                    placeholder={this.props.error ? this.props.error.message : this.props.userValue}
                    required/>
           </FormGroup>

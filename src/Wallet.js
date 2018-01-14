@@ -21,12 +21,14 @@ użytkownik powinien zobaczyć komunikat o potencjalnej korzyści ze sprzedaży.
 class Wallet extends React.Component {
 
   state = {
-    modal: false
+    modal: false,
+
   }
 
   closeModal = () => {
     this.setState({
-      modal: false
+      modal: false,
+      amount: null,
     })
   }
 
@@ -58,14 +60,24 @@ class Wallet extends React.Component {
     })
   }
 
+  setMax = () => {
+
+  this.setState({
+    amount: this.state.curr
+  })
+
+  }
+
   handleSell = () => {
 
     const transactionId = Date.now()
     const currencyCode = this.state.selectedCurrency
-    const currencyAmount = (-1) * this.state.amount
+    const currencyAmount = this.state.amount*(-1)
     const transactionRate = this.state.selectedRate * 1
     const dateOfTransaction = (moment().format('YYYY-MM-DD'))
     const transactionKey = this.state.transactionKey
+
+    console.log(currencyAmount)
 
     this.props.sellCurrency({
       transactionId,
@@ -101,12 +113,18 @@ class Wallet extends React.Component {
                 e =>
                   <span> {e.currency} - {e.mid}</span>)
             }
-              <Input type="number" name="number" id="exampleSelect" placeholder="How much?"
-                     onChange={this.handleChange}>
+              <Input type="number"
+                     name="number"
+                     id="exampleSelect"
+                     placeholder="How much?"
+                     value = {this.state.amount}
+                     onChange={this.handleChange}
+              >
               </Input>
               {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${(Math.round(this.state.result * 10000) / 10000)} zł` : 'nie uda się'}
             </ModalBody>
             <ModalFooter>
+              <Button onClick={this.setMax} >MAX {this.state.curr}  </Button>
               <Button color="success" onClick={this.handleSell}
                       disabled={((this.state.amount * 1) > 0 && (this.state.amount * 1) <= (this.state.curr * 1)) ? false : true}>Sell</Button>
               <Button color="secondary" onClick={this.closeModal}>Close</Button>

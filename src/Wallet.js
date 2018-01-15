@@ -147,7 +147,9 @@ class Wallet extends React.Component {
           {
             getTransactions(this.props.transactions).sort(
             (a, b) => a.currencyCode > b.currencyCode
-          ).map(
+          ).filter(
+            ele => ele.currencyAmount > 0
+            ).map(
             rate => <tr
               key={rate.transactionId}
               onClick={this.toggleModal}

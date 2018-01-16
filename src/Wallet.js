@@ -124,7 +124,7 @@ class Wallet extends React.Component {
               {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${(Math.round(this.state.result * 10000) / 10000)} zł` : 'nie uda się'}
             </ModalBody>
             <ModalFooter>
-              <Button onClick={this.setMax} >MAX {this.state.curr}  </Button>
+              <Button onClick={this.setMax} > MAX </Button>
               <Button color="success" onClick={this.handleSell}
                       disabled={((this.state.amount * 1) > 0 && (this.state.amount * 1) <= (this.state.curr * 1)) ? false : true}>Sell</Button>
               <Button color="secondary" onClick={this.closeModal}>Close</Button>
@@ -135,12 +135,12 @@ class Wallet extends React.Component {
         <Table hover size="sm" responsive>
           <thead>
           <tr>
-            <th>Currency</th>
-            <th>Today rates</th>
-            <th>Rate of purchase</th>
-            <th>Amount</th>
-            <th>Delta</th>
-            <th>Recommendation</th>
+            <th>Waluta</th>
+            <th>Obecny kurs</th>
+            <th>Kurs kupna</th>
+            <th>Ilość</th>
+            <th>Różnica</th>
+            <th>Rekomendacja</th>
           </tr>
           </thead>
           <tbody>
@@ -186,8 +186,18 @@ class Wallet extends React.Component {
               <td>
                 {
                   this.props.rates.filter(rate2 => rate2.code === rate.currencyCode)
-                    .map(e => <span
-                      key={e.transactionId}> {(e.mid - rate.transactionRate) > 0 ? 'Zarabiasz!' : 'Tracisz!'} </span>)
+                    .map(
+                      e => <span
+                      key={e.transactionId}
+                      >
+                        {
+                          (e.mid - rate.transactionRate) === 0 ?
+                            'Po tyle kupiłeś!' :
+                            (e.mid - rate.transactionRate) > 0 ?
+                              'Zarabiasz!' :
+                              'Tracisz!'
+                        }
+                        </span>)
                 }
               </td>
             </tr>)}

@@ -16,11 +16,12 @@ export const enableSync = () => dispatch => {
   unsubscribe = firebase.auth().onAuthStateChanged(
     user => {
       if (user && user.uid) {
-        console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+
         let ref = firebase.database().ref('/users/' + user.uid)
 
         ref.on("value", function (snap) {
           console.log(snap.val().name)
+          user.updateProfile({ displayName: snap.val().name })
           user.alamakota = snap.val().name
           dispatch({type: SET_USER, data: user})
         })

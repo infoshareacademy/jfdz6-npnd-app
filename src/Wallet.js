@@ -97,7 +97,10 @@ class Wallet extends React.Component {
   render() {
     return (
       <div>
-        <h1>My Wallet</h1>
+        <h1>
+          My Wallet - {this.props.auth.data.displayName}
+        </h1>
+
 
         <Modal isOpen={this.state.modal} toggle={this.closeModal} keyboard={false}>
           <FormGroup>
@@ -211,7 +214,8 @@ class Wallet extends React.Component {
 
 const mapStateToProps = state => ({
   rates: state.exchangeRates.data,
-  transactions: state.handleTransactions.transactions
+  transactions: state.handleTransactions.transactions,
+  auth: state.auth
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -16,10 +16,12 @@ class SignUp extends Component {
   }
 
   handleSubmit = event => {
+    const { login, password, ...other } = this.state
     event.preventDefault()
     this.props.signUp(
       this.state.login,
-      this.state.password
+      this.state.password,
+      other
     )
   }
 
@@ -30,12 +32,16 @@ class SignUp extends Component {
           <Col sm="12" md={{size: 10, offset: 1}}>
             <Form onSubmit={this.handleSubmit}>
               <FormGroup>
+                <Label for="name">Login</Label>
+                <Input name="name" id="name" onChange={this.handleChange}/>
+              </FormGroup>
+              <FormGroup>
                 <Label for='userName'>
                   Email:
                 </Label>
                 <Input
                   name='login'
-                  type='email'
+                  type='userName'
                   onChange={this.handleChange}/>
               </FormGroup>
               <FormGroup>
@@ -69,7 +75,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  signUp: (email, password) => dispatch(signUp(email, password))
+  signUp: (email, password, other) => dispatch(signUp(email, password, other))
 })
 
 export default connect(

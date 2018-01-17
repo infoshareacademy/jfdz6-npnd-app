@@ -6,26 +6,53 @@ const LOG_OUT = 'auth/LOG_OUT'
 
 const initialState = {
   data: null,
-  error: null
+  error: null,
+  name: null
 }
 
-export const signUp = (email, password) => dispatch => {
+let unsubscribe = null
+export const enableSync = () => dispatch => {
+  dispatch(disableSync())
+  unsubscribe = firebase.auth().onAuthStateChanged(
+    user => {
+      if (user && user.uid) {
+        console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+        let ref = firebase.database().ref('/users/' + user.uid)
+
+        ref.on("value", function (snap) {
+          console.log(snap.val().name)
+          user.alamakota = snap.val().name
+          dispatch({type: SET_USER, data: user})
+        })
+      }
+      dispatch({type: SET_USER, data: user})
+    }
+  )
+}
+
+export const disableSync = () => dispatch => {
+  if (unsubscribe !== null) {
+    unsubscribe()
+  }
+}
+
+export const signUp = (email, password, other) => dispatch => {
   firebase.auth().createUserWithEmailAndPassword(
     email,
     password
   ).then(
-    data => dispatch({type: SET_USER, data})
+    user => {
+      firebase.database().ref('/users/' + user.uid).set(other)
+    }
   ).catch(
     error => dispatch({type: ERROR, error})
   )
 }
 
 export const signIn = (email, password) => dispatch => {
-  firebase.auth().signInWithEmailAndPassword(
+  firebase.auth().signInAndRetrieveDataWithEmailAndPassword(
     email,
     password
-  ).then(
-    data => dispatch({type: SET_USER, data})
   ).catch(
     error => dispatch({type: ERROR, error})
   )
@@ -33,13 +60,10 @@ export const signIn = (email, password) => dispatch => {
 
 export const signOut = () => dispatch => {
 
-    firebase.auth().signOut().then(
-      data => dispatch({type: LOG_OUT, data})
-    ).catch(
-      error => dispatch({type: ERROR, error})
-    )
-  }
-
+  firebase.auth().signOut().catch(
+    error => dispatch({type: ERROR, error})
+  )
+}
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {

@@ -9,7 +9,7 @@ const CHANGE_OUTPUT_CURRENCY = 'CHANGE_OUTPUT_CURRENCY'
 
 export const add = value => ({
   type: ADD,
-  userValue: value.trim()
+  userValue: value
 })
 
 export const changeCurrency = currency => ({

@@ -19,8 +19,8 @@ export const enableSync = () => dispatch => {
         const users = firebase.database().ref('/users/' + user.uid)
         return users.once('value').then(
           snapshot => {
-            const { name } = (snapshot.val() || {})
-            dispatch({type: SET_USER, data: {...user, name}})
+            user.updateProfile({ displayName: snapshot.val().name })
+            dispatch({type: SET_USER, data: user})
           }
         )
       }

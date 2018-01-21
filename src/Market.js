@@ -75,12 +75,16 @@ class Market extends React.Component {
     const transactionRate = (this.props.rates.filter(rate2 => rate2.code === this.state.selectedCurrency)
       .map(e => e.mid)[0])
     const transactionId = Date.now()
+    const transactionKey = currencyCode + transactionRate
 
 
     this.props.buyCurrency({
       transactionId,
       currencyCode,
-      currencyAmount, transactionRate, dateOfTransaction
+      currencyAmount,
+      transactionRate,
+      dateOfTransaction,
+      transactionKey
     })
 
     this.setState({
@@ -178,7 +182,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getCurrencies: () => dispatch(getCurrencies()),
   getYesterdayRates: (yesterdayDate) => dispatch(getYesterdayRates(yesterdayDate)),
-  buyCurrency: (transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction) => dispatch(buyCurrency(transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction)),
+  buyCurrency: (transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction, transactionKey) => dispatch(buyCurrency(transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction, transactionKey))
 })
 
 

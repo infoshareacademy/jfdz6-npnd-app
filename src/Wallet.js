@@ -4,6 +4,7 @@ import { getCurrencies } from "./state/exchangeRates"
 import { Table, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Input } from 'reactstrap'
 import { sellCurrency } from "./state/handleTransactions"
 import moment from 'moment'
+import getTransactions from './utils'
 
 
 /*
@@ -21,12 +22,13 @@ class Wallet extends React.Component {
 
   state = {
     modal: false,
-    transactions: []
+
   }
 
   closeModal = () => {
     this.setState({
-      modal: false
+      modal: false,
+      amount: null,
     })
   }
 
@@ -36,12 +38,14 @@ class Wallet extends React.Component {
     const selectedCurrency = target.dataset.itemId
     const selectedRate = target.dataset.itemRate
     const myCurrency = target.dataset.itemAmount
+    const transactionKey = selectedCurrency + selectedRate
 
     this.setState({
       selectedCurrency: selectedCurrency,
       modal: !this.state.modal,
       selectedRate: selectedRate,
-      curr: myCurrency
+      curr: myCurrency,
+      transactionKey: transactionKey
     });
   }
 
@@ -56,49 +60,47 @@ class Wallet extends React.Component {
     })
   }
 
+  setMax = () => {
+
+  this.setState({
+    amount: this.state.curr
+  })
+
+  }
+
   handleSell = () => {
 
     const transactionId = Date.now()
     const currencyCode = this.state.selectedCurrency
-    const currencyAmount = (-1) * this.state.amount
+    const currencyAmount = this.state.amount*(-1)
     const transactionRate = this.state.selectedRate * 1
     const dateOfTransaction = (moment().format('YYYY-MM-DD'))
+    const transactionKey = this.state.transactionKey
+
+    console.log(currencyAmount)
 
     this.props.sellCurrency({
       transactionId,
       currencyCode,
       currencyAmount,
       transactionRate,
-      dateOfTransaction
+      dateOfTransaction,
+      transactionKey
     })
 
     this.setState({
       modal: false,
-      result: null
-    })
-  }
-
-  componentDidMount() {
-
-    this.setState({
-      transactions: this.props.transactions.reduce((result, next) => {
-        result.filter(e => e.currencyCode === next.currencyCode && e.transactionRate === next.transactionRate).length > 0 ?
-          result[result.findIndex(item => item.currencyCode === next.currencyCode && item.transactionRate === next.transactionRate)].currencyAmount = result[result.findIndex(item => item.currencyCode === next.currencyCode && item.transactionRate === next.transactionRate)].currencyAmount + next.currencyAmount
-          :
-          result.push({
-            currencyCode: next.currencyCode,
-            currencyAmount: next.currencyAmount,
-            transactionRate: next.transactionRate
-          })
-        return result
-      }, [])
+      result: null,
     })
   }
 
   render() {
     return (
       <div>
-        <h1>My Wallet</h1>
+        <h1>
+          My Wallet - {this.props.auth.data.displayName}
+        </h1>
+
 
         <Modal isOpen={this.state.modal} toggle={this.closeModal} keyboard={false}>
           <FormGroup>
@@ -114,12 +116,18 @@ class Wallet extends React.Component {
                 e =>
                   <span> {e.currency} - {e.mid}</span>)
             }
-              <Input type="number" name="number" id="exampleSelect" placeholder="How much?"
-                     onChange={this.handleChange}>
+              <Input type="number"
+                     name="number"
+                     id="exampleSelect"
+                     placeholder="How much?"
+                     value = {this.state.amount}
+                     onChange={this.handleChange}
+              >
               </Input>
               {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${(Math.round(this.state.result * 10000) / 10000)} zł` : 'nie uda się'}
             </ModalBody>
             <ModalFooter>
+              <Button onClick={this.setMax} > MAX </Button>
               <Button color="success" onClick={this.handleSell}
                       disabled={((this.state.amount * 1) > 0 && (this.state.amount * 1) <= (this.state.curr * 1)) ? false : true}>Sell</Button>
               <Button color="secondary" onClick={this.closeModal}>Close</Button>
@@ -130,18 +138,21 @@ class Wallet extends React.Component {
         <Table hover size="sm" responsive>
           <thead>
           <tr>
-            <th>Currency</th>
-            <th>Today rates</th>
-            <th>Rate of purchase</th>
-            <th>Amount</th>
-            <th>Delta</th>
-            <th>Recommendation</th>
+            <th>Waluta</th>
+            <th>Obecny kurs</th>
+            <th>Kurs kupna</th>
+            <th>Ilość</th>
+            <th>Różnica</th>
+            <th>Rekomendacja</th>
           </tr>
           </thead>
           <tbody>
-          {this.state.transactions.sort(
+          {
+            getTransactions(this.props.transactions).sort(
             (a, b) => a.currencyCode > b.currencyCode
-          ).map(
+          ).filter(
+            ele => ele.currencyAmount > 0
+            ).map(
             rate => <tr
               key={rate.transactionId}
               onClick={this.toggleModal}
@@ -158,13 +169,13 @@ class Wallet extends React.Component {
               </td>
               <td>
                 {
-                  this.state.transactions.filter(rate2 => rate2.currencyCode === rate.currencyCode && rate2.transactionRate === rate.transactionRate)
+                  getTransactions(this.props.transactions).filter(rate2 => rate2.transactionKey === rate.transactionKey)
                     .map(e => <span key={e.transactionId}> {e.transactionRate}</span>)
                 }
               </td>
               <td>
                 {
-                  this.state.transactions.filter(rate2 => rate2.currencyCode === rate.currencyCode && rate2.transactionRate === rate.transactionRate)
+                  getTransactions(this.props.transactions).filter(rate2 => rate2.transactionKey === rate.transactionKey)
                     .map(e => <span key={e.transactionId}> {e.currencyAmount}</span>)
                 }
               </td>
@@ -178,8 +189,18 @@ class Wallet extends React.Component {
               <td>
                 {
                   this.props.rates.filter(rate2 => rate2.code === rate.currencyCode)
-                    .map(e => <span
-                      key={e.transactionId}> {(e.mid - rate.transactionRate) > 0 ? 'Zarabiasz!' : 'Tracisz!'} </span>)
+                    .map(
+                      e => <span
+                      key={e.transactionId}
+                      >
+                        {
+                          (e.mid - rate.transactionRate) === 0 ?
+                            'Po tyle kupiłeś!' :
+                            (e.mid - rate.transactionRate) > 0 ?
+                              'Zarabiasz!' :
+                              'Tracisz!'
+                        }
+                        </span>)
                 }
               </td>
             </tr>)}
@@ -193,12 +214,13 @@ class Wallet extends React.Component {
 
 const mapStateToProps = state => ({
   rates: state.exchangeRates.data,
-  transactions: state.handleTransactions.transactions
+  transactions: state.handleTransactions.transactions,
+  auth: state.auth
 })
 
 const mapDispatchToProps = dispatch => ({
   getCurrencies: () => dispatch(getCurrencies()),
-  sellCurrency: (transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction) => dispatch(sellCurrency(transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction))
+  sellCurrency: (transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction, transactionKey) => dispatch(sellCurrency(transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction, transactionKey))
 })
 
 

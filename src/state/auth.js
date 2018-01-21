@@ -6,8 +6,7 @@ const LOG_OUT = 'auth/LOG_OUT'
 
 const initialState = {
   data: null,
-  error: null,
-  name: null
+  error: null
 }
 
 let unsubscribe = null
@@ -15,16 +14,7 @@ export const enableSync = () => dispatch => {
   dispatch(disableSync())
   unsubscribe = firebase.auth().onAuthStateChanged(
     user => {
-      if (user) {
-        const users = firebase.database().ref('/users/' + user.uid)
-        return users.once('value').then(
-          snapshot => {
-            user.updateProfile({ displayName: snapshot.val().name })
-            dispatch({type: SET_USER, data: user})
-          }
-        )
-      }
-      return dispatch({ type: SET_USER, data: null })
+      return dispatch({ type: SET_USER, data: user })
     }
   )
 }
@@ -40,8 +30,10 @@ export const signUp = (email, password, other) => dispatch => {
     email,
     password
   ).then(
-    user => {
-      firebase.database().ref('/users/' + user.uid).set(other)
+    (user) => {
+      user.updateProfile({ displayName: other.name }).then(
+        () => dispatch({ type: SET_USER, data: {...user}})
+      )
     }
   ).catch(
     error => dispatch({type: ERROR, error})

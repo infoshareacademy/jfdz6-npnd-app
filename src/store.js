@@ -14,7 +14,7 @@ const config = {
   authDomain: "react-project-23cb9.firebaseapp.com",
   databaseURL: "https://react-project-23cb9.firebaseio.com",
   projectId: "react-project-23cb9",
-  storageBucket: "",
+  storageBucket: "react-project-23cb9.appspot.com",
   messagingSenderId: "752624683001"
 };
 firebase.initializeApp(config);

@@ -45,7 +45,6 @@ class App extends Component {
     return (
     <Router>
       <div>
-
         <Navbar color="faded" light expand="md">
           <SignOut/>
           <h1>Witaj {this.props.auth.data.displayName}</h1>
@@ -64,17 +63,13 @@ class App extends Component {
               <NavItem>
                 <NavLink href="/market">Rynek</NavLink>
               </NavItem>
-
-
             </Nav>
           </Collapse>
         </Navbar>
-
         <Route path="/calculator" component={Calculator}/>
         <Route path="/currencyRates" component={CurrencyRates}/>
         <Route path="/wallet" component={Wallet}/>
         <Route path="/market" component={Market}/>
-
       </div>
     </Router>
     )

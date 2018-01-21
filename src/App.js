@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import './App.css';
 import CurrencyRates from './CurrencyRates'
 import Wallet from './Wallet'
@@ -44,9 +45,9 @@ class App extends Component {
     return (
     <Router>
       <div>
-
         <Navbar color="faded" light expand="md">
           <SignOut/>
+          <h1>Witaj {this.props.auth.data.displayName}</h1>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
@@ -62,22 +63,21 @@ class App extends Component {
               <NavItem>
                 <NavLink href="/market">Rynek</NavLink>
               </NavItem>
-
-
             </Nav>
           </Collapse>
         </Navbar>
-
         <Route path="/calculator" component={Calculator}/>
         <Route path="/currencyRates" component={CurrencyRates}/>
         <Route path="/wallet" component={Wallet}/>
         <Route path="/market" component={Market}/>
-
       </div>
     </Router>
     )
   }
-
 }
 
-export default App;
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps)(App)

@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 import firebase from 'firebase'
 
 import exchangeRates from './state/exchangeRates'
-import auth from'./state/auth'
+import auth, { enableSync } from'./state/auth'
 import historicalExchangeRates from "./state/historicalExchangeRates";
 import handleTransactions from "./state/handleTransactions";
 
@@ -14,7 +14,7 @@ const config = {
   authDomain: "react-project-23cb9.firebaseapp.com",
   databaseURL: "https://react-project-23cb9.firebaseio.com",
   projectId: "react-project-23cb9",
-  storageBucket: "",
+  storageBucket: "react-project-23cb9.appspot.com",
   messagingSenderId: "752624683001"
 };
 firebase.initializeApp(config);
@@ -42,5 +42,6 @@ const store = createStore(
 store.dispatch({type: 'RESET'})
 
 window.store = store
+store.dispatch(enableSync())
 
 export default store;

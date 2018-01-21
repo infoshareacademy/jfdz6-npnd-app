@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import {disableTransactionSync, enableTransationSync} from "./handleTransactions";
 
 const SET_USER = 'auth/SET_USER'
 const ERROR = 'auth/ERROR'
@@ -14,6 +15,11 @@ export const enableSync = () => dispatch => {
   dispatch(disableSync())
   unsubscribe = firebase.auth().onAuthStateChanged(
     user => {
+      if (user) {
+        dispatch(enableTransationSync())
+      } else {
+        dispatch(disableTransactionSync())
+      }
       return dispatch({ type: SET_USER, data: user })
     }
   )

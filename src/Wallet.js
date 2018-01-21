@@ -68,6 +68,9 @@ class Wallet extends React.Component {
 
   }
 
+  componentDidMount() {
+    this.props.getCurrencies()
+  }
   handleSell = () => {
 
     const transactionId = Date.now()
@@ -88,10 +91,13 @@ class Wallet extends React.Component {
       transactionKey
     })
 
+
+
     this.setState({
       modal: false,
       result: null,
     })
+
   }
 
   render() {

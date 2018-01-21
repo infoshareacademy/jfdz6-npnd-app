@@ -7,7 +7,8 @@ import Calculator from './Calculator'
 import Market from './Market'
 import {
   BrowserRouter as Router,
-  Route } from 'react-router-dom'
+  Route,
+  Link} from 'react-router-dom'
 import {
   Collapse,
   Navbar,
@@ -52,16 +53,16 @@ class App extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/calculator">Kalkulator</NavLink>
+                <NavLink tag={Link} to="/calculator">Kalkulator</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/currencyRates">Kursy walut</NavLink>
+                <NavLink tag={Link} to="/currencyRates">Kursy walut</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/wallet">Portfel</NavLink>
+                <NavLink tag={Link} to="/wallet">Portfel</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/market">Rynek</NavLink>
+                <NavLink tag={Link} to="/market">Rynek</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

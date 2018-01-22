@@ -48,6 +48,7 @@ class App extends Component {
 
         <Navbar color="faded" light expand="md">
           <SignOut/>
+          <h1>Witaj {this.props.auth.data.displayName}</h1>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

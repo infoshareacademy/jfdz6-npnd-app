@@ -1,13 +1,51 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Table } from 'reactstrap'
+import { Doughnut } from 'react-chartjs-2'
+import getTransactions from './utils'
+
+const data = {
+  labels: [
+    'Red',
+    'Green',
+    'Yellow'
+  ],
+  datasets: [{
+    data: [300, 50, 100],
+    backgroundColor: [
+      '#FF6384',
+      '#36A2EB',
+      '#FFCE56'
+    ],
+    hoverBackgroundColor: [
+      '#FF6384',
+      '#36A2EB',
+      '#FFCE56'
+    ]
+  }]
+};
 
 class Budget extends React.Component {
 
 
   render() {
+
+    const chartData = {
+      ...data,
+      labels: getTransactions(this.props.transactions).map(e => e.currencyCode),
+      datasets: [ {
+        ...data.datasets[ 0 ],
+        data: getTransactions(this.props.transactions).map(e => e.currencyAmount)
+      }
+      ]
+    }
+
     return (
       <div>
+
+        <h2>Doughnut Example</h2>
+        <Doughnut data={chartData} />
+
         <h2>Logi transkacji</h2>
         <Table hover size="sm" responsive>
           <thead>

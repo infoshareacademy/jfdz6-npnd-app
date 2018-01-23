@@ -115,7 +115,6 @@ class CurrencyRates extends React.Component {
 
 
       <div>
-        <h1>Currency Rates</h1>
 
 
         Od

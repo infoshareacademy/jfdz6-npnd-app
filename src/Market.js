@@ -104,7 +104,6 @@ class Market extends React.Component {
   render() {
     return (
       <div>
-        <h1>Market </h1>
 
         <Modal isOpen={this.state.modal} toggle={this.closeModal} keyboard={false}>
           <FormGroup>

@@ -5,6 +5,7 @@ import CurrencyRates from './CurrencyRates'
 import Wallet from './Wallet'
 import Calculator from './Calculator'
 import Market from './Market'
+import Budget from './Budget'
 import {
   BrowserRouter as Router,
   Route,
@@ -64,6 +65,9 @@ class App extends Component {
               <NavItem>
                 <NavLink tag={Link} to="/market">Rynek</NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink tag={Link} to="/budget">Budżet</NavLink>
+              </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
@@ -71,6 +75,7 @@ class App extends Component {
         <Route path="/currencyRates" component={CurrencyRates}/>
         <Route path="/wallet" component={Wallet}/>
         <Route path="/market" component={Market}/>
+        <Route path="/budget" component={Budget}/>
       </div>
     </Router>
     )

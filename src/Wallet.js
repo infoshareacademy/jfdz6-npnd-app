@@ -22,13 +22,14 @@ class Wallet extends React.Component {
 
   state = {
     modal: false,
-
+    result: null
   }
 
   closeModal = () => {
     this.setState({
       modal: false,
       amount: null,
+      result: null
     })
   }
 
@@ -95,11 +96,10 @@ class Wallet extends React.Component {
       transactionKey
     })
 
-
-
     this.setState({
       modal: false,
-      result: null,
+      amount: null,
+      result: null
     })
 
   }
@@ -131,7 +131,7 @@ class Wallet extends React.Component {
                      onChange={this.handleChange}
               >
               </Input>
-              {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${(Math.round(this.state.result * 10000) / 10000)} zł` : 'nie uda się'}
+              {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${(Math.round(this.state.result * 10000) / 10000)} zł` : ''}
             </ModalBody>
             <ModalFooter>
               <Button onClick={this.setMax} > MAX </Button>

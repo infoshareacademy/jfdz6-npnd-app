@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import {disableTransactionSync, enableTransationSync} from "./handleTransactions";
 
 const SET_USER = 'auth/SET_USER'
 const ERROR = 'auth/ERROR'
@@ -6,8 +7,7 @@ const LOG_OUT = 'auth/LOG_OUT'
 
 const initialState = {
   data: null,
-  error: null,
-  name: null
+  error: null
 }
 
 let unsubscribe = null
@@ -15,18 +15,12 @@ export const enableSync = () => dispatch => {
   dispatch(disableSync())
   unsubscribe = firebase.auth().onAuthStateChanged(
     user => {
-      if (user && user.uid) {
-
-        let ref = firebase.database().ref('/users/' + user.uid)
-
-        ref.on("value", function (snap) {
-          console.log(snap.val().name)
-          user.updateProfile({ displayName: snap.val().name })
-          user.alamakota = snap.val().name
-          dispatch({type: SET_USER, data: user})
-        })
+      if (user) {
+        dispatch(enableTransationSync())
+      } else {
+        dispatch(disableTransactionSync())
       }
-      dispatch({type: SET_USER, data: user})
+      return dispatch({ type: SET_USER, data: user })
     }
   )
 }
@@ -42,8 +36,10 @@ export const signUp = (email, password, other) => dispatch => {
     email,
     password
   ).then(
-    user => {
-      firebase.database().ref('/users/' + user.uid).set(other)
+    (user) => {
+      user.updateProfile({ displayName: other.name }).then(
+        () => dispatch({ type: SET_USER, data: {...user}})
+      )
     }
   ).catch(
     error => dispatch({type: ERROR, error})

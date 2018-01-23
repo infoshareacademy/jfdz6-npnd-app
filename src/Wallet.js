@@ -62,10 +62,17 @@ class Wallet extends React.Component {
 
   setMax = () => {
 
-  this.setState({
-    amount: this.state.curr
-  })
+    const currencyQuantity = this.state.curr
+    const result = currencyQuantity * this.state.selectedRate
 
+    this.setState({
+      result: result,
+      amount: currencyQuantity
+    })
+  }
+
+  componentDidMount() {
+    this.props.getCurrencies()
   }
 
   handleSell = () => {
@@ -88,10 +95,13 @@ class Wallet extends React.Component {
       transactionKey
     })
 
+
+
     this.setState({
       modal: false,
       result: null,
     })
+
   }
 
   render() {

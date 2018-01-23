@@ -56,8 +56,6 @@ class Market extends React.Component {
       result: result,
       amount: currencyQuantity
     })
-
-
   }
 
   closeModal = () => {
@@ -93,7 +91,6 @@ class Market extends React.Component {
       modal: false,
       result: null
     })
-
   }
 
   componentWillMount() {
@@ -129,12 +126,15 @@ class Market extends React.Component {
               {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${(Math.round(this.state.result*10000)/10000)} zł` : 'nie uda się'}
             </ModalBody>
             <ModalFooter>
-              <Button color="success" onClick={this.handleBuy} disabled={this.state.amount > 0 ? false : true}>Buy</Button>
+              <Button color="success"
+                      onClick={this.handleBuy}
+                      disabled={this.state.amount > 0 ? false : true}>
+                Buy
+              </Button>
               <Button color="secondary" onClick={this.closeModal}>Close</Button>
             </ModalFooter>
           </FormGroup>
         </Modal>
-
 
         <Table hover size="sm" responsive>
           <thead>
@@ -167,7 +167,6 @@ class Market extends React.Component {
             </tr>)}
           </tbody>
         </Table>
-
       </div>
     )
   }
@@ -176,7 +175,8 @@ class Market extends React.Component {
 const mapStateToProps = state => ({
   rates: state.exchangeRates.data,
   yesterdayRates: state.historicalExchangeRates.yesterdayData,
-  currencyCode: state.handleTransactions.currencyCode
+  currencyCode: state.handleTransactions.currencyCode,
+  transactions: state.handleTransactions.transactions
 })
 
 const mapDispatchToProps = dispatch => ({

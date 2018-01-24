@@ -5,6 +5,7 @@ import { Table, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, I
 import moment from 'moment'
 import { getYesterdayRates } from "./state/historicalExchangeRates";
 import { buyCurrency } from "./state/handleTransactions"
+import Octicon from 'react-octicon'
 
 /*
 Zalogowany użytkownik powinien móc dodać i zarządzać swoim portfelem walut.
@@ -122,7 +123,7 @@ class Market extends React.Component {
               <Input type="number" name="number" id="exampleSelect" placeholder="How much?"
                      onChange={this.handleChange}>
               </Input>
-              {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${(Math.round(this.state.result*10000)/10000)} zł` : 'nie uda się'}
+              {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${(Math.round(this.state.result*10000)/10000)} zł` : ''}
             </ModalBody>
             <ModalFooter>
               <Button color="success"
@@ -160,7 +161,15 @@ class Market extends React.Component {
               <td>
                 {
                   this.props.yesterdayRates.filter(item => item.code === rate.code)
-                    .map(w => <span>{(rate.mid - w.mid) > 0 ? '+' : '-'}</span>)
+                    .map(
+                      w => <span>
+                        {
+                          (rate.mid - w.mid) > 0 ?
+                      <Octicon name="arrow-up" style={{color: 'green'}} mega/> :
+                      <Octicon name="arrow-down" style={{color: 'red' }} mega/>
+                        }
+                      </span>
+                    )
                 }
               </td>
             </tr>)}

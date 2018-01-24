@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Table } from 'reactstrap'
 import { Doughnut } from 'react-chartjs-2'
-import { getTransactions, getRandomColor  } from './utils'
+import { getTransactions, getRandomColor, calculateBudget  } from './utils'
 
 const data = {
   labels: [
@@ -49,6 +49,8 @@ class Budget extends React.Component {
 
         <h2>Doughnut Example</h2>
         <Doughnut data={chartData} />
+
+        <h3> Twój budżet wynosi: {calculateBudget(this.props.budget, this.props.transactions)}</h3>
 
         <h2>Logi transkacji</h2>
         <Table hover size="sm" responsive>
@@ -101,7 +103,8 @@ class Budget extends React.Component {
 const mapStateToProps = state => ({
   rates: state.exchangeRates.data,
   transactions: state.handleTransactions.transactions,
-  auth: state.auth
+  auth: state.auth,
+  budget: state.handleTransactions.budget
 })
 
 

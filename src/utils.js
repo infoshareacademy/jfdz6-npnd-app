@@ -21,3 +21,9 @@ export function getRandomColor() {
   }
   return color;
 }
+
+export function calculateBudget(budget, transactions) {
+  let currencies =  getTransactions(transactions).map(e => e.currencyAmount * e.transactionRate)
+    let result = currencies.reduce( (curr, prev) => curr - prev, budget)
+  return result;
+}

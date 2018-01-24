@@ -11,6 +11,23 @@ class SignIn extends Component {
     password: ''
   }
 
+  handleErrorMessages = () => {
+    if (this.props.auth.error.code === 'auth/user-not-found') {
+      return (
+        <p>Ups, chyba Cię nie znamy</p>
+      )
+    }
+    if (this.props.auth.error.code === 'auth/wrong-password') {
+      return (
+        <p>Ups, to hasło jest chyba niepoprawne</p>
+      )
+    }
+    if (this.props.auth.error.code === 'auth/invalid-email') {
+      return (
+        <p>Ups, ten email jest chyba niepoprawny</p>
+      )
+    }
+  }
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -40,6 +57,7 @@ class SignIn extends Component {
                   id='userEmail'
                   onChange={this.handleChange}
                   autoFocus
+                  required
                 />
               </FormGroup>
               <FormGroup>
@@ -50,10 +68,11 @@ class SignIn extends Component {
                   name='password'
                   type='password'
                   id='userPassword'
-                  onChange={this.handleChange}/>
+                  onChange={this.handleChange}
+                  required/>
                 <div className='text-center'>
                   <Button type='submit' color='primary' size='lg' style={{marginTop: 30, cursor: 'pointer'}}>Zaloguj się</Button>
-                  <p style={{color: 'red'}}>{this.props.auth.error ? this.props.auth.error.message : null}</p>
+                  <p style={{color: 'red'}}>{this.props.auth.error ? this.handleErrorMessages() : null}</p>
                 </div>
                 <p style={{marginTop: 50}} className='text-center'>Nie masz jeszcze konta? Zarejestruj się teraz!</p>
                 <ModalSignUp/>

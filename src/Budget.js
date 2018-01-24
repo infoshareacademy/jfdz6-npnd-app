@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Table } from 'reactstrap'
 import { Doughnut } from 'react-chartjs-2'
-import getTransactions from './utils'
+import { getTransactions, getRandomColor  } from './utils'
 
 const data = {
   labels: [
@@ -30,12 +30,16 @@ class Budget extends React.Component {
 
   render() {
 
+    const colors = (getTransactions(this.props.transactions).map(e => getRandomColor().toString()))
+
     const chartData = {
       ...data,
       labels: getTransactions(this.props.transactions).map(e => e.currencyCode),
       datasets: [ {
         ...data.datasets[ 0 ],
-        data: getTransactions(this.props.transactions).map(e => e.currencyAmount)
+        data: getTransactions(this.props.transactions).map(e => e.currencyAmount),
+        backgroundColor: colors,
+        hoverBackgroundColor: colors
       }
       ]
     }

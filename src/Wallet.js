@@ -4,7 +4,7 @@ import { getCurrencies } from "./state/exchangeRates"
 import { Table, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Input } from 'reactstrap'
 import { sellCurrency } from "./state/handleTransactions"
 import moment from 'moment'
-import getTransactions from './utils'
+import { getTransactions } from './utils'
 
 
 /*

@@ -115,8 +115,7 @@ class CurrencyRates extends React.Component {
 
 
       <div>
-        <h1>Currency Rates</h1>
-
+        <h2>Kursy walut</h2>
 
         Od
         <DatePicker
@@ -141,14 +140,14 @@ class CurrencyRates extends React.Component {
           this.state.startDate !== null && this.state.endDate !== null ?
             <div>
               <FormGroup>
-                <Label for="exampleSelect">Choose currency </Label>
+                <Label for="exampleSelect">Wybierz walutę </Label>
                 <Input type="select" name="select" id="exampleSelect" placeholder="-" onChange={this.handleChange}>
                   {this.props.rates.map(rate => <option>{rate.currency}</option>)}
                   <option selected>-</option>
                 </Input>
               </FormGroup>
               <Button onClick={this.handleHistoricalRates}>
-                Show rates
+                Pokaż kurs
               </Button>
             </div>
             : null

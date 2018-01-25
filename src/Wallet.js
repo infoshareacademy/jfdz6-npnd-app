@@ -107,14 +107,14 @@ class Wallet extends React.Component {
   render() {
     return (
       <div>
-        <h1>
-          My Wallet - {this.props.auth.data.displayName}
-        </h1>
+        <h2>
+          Mój portfel
+        </h2>
 
 
         <Modal isOpen={this.state.modal} toggle={this.closeModal} keyboard={false}>
           <FormGroup>
-            <ModalHeader toggle={this.closeModal}>Sell - {this.state.selectedCurrency}</ModalHeader>
+            <ModalHeader toggle={this.closeModal}>Sprzedaj - {this.state.selectedCurrency}</ModalHeader>
             <ModalBody>
               {
                 this.state.selectedCurrency
@@ -129,7 +129,7 @@ class Wallet extends React.Component {
               <Input type="number"
                      name="number"
                      id="exampleSelect"
-                     placeholder="How much?"
+                     placeholder="Jak dużo?"
                      value = {this.state.amount}
                      onChange={this.handleChange}
               >
@@ -139,8 +139,8 @@ class Wallet extends React.Component {
             <ModalFooter>
               <Button onClick={this.setMax} > MAX </Button>
               <Button color="success" onClick={this.handleSell}
-                      disabled={((this.state.amount * 1) > 0 && (this.state.amount * 1) <= (this.state.curr * 1)) ? false : true}>Sell</Button>
-              <Button color="secondary" onClick={this.closeModal}>Close</Button>
+                      disabled={((this.state.amount * 1) > 0 && (this.state.amount * 1) <= (this.state.curr * 1)) ? false : true}>Sprzedaj</Button>
+              <Button color="secondary" onClick={this.closeModal}>Zamknij</Button>
             </ModalFooter>
           </FormGroup>
         </Modal>

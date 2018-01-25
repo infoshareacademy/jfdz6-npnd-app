@@ -108,7 +108,7 @@ class Wallet extends React.Component {
     return (
       <div>
         <h1>
-          My Wallet - {this.props.auth.data.displayName}
+          My Wallet
         </h1>
 
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import './App.css';
 import CurrencyRates from './CurrencyRates'
 import Wallet from './Wallet'
 import Calculator from './Calculator'
@@ -23,7 +22,7 @@ import {
   DropdownItem
 } from 'reactstrap';
 import SignOut from './SignOut'
-
+import './App.css';
 
 class App extends Component {
 

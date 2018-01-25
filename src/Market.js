@@ -139,8 +139,8 @@ class Market extends React.Component {
         <Table hover size="sm" responsive>
           <thead>
           <tr>
-            <th>Currency</th>
-            <th>Rates</th>
+            <th>Waluta</th>
+            <th>Kurs</th>
             <th>Trend?</th>
           </tr>
           </thead>

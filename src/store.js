@@ -31,7 +31,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const enhancer = composeEnhancers(
     applyMiddleware(thunk),
-    persistState([]/* config*/),
+    persistState(['auth']/* config*/),
 )
 
 const store = createStore(

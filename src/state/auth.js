@@ -1,8 +1,9 @@
 import firebase from 'firebase'
+import {disableTransactionSync, enableTransationSync} from "./handleTransactions";
 
 const SET_USER = 'auth/SET_USER'
 const ERROR = 'auth/ERROR'
-const LOG_OUT = 'auth/LOG_OUT'
+export const LOG_OUT = 'auth/LOG_OUT'
 
 const initialState = {
   data: null,
@@ -14,6 +15,11 @@ export const enableSync = () => dispatch => {
   dispatch(disableSync())
   unsubscribe = firebase.auth().onAuthStateChanged(
     user => {
+      if (user) {
+        dispatch(enableTransationSync())
+      } else {
+        dispatch(disableTransactionSync())
+      }
       return dispatch({ type: SET_USER, data: user })
     }
   )
@@ -53,7 +59,7 @@ export const signOut = () => dispatch => {
 
   firebase.auth().signOut().catch(
     error => dispatch({type: ERROR, error})
-  )
+  ).then(user => {return dispatch({ type: LOG_OUT, data: user })})
 }
 
 export default (state = initialState, action = {}) => {

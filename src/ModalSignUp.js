@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import SignUp from './SignUp'
+import { connect } from 'react-redux'
 
 class ModalSignUp extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class ModalSignUp extends React.Component {
     this.setState({
       modal: !this.state.modal
     });
+    this.props.auth.error = false
   }
 
   render() {
@@ -33,4 +35,8 @@ class ModalSignUp extends React.Component {
   }
 }
 
-export default ModalSignUp;
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps)(ModalSignUp);

@@ -46,14 +46,17 @@ class Budget extends React.Component {
 
     return (
       <div>
+        <h3 style={{textAlign: 'center'}} >
+          Twój budżet wynosi: {calculateBudget(this.props.budget, this.props.transactions)}
+          </h3>
 
-        <h2>Doughnut Example</h2>
         <Doughnut data={chartData} />
 
-        <h3> Twój budżet wynosi: {calculateBudget(this.props.budget, this.props.transactions)}</h3>
 
-        <h2>Logi transkacji</h2>
-        <Table hover size="sm" responsive>
+        <h2 style={{textAlign: 'center'}}>
+          Logi transkacji
+        </h2>
+        <Table hover size="sm" responsive style={{textAlign: 'center'}}>
           <thead>
           <tr>
             <th>Waluta</th>
@@ -71,7 +74,11 @@ class Budget extends React.Component {
                 data-item-amount={rate.currencyAmount}
                 data-item-rate={rate.transactionRate}
               >
-                {rate.currencyCode}
+                <td>
+                  {
+                    rate.currencyCode
+                  }
+                </td>
                 <td>
                   {
                     this.props.transactions.filter(rate2 => rate2.transactionId === rate.transactionId)

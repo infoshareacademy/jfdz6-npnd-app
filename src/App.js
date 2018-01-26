@@ -1,21 +1,88 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { connect } from 'react-redux'
+import CurrencyRates from './CurrencyRates'
+import Wallet from './Wallet'
+import Calculator from './Calculator'
+import Market from './Market'
+import Budget from './Budget'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link} from 'react-router-dom'
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from 'reactstrap';
+import SignOut from './SignOut'
 import './App.css';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      isOpen: false
+    };
+  }
+
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+    <Router>
+      <div>
+        <Navbar color="faded" light expand="md">
+          <SignOut/>
+          <p className="welcome-message">Witaj {this.props.auth.data.displayName}</p>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink className="item-fade" tag={Link} to="/calculator">Kalkulator</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink className="item-fade" tag={Link} to="/currencyRates">Kursy walut</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink className="item-fade" tag={Link} to="/wallet">Portfel</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink className="item-fade" tag={Link} to="/market">Rynek</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} to="/budget">Budżet</NavLink>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
+        <Route path="/calculator" component={Calculator}/>
+        <Route path="/currencyRates" component={CurrencyRates}/>
+        <Route path="/wallet" component={Wallet}/>
+        <Route path="/market" component={Market}/>
+        <Route path="/budget" component={Budget}/>
       </div>
-    );
+    </Router>
+    )
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps)(App)

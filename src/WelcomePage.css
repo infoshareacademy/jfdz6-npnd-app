@@ -1,0 +1,57 @@
+.description,
+.summary {
+    margin: 20px;
+    border: 2px solid rgb(233, 236, 239);
+    border-radius: 4px;
+    padding: 7px 5px 0 5px;
+}
+
+.summary {
+    background-color: #f5f5f5;
+}
+
+.center-text {
+    text-align: center;
+}
+
+p {
+    font-size: large;
+}
+
+.header-text {
+    font-size: larger;
+}
+
+.right-text {
+    text-align: right;
+}
+
+.no-bottom-margin {
+    margin-bottom: 0;
+}
+
+.submit-text {
+    font-size: x-large;
+}
+
+.gray-background {
+    background-color: #d3d3d3;
+}
+
+.black-background {
+    background-color: #2F2F38;
+    color: #F0EFF0;
+}
+
+
+@media screen and (min-width: 780px) {
+
+    .flex-container {
+        display: flex;
+    }
+
+    .description {
+        flex: 1;
+    }
+
+}

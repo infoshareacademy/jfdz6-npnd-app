@@ -1,0 +1,29 @@
+.submit-button {
+    margin-bottom: 20px;
+}
+
+@media screen and (min-width: 780px) {
+
+    .flex-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap
+    }
+
+    .input-field {
+        width: 19%;
+    }
+
+    .currency-list {
+        width: 39%;
+    }
+
+    .submit-button {
+        display: block;
+        margin: 0 auto 20px auto;
+    }
+}
+
+Button {
+    cursor: pointer;
+}

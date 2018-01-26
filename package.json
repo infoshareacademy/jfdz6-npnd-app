@@ -3,13 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "bootstrap": "^4.0.0-beta.2",
+    "chart.js": "^2.7.1",
+    "firebase": "^4.8.1",
+    "moment": "^2.19.4",
+    "react": "^16.2.0",
+    "react-chartjs-2": "^2.6.4",
+    "react-datepicker": "^0.61.0",
+    "react-dom": "^16.2.0",
+    "react-media": "^1.6.1",
+    "react-moment": "^0.6.8",
+    "react-octicon": "^3.0.1",
     "react-redux": "^5.0.6",
-    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17",
     "reactstrap": "^5.0.0-alpha.4",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-localstorage": "^0.4.1",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

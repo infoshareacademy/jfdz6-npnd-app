@@ -1,28 +1,29 @@
-.App {
-  text-align: center;
+.welcome-message {
+    font-size: 1.7em;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+@media screen and (min-width: 576px) {
+    .welcome-message {
+        font-size: 2.7em;
+    }
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.item-fade {
+    color: #26292D !important;
+    font-weight: bold;
+    border-radius: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    overflow: hidden;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: color, background-color;
+    transition-property: color, background-color;
 }
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.item-fade:hover, .item-fade:focus, .item-fade:active {
+    background-color: #868B95;
+    color: #ffffff !important;
 }

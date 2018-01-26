@@ -3,7 +3,6 @@ import { signIn } from './state/auth'
 import { connect } from 'react-redux'
 import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col } from 'reactstrap'
 import ModalSignUp from './ModalSignUp'
-import './SignIn.css'
 
 class SignIn extends Component {
   state = {

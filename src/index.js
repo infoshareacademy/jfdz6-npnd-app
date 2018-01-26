@@ -9,8 +9,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import './index.css';
 import Auth from './Auth'
 
-// Aplikacja powinna umożliwić szybkie przeliczenie dowolnej ilości wybranej waluty na inną.
-
 ReactDOM.render(
   <Provider store={store}>
     <Router>

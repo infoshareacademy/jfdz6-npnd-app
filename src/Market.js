@@ -151,8 +151,13 @@ class Market extends React.Component {
               key={rate.code}
               onClick={this.toggleModal}
               data-item-id={rate.code}
+              style = {{cursor: 'pointer'}}
             >
-              {rate.code}
+              <td>
+              {
+                rate.code
+              }
+              </td>
               <td>
                 {
                   this.props.rates.filter(rate2 => rate2.code === rate.code)

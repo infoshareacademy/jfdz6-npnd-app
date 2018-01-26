@@ -7,17 +7,6 @@ import moment from 'moment'
 import { getTransactions } from './utils'
 
 
-/*
-Zalogowany użytkownik powinien móc dodać i zarządzać swoim portfelem walut.
-
-Portfel prezentuje zmianę wartości, zysku lub straty
-
-naszego portfela w stosunku do daty zakupu (dodania wpisu do portfela).
-
-Jeśli od momentu zakupu waluta ma najwyższą wartość kursu
-użytkownik powinien zobaczyć komunikat o potencjalnej korzyści ze sprzedaży.
- */
-
 class Wallet extends React.Component {
 
   state = {
@@ -169,8 +158,13 @@ class Wallet extends React.Component {
               data-item-id={rate.currencyCode}
               data-item-amount={rate.currencyAmount}
               data-item-rate={rate.transactionRate}
+              style = {{cursor: 'pointer'}}
             >
-              {rate.currencyCode}
+              <td>
+                  {
+                    rate.currencyCode
+                  }
+              </td>
               <td>
                 {
                   this.props.rates.filter(rate2 => rate2.code === rate.currencyCode)
@@ -193,7 +187,7 @@ class Wallet extends React.Component {
                 {
                   this.props.rates.filter(rate2 => rate2.code === rate.currencyCode)
                     .map(e => <span
-                      key={e.transactionId}> {Math.round(((e.mid - rate.transactionRate) * rate.currencyAmount) * 10000) / 10000} </span>)
+                      key={e.transactionId}> {`${Math.round(((e.mid - rate.transactionRate) * rate.currencyAmount) * 10000) / 10000} zł`} </span>)
                 }
               </td>
               <td>

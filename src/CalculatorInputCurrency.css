@@ -1,6 +1,5 @@
 .submit-button {
-    display: block !important;
-    margin: 0 auto !important;
+    margin-bottom: 20px;
 }
 
 @media screen and (min-width: 780px) {
@@ -18,4 +17,13 @@
     .currency-list {
         width: 39%;
     }
+
+    .submit-button {
+        display: block;
+        margin: 0 auto 20px auto;
+    }
+}
+
+Button {
+    cursor: pointer;
 }

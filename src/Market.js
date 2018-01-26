@@ -5,6 +5,7 @@ import { Table, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, I
 import moment from 'moment'
 import { getYesterdayRates } from "./state/historicalExchangeRates";
 import { buyCurrency } from "./state/handleTransactions"
+import Octicon from 'react-octicon'
 
 /*
 Zalogowany użytkownik powinien móc dodać i zarządzać swoim portfelem walut.
@@ -56,8 +57,6 @@ class Market extends React.Component {
       result: result,
       amount: currencyQuantity
     })
-
-
   }
 
   closeModal = () => {
@@ -77,19 +76,22 @@ class Market extends React.Component {
     const transactionRate = (this.props.rates.filter(rate2 => rate2.code === this.state.selectedCurrency)
       .map(e => e.mid)[0])
     const transactionId = Date.now()
+    const transactionKey = currencyCode + transactionRate
 
 
     this.props.buyCurrency({
       transactionId,
       currencyCode,
-      currencyAmount, transactionRate, dateOfTransaction
+      currencyAmount,
+      transactionRate,
+      dateOfTransaction,
+      transactionKey
     })
 
     this.setState({
       modal: false,
       result: null
     })
-
   }
 
   componentWillMount() {
@@ -103,11 +105,13 @@ class Market extends React.Component {
   render() {
     return (
       <div>
-        <h1>Market </h1>
+        <h2 style={{textAlign: 'center'}}>
+          Rynek
+        </h2>
 
         <Modal isOpen={this.state.modal} toggle={this.closeModal} keyboard={false}>
           <FormGroup>
-            <ModalHeader toggle={this.closeModal}>Buy - {this.state.selectedCurrency}</ModalHeader>
+            <ModalHeader toggle={this.closeModal}>Kup - {this.state.selectedCurrency}</ModalHeader>
             <ModalBody>
               {
                 this.state.selectedCurrency
@@ -119,24 +123,27 @@ class Market extends React.Component {
                 e =>
                   <span> {e.currency} - {e.mid}</span>)
             }
-              <Input type="number" name="number" id="exampleSelect" placeholder="How much?"
+              <Input type="number" name="number" id="exampleSelect" placeholder="Jak dużo?"
                      onChange={this.handleChange}>
               </Input>
-              {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${(Math.round(this.state.result*10000)/10000)} zł` : 'nie uda się'}
+              {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${(Math.round(this.state.result*10000)/10000)} zł` : ''}
             </ModalBody>
             <ModalFooter>
-              <Button color="success" onClick={this.handleBuy} disabled={this.state.amount > 0 ? false : true}>Buy</Button>
-              <Button color="secondary" onClick={this.closeModal}>Close</Button>
+              <Button color="success"
+                      onClick={this.handleBuy}
+                      disabled={this.state.amount > 0 && this.props.budget > this.state.amount  ? false : true}>
+                Kup
+              </Button>
+              <Button color="secondary" onClick={this.closeModal}>Zamknij</Button>
             </ModalFooter>
           </FormGroup>
         </Modal>
 
-
-        <Table hover size="sm" responsive>
+        <Table hover size="sm" responsive style={{textAlign: 'center'}}>
           <thead>
           <tr>
-            <th>Currency</th>
-            <th>Rates</th>
+            <th>Waluta</th>
+            <th>Kurs</th>
             <th>Trend?</th>
           </tr>
           </thead>
@@ -146,8 +153,13 @@ class Market extends React.Component {
               key={rate.code}
               onClick={this.toggleModal}
               data-item-id={rate.code}
+              style = {{cursor: 'pointer'}}
             >
-              {rate.code}
+              <td>
+              {
+                rate.code
+              }
+              </td>
               <td>
                 {
                   this.props.rates.filter(rate2 => rate2.code === rate.code)
@@ -157,13 +169,20 @@ class Market extends React.Component {
               <td>
                 {
                   this.props.yesterdayRates.filter(item => item.code === rate.code)
-                    .map(w => <span>{(rate.mid - w.mid) > 0 ? '+' : '-'}</span>)
+                    .map(
+                      w => <span>
+                        {
+                          (rate.mid - w.mid) > 0 ?
+                      <Octicon name="arrow-up" style={{color: 'green'}} mega/> :
+                      <Octicon name="arrow-down" style={{color: 'red' }} mega/>
+                        }
+                      </span>
+                    )
                 }
               </td>
             </tr>)}
           </tbody>
         </Table>
-
       </div>
     )
   }
@@ -172,13 +191,15 @@ class Market extends React.Component {
 const mapStateToProps = state => ({
   rates: state.exchangeRates.data,
   yesterdayRates: state.historicalExchangeRates.yesterdayData,
-  currencyCode: state.handleTransactions.currencyCode
+  currencyCode: state.handleTransactions.currencyCode,
+  transactions: state.handleTransactions.transactions,
+  budget: state.handleTransactions.budget
 })
 
 const mapDispatchToProps = dispatch => ({
   getCurrencies: () => dispatch(getCurrencies()),
   getYesterdayRates: (yesterdayDate) => dispatch(getYesterdayRates(yesterdayDate)),
-  buyCurrency: (transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction) => dispatch(buyCurrency(transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction))
+  buyCurrency: (transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction, transactionKey) => dispatch(buyCurrency(transactionId, currencyCode, currencyAmount, transactionRate, dateOfTransaction, transactionKey))
 })
 
 

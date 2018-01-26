@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 
 import SignIn from './SignIn'
 import WelcomePage from './WelcomePage'
+import Footer from './Footer'
 
 class Auth extends Component {
   render() {
@@ -13,6 +14,7 @@ class Auth extends Component {
             <div>
               <WelcomePage/>
               <SignIn/>
+              <Footer/>
             </div>
             :
             this.props.children

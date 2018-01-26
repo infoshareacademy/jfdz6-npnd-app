@@ -6,17 +6,8 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { getHistoricalCurrencies, resetHistoricalCurrencies } from "./state/historicalExchangeRates"
 import { Line } from 'react-chartjs-2';
+import './CurrencyRates.css'
 
-/*
-Aplikacja powinna umożliwić sprawdzenie aktualnego  CURRENT_RATE_Currency(?)
-lub
-historycznego kursu wybranej waluty. Historical_RATE_Currency(?)
-
-Powinno być możliwe porównanie wizualne zmian kursu w wybranym
-okresie za pomocą wykresu.
-
-Wybrane kursy można pobierać na bieżąco z API NBP.
- */
 
 const data = {
   labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July' ],
@@ -115,7 +106,7 @@ class CurrencyRates extends React.Component {
 
 
       <div>
-
+        <h2>Kursy walut</h2>
 
         Od
         <DatePicker
@@ -140,14 +131,14 @@ class CurrencyRates extends React.Component {
           this.state.startDate !== null && this.state.endDate !== null ?
             <div>
               <FormGroup>
-                <Label for="exampleSelect">Choose currency </Label>
+                <Label for="exampleSelect">Wybierz walutę </Label>
                 <Input type="select" name="select" id="exampleSelect" placeholder="-" onChange={this.handleChange}>
                   {this.props.rates.map(rate => <option>{rate.currency}</option>)}
                   <option selected>-</option>
                 </Input>
               </FormGroup>
               <Button onClick={this.handleHistoricalRates}>
-                Show rates
+                Pokaż kurs
               </Button>
             </div>
             : null

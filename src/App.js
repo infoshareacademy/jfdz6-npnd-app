@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import './App.css';
 import CurrencyRates from './CurrencyRates'
 import Wallet from './Wallet'
 import Calculator from './Calculator'
@@ -24,7 +23,7 @@ import {
   DropdownItem
 } from 'reactstrap';
 import SignOut from './SignOut'
-
+import './App.css';
 
 class App extends Component {
 
@@ -49,21 +48,21 @@ class App extends Component {
       <div>
         <Navbar color="faded" light expand="md">
           <SignOut/>
-          <h1>Witaj {this.props.auth.data.displayName}</h1>
+          <p className="welcome-message">Witaj {this.props.auth.data.displayName}</p>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink tag={Link} to="/calculator">Kalkulator</NavLink>
+                <NavLink className="item-fade" tag={Link} to="/calculator">Kalkulator</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/currencyRates">Kursy walut</NavLink>
+                <NavLink className="item-fade" tag={Link} to="/currencyRates">Kursy walut</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/wallet">Portfel</NavLink>
+                <NavLink className="item-fade" tag={Link} to="/wallet">Portfel</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/market">Rynek</NavLink>
+                <NavLink className="item-fade" tag={Link} to="/market">Rynek</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink tag={Link} to="/budget">Budżet</NavLink>

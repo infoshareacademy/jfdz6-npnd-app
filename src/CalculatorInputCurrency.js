@@ -57,6 +57,7 @@ class CalculatorInputCurrency extends Component {
                     </option>
                   )
                 }
+                <option selected>-</option>
               </Input>
             </FormGroup>
             </div>
@@ -77,11 +78,12 @@ class CalculatorInputCurrency extends Component {
                     </option>
                   )
                 }
+                <option selected>-</option>
               </Input>
             </FormGroup>
             </div>
             <div className='submit-button'>
-            <Button type="submit" bsSize="lg">Przelicz</Button>
+            <Button type="submit" bsSize="lg" id="test" block='true'>Przelicz</Button>
             </div>
           </div>
         </Form>

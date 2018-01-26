@@ -17,9 +17,9 @@ class SignOut extends Component {
     return (
       <Media query="(max-width: 576px)">
         {matches => matches ? (
-          <Button id='signOutButton' type='submit' color='primary' size='md'
+          <Button id='signOutButton' type='submit' size='md'
                   onClick={this.handleSignOut}><Octicon name='sign-out'/></Button>) : (
-          <Button id='signOutButton' type='submit' color='primary' size='lg' onClick={this.handleSignOut}>Wyloguj
+          <Button id='signOutButton' type='submit' size='lg' onClick={this.handleSignOut}>Wyloguj
             się</Button>)}
       </Media>
     )

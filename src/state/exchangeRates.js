@@ -1,3 +1,5 @@
+import {LOG_OUT} from './auth'
+
 const ADD = 'ADD'
 
 const BEGIN = 'GET_BEGIN'
@@ -89,6 +91,8 @@ export default (state = initialState, action = {}) => {
         ...state,
         selectOutputValue: action.selectValue
       }
+    case LOG_OUT:
+      return initialState
     default:
       return state
   }

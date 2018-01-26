@@ -105,10 +105,11 @@ class Market extends React.Component {
   render() {
     return (
       <div>
+        <h2>Rynek </h2>
 
         <Modal isOpen={this.state.modal} toggle={this.closeModal} keyboard={false}>
           <FormGroup>
-            <ModalHeader toggle={this.closeModal}>Buy - {this.state.selectedCurrency}</ModalHeader>
+            <ModalHeader toggle={this.closeModal}>Kup - {this.state.selectedCurrency}</ModalHeader>
             <ModalBody>
               {
                 this.state.selectedCurrency
@@ -120,7 +121,7 @@ class Market extends React.Component {
                 e =>
                   <span> {e.currency} - {e.mid}</span>)
             }
-              <Input type="number" name="number" id="exampleSelect" placeholder="How much?"
+              <Input type="number" name="number" id="exampleSelect" placeholder="Jak dużo?"
                      onChange={this.handleChange}>
               </Input>
               {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${(Math.round(this.state.result*10000)/10000)} zł` : ''}
@@ -129,9 +130,9 @@ class Market extends React.Component {
               <Button color="success"
                       onClick={this.handleBuy}
                       disabled={this.state.amount > 0 ? false : true}>
-                Buy
+                Kup
               </Button>
-              <Button color="secondary" onClick={this.closeModal}>Close</Button>
+              <Button color="secondary" onClick={this.closeModal}>Zamknij</Button>
             </ModalFooter>
           </FormGroup>
         </Modal>
@@ -139,8 +140,8 @@ class Market extends React.Component {
         <Table hover size="sm" responsive>
           <thead>
           <tr>
-            <th>Currency</th>
-            <th>Rates</th>
+            <th>Waluta</th>
+            <th>Kurs</th>
             <th>Trend?</th>
           </tr>
           </thead>

@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 
 import SignIn from './SignIn'
-
+import WelcomePage from './WelcomePage'
+import Footer from './Footer'
 
 class Auth extends Component {
   render() {
@@ -11,8 +12,11 @@ class Auth extends Component {
         {
           this.props.auth.data === null ?
             <div>
+              <WelcomePage/>
               <SignIn/>
-            </div> :
+              <Footer/>
+            </div>
+            :
             this.props.children
         }
       </div>

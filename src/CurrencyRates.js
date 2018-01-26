@@ -10,7 +10,7 @@ import './CurrencyRates.css'
 
 
 const data = {
-  labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July' ],
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
   datasets: [
     {
       label: 'My First dataset',
@@ -31,7 +31,7 @@ const data = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [ 3, 4, 2 ]
+      data: [3, 4, 2]
     }
   ]
 }
@@ -77,7 +77,7 @@ class CurrencyRates extends React.Component {
     const currencyStartDate = this.state.startDate.format('YYYY-MM-DD')
     const currencyEndDate = this.state.endDate.format('YYYY-MM-DD')
 
-    const currencyId = this.props.rates.filter(e => e.currency === myState).map(e => e.code)[ 0 ]
+    const currencyId = this.props.rates.filter(e => e.currency === myState).map(e => e.code)[0]
 
     this.props.getHistoricalCurrencies(currencyStartDate, currencyEndDate, currencyId)
   }
@@ -93,8 +93,8 @@ class CurrencyRates extends React.Component {
     const chartData = {
       ...data,
       labels: this.props.historicalRates.map(e => e.effectiveDate),
-      datasets: [ {
-        ...data.datasets[ 0 ],
+      datasets: [{
+        ...data.datasets[0],
         data: this.props.historicalRates.map(e => e.mid),
         label: this.state.selectedCurrency
       }
@@ -105,7 +105,9 @@ class CurrencyRates extends React.Component {
 
 
 
-      <div>
+      <div
+        style={{textAlign: 'center'}}
+      >
         <h2>Kursy walut</h2>
 
         Od

@@ -69,7 +69,7 @@ class Wallet extends React.Component {
 
     const transactionId = Date.now()
     const currencyCode = this.state.selectedCurrency
-    const currencyAmount = this.state.amount*(-1)
+    const currencyAmount = this.state.amount * (-1)
     const transactionRate = this.state.selectedRate * 1
     const dateOfTransaction = (moment().format('YYYY-MM-DD'))
     const transactionKey = this.state.transactionKey
@@ -96,7 +96,7 @@ class Wallet extends React.Component {
   render() {
     return (
       <div>
-        <h2>
+        <h2 style={{textAlign: 'center'}}>
           Mój portfel
         </h2>
 
@@ -119,22 +119,31 @@ class Wallet extends React.Component {
                      name="number"
                      id="exampleSelect"
                      placeholder="Jak dużo?"
-                     value = {this.state.amount}
+                     value={this.state.amount}
                      onChange={this.handleChange}
               >
               </Input>
               {(this.state.result !== null && (this.state.result > 0)) ? `Będzie trza zapłacić  ${(Math.round(this.state.result * 10000) / 10000)} zł` : ''}
             </ModalBody>
             <ModalFooter>
-              <Button onClick={this.setMax} > MAX </Button>
+              <Button onClick={this.setMax}> MAX </Button>
               <Button color="success" onClick={this.handleSell}
-                      disabled={((this.state.amount * 1) > 0 && (this.state.amount * 1) <= (this.state.curr * 1)) ? false : true}>Sprzedaj</Button>
+                      disabled={
+                        (
+                          (this.state.amount * 1) > 0 && (this.state.amount * 1) <=
+                          (this.state.curr * 1)
+                        )
+                          ?
+                          false : true
+                      }>
+                Sprzedaj
+              </Button>
               <Button color="secondary" onClick={this.closeModal}>Zamknij</Button>
             </ModalFooter>
           </FormGroup>
         </Modal>
 
-        <Table hover size="sm" responsive>
+        <Table hover size="sm" responsive style={{textAlign: 'center'}}>
           <thead>
           <tr>
             <th>Waluta</th>
@@ -148,55 +157,55 @@ class Wallet extends React.Component {
           <tbody>
           {
             getTransactions(this.props.transactions).sort(
-            (a, b) => a.currencyCode > b.currencyCode
-          ).filter(
-            ele => ele.currencyAmount > 0
+              (a, b) => a.currencyCode > b.currencyCode
+            ).filter(
+              ele => ele.currencyAmount > 0
             ).map(
-            rate => <tr
-              key={rate.transactionId}
-              onClick={this.toggleModal}
-              data-item-id={rate.currencyCode}
-              data-item-amount={rate.currencyAmount}
-              data-item-rate={rate.transactionRate}
-              style = {{cursor: 'pointer'}}
-            >
-              <td>
+              rate => <tr
+                key={rate.transactionId}
+                onClick={this.toggleModal}
+                data-item-id={rate.currencyCode}
+                data-item-amount={rate.currencyAmount}
+                data-item-rate={rate.transactionRate}
+                style={{cursor: 'pointer'}}
+              >
+                <td>
                   {
                     rate.currencyCode
                   }
-              </td>
-              <td>
-                {
-                  this.props.rates.filter(rate2 => rate2.code === rate.currencyCode)
-                    .map(e => <span key={e.transactionId}> {e.mid}</span>)
-                }
-              </td>
-              <td>
-                {
-                  getTransactions(this.props.transactions).filter(rate2 => rate2.transactionKey === rate.transactionKey)
-                    .map(e => <span key={e.transactionId}> {e.transactionRate}</span>)
-                }
-              </td>
-              <td>
-                {
-                  getTransactions(this.props.transactions).filter(rate2 => rate2.transactionKey === rate.transactionKey)
-                    .map(e => <span key={e.transactionId}> {e.currencyAmount}</span>)
-                }
-              </td>
-              <td>
-                {
-                  this.props.rates.filter(rate2 => rate2.code === rate.currencyCode)
-                    .map(e => <span
-                      key={e.transactionId}> {`${Math.round(((e.mid - rate.transactionRate) * rate.currencyAmount) * 10000) / 10000} zł`} </span>)
-                }
-              </td>
-              <td>
-                {
-                  this.props.rates.filter(rate2 => rate2.code === rate.currencyCode)
-                    .map(
-                      e => <span
-                      key={e.transactionId}
-                      >
+                </td>
+                <td>
+                  {
+                    this.props.rates.filter(rate2 => rate2.code === rate.currencyCode)
+                      .map(e => <span key={e.transactionId}> {e.mid}</span>)
+                  }
+                </td>
+                <td>
+                  {
+                    getTransactions(this.props.transactions).filter(rate2 => rate2.transactionKey === rate.transactionKey)
+                      .map(e => <span key={e.transactionId}> {e.transactionRate}</span>)
+                  }
+                </td>
+                <td>
+                  {
+                    getTransactions(this.props.transactions).filter(rate2 => rate2.transactionKey === rate.transactionKey)
+                      .map(e => <span key={e.transactionId}> {e.currencyAmount}</span>)
+                  }
+                </td>
+                <td>
+                  {
+                    this.props.rates.filter(rate2 => rate2.code === rate.currencyCode)
+                      .map(e => <span
+                        key={e.transactionId}> {`${Math.round(((e.mid - rate.transactionRate) * rate.currencyAmount) * 10000) / 10000} zł`} </span>)
+                  }
+                </td>
+                <td>
+                  {
+                    this.props.rates.filter(rate2 => rate2.code === rate.currencyCode)
+                      .map(
+                        e => <span
+                          key={e.transactionId}
+                        >
                         {
                           (e.mid - rate.transactionRate) === 0 ?
                             'Po tyle kupiłeś!' :
@@ -205,9 +214,9 @@ class Wallet extends React.Component {
                               'Tracisz!'
                         }
                         </span>)
-                }
-              </td>
-            </tr>)}
+                  }
+                </td>
+              </tr>)}
           </tbody>
         </Table>
 

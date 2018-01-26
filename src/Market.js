@@ -105,7 +105,9 @@ class Market extends React.Component {
   render() {
     return (
       <div>
-        <h2>Rynek </h2>
+        <h2 style={{textAlign: 'center'}}>
+          Rynek
+        </h2>
 
         <Modal isOpen={this.state.modal} toggle={this.closeModal} keyboard={false}>
           <FormGroup>
@@ -129,7 +131,7 @@ class Market extends React.Component {
             <ModalFooter>
               <Button color="success"
                       onClick={this.handleBuy}
-                      disabled={this.state.amount > 0 ? false : true}>
+                      disabled={this.state.amount > 0 && this.props.budget > this.state.amount  ? false : true}>
                 Kup
               </Button>
               <Button color="secondary" onClick={this.closeModal}>Zamknij</Button>
@@ -137,7 +139,7 @@ class Market extends React.Component {
           </FormGroup>
         </Modal>
 
-        <Table hover size="sm" responsive>
+        <Table hover size="sm" responsive style={{textAlign: 'center'}}>
           <thead>
           <tr>
             <th>Waluta</th>
@@ -190,7 +192,8 @@ const mapStateToProps = state => ({
   rates: state.exchangeRates.data,
   yesterdayRates: state.historicalExchangeRates.yesterdayData,
   currencyCode: state.handleTransactions.currencyCode,
-  transactions: state.handleTransactions.transactions
+  transactions: state.handleTransactions.transactions,
+  budget: state.handleTransactions.budget
 })
 
 const mapDispatchToProps = dispatch => ({

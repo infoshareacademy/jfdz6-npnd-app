@@ -57,6 +57,7 @@ class CalculatorInputCurrency extends Component {
                     </option>
                   )
                 }
+                <option selected>-</option>
               </Input>
             </FormGroup>
             </div>
@@ -77,6 +78,7 @@ class CalculatorInputCurrency extends Component {
                     </option>
                   )
                 }
+                <option selected>-</option>
               </Input>
             </FormGroup>
             </div>

@@ -6,6 +6,8 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { getHistoricalCurrencies, resetHistoricalCurrencies } from "./state/historicalExchangeRates"
 import { Line } from 'react-chartjs-2';
+import './CurrencyRates.css'
+
 
 const data = {
   labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July' ],

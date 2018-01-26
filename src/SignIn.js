@@ -45,7 +45,7 @@ class SignIn extends Component {
       <Container className='container'>
         <Row>
           <Col sm='12' md={{size: 6, offset: 3}} className='border rounded'>
-            <Form onSubmit={this.handleSubmit}>
+            <Form onSubmit={this.handleSubmit} style={{paddingTop: 20}}>
               <FormGroup>
                 <Label for="userEmail">
                   Email:

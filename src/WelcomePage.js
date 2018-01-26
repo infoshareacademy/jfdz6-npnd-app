@@ -8,7 +8,7 @@ class WelcomePage extends Component {
     return (
       <div>
         <div className="flex-container">
-          <div className="description">
+          <div className="description gray-background">
             <p><span className="header-text"><b>Witaj w aplikacji, która uczyni Cię bogatym!</b></span>
               <ul>
                 <li>Zawsze czułeś zawód po kliknięciu w reklamę mówiącą
@@ -26,7 +26,7 @@ class WelcomePage extends Component {
               </ul>
             </p>
           </div>
-          <div className="description">
+          <div className="description black-background">
             <p><span className="header-text"><b>Po rejestracji zyskasz dostęp do finansowych supermocy!</b></span>
               <ul>
                 <li>Będziesz mógł przeliczać ilość dowolnej waluty na inną!

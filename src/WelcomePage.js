@@ -17,7 +17,7 @@ class WelcomePage extends Component {
                   mającą pokazać "jak dzięki tej prostej sztuczce przeszedł on na emeryturę w wieku 20 lat"?
                 </li>
                 <li>Czy
-                  zastanawiałeś się jak to jest, że ci ludzie w dresach i złotych łańcucach z cygarem w ustach i
+                  zastanawiałeś się jak to jest, że ci ludzie w dresach i złotych łańcuchah z cygarem w ustach i
                   plikiem
                   banknotów w dłoni mają już rewelacyjne życie, podczas gdy Ty nie jesteś nawet w stanie polecieć na
                   Malediwy raz w miesiącu?

@@ -1,10 +1,29 @@
 .welcome-message {
     font-size: 1.7em;
-    color: #454545;
 }
 
 @media screen and (min-width: 576px) {
     .welcome-message {
         font-size: 2.7em;
     }
+}
+
+.item-fade {
+    color: #26292D !important;
+    font-weight: bold;
+    border-radius: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    overflow: hidden;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: color, background-color;
+    transition-property: color, background-color;
+}
+.item-fade:hover, .item-fade:focus, .item-fade:active {
+    background-color: #868B95;
+    color: #ffffff !important;
 }

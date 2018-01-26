@@ -81,7 +81,7 @@ class CalculatorInputCurrency extends Component {
             </FormGroup>
             </div>
             <div className='submit-button'>
-            <Button type="submit" bsSize="lg">Przelicz</Button>
+            <Button type="submit" bsSize="lg" id="test" block='true'>Przelicz</Button>
             </div>
           </div>
         </Form>

@@ -52,16 +52,16 @@ class App extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink tag={Link} to="/calculator">Kalkulator</NavLink>
+                <NavLink className="item-fade" tag={Link} to="/calculator">Kalkulator</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/currencyRates">Kursy walut</NavLink>
+                <NavLink className="item-fade" tag={Link} to="/currencyRates">Kursy walut</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/wallet">Portfel</NavLink>
+                <NavLink className="item-fade" tag={Link} to="/wallet">Portfel</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/market">Rynek</NavLink>
+                <NavLink className="item-fade" tag={Link} to="/market">Rynek</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

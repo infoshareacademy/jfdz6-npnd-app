@@ -20,8 +20,8 @@ class CalculatorOutputCurrency extends Component {
   render() {
     return (
       <div>
-        <p style={{color: "#26292D", marginBottom: 0}}>Podana kwota przeliczona z {this.props.selectValue || <em><u>(wybierz walutę, z której chcesz przeliczyć)</u></em>} na {this.props.selectOutputValue || <em><u>(wybierz walutę, na którą chcesz przeliczyć)</u></em>} wynosi:</p>
-          <p style={{color: "#26292D", fontSize: 35}}>
+        <p style={{marginBottom: 0}}>Podana kwota przeliczona z {this.props.selectValue || <em><u>(wybierz walutę, z której chcesz przeliczyć)</u></em>} na {this.props.selectOutputValue || <em><u>(wybierz walutę, na którą chcesz przeliczyć)</u></em>} wynosi:</p>
+          <p style={{fontSize: 35}}>
             {this.calculateOutput() ? this.calculateOutput() : 'Proszę wpisać liczbę'}
           </p>
       </div>

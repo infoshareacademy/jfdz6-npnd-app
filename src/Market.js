@@ -94,7 +94,9 @@ class Market extends React.Component {
   render() {
     return (
       <div>
-        <h2 style={{textAlign: 'center'}}>
+        <h2 style={{textAlign: 'center',
+          backgroundColor: 'rgba(236, 236, 236, 0.75)',
+        marginBottom:'0'}}>
           Rynek
         </h2>
 
@@ -128,7 +130,8 @@ class Market extends React.Component {
           </FormGroup>
         </Modal>
 
-        <Table hover size="sm" responsive style={{textAlign: 'center'}}>
+        <Table hover size="sm" responsive style={{textAlign: 'center',
+          backgroundColor: 'rgba(236, 236, 236, 0.75)'}}>
           <thead>
           <tr>
             <th>Waluta</th>

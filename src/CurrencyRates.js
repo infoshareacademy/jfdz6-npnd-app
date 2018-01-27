@@ -16,17 +16,17 @@ const data = {
       label: 'My First dataset',
       fill: false,
       lineTension: 0.1,
-      backgroundColor: 'rgba(75,192,192,0.4)',
-      borderColor: 'rgba(75,192,192,1)',
+      backgroundColor: 'rgba(211, 18, 18,0.4)',
+      borderColor: 'rgba(211, 18, 18,1)',
       borderCapStyle: 'butt',
       borderDash: [],
       borderDashOffset: 0.0,
       borderJoinStyle: 'miter',
-      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBorderColor: 'rgba(211, 18, 18,1)',
       pointBackgroundColor: '#fff',
       pointBorderWidth: 1,
       pointHoverRadius: 5,
-      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBackgroundColor: 'rgba(211, 18, 18,1)',
       pointHoverBorderColor: 'rgba(220,220,220,1)',
       pointHoverBorderWidth: 2,
       pointRadius: 1,
@@ -147,16 +147,18 @@ class CurrencyRates extends React.Component {
         }
         {
           this.props.rates.filter(rate => rate.currency === this.state.selectedCurrency)
-            .map(e => <p> {e.currency} {e.mid}</p>)
+            .map(e => <p> Aktualny kurs {e.currency} {e.mid}</p>)
         }
 
         {
           this.state.selectedCurrency !== null &&
           this.state.endDate !== null &&
           this.state.startDate !== null ?
-            <Line
+            <div style={{backgroundColor: 'rgba(236, 236, 236, 0.75)'}}>
+              <Line
               data={chartData}
-            /> :
+            />
+            </div>:
             null
         }
 

@@ -56,9 +56,12 @@ class Budget extends React.Component {
         <h2 style={{textAlign: 'center'}}>
           Logi transkacji
         </h2>
-        <Table hover size="sm" responsive style={{textAlign: 'center'}}>
+        <Table size="sm" responsive style={{textAlign: 'center',
+        backgroundColor: 'rgba(236, 236, 236, 0.75)'}}>
+
           <thead>
           <tr>
+            <th>Typ transakcji</th>
             <th>Waluta</th>
             <th>Kurs transakcji</th>
             <th>Ilość</th>
@@ -74,6 +77,12 @@ class Budget extends React.Component {
                 data-item-amount={rate.currencyAmount}
                 data-item-rate={rate.transactionRate}
               >
+                <td>
+                  {
+                    this.props.transactions.filter(rate2 => rate2.transactionId === rate.transactionId)
+                      .map(e => <span key={e.transactionId}> {e.currencyAmount > 0 ? 'KUPNO' : 'SPRZEDAŻ'}</span>)
+                  }
+                </td>
                 <td>
                   {
                     rate.currencyCode

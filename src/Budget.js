@@ -30,14 +30,14 @@ class Budget extends React.Component {
 
   render() {
 
-    const colors = (getTransactions(this.props.transactions).map(e => getRandomColor().toString()))
+    const colors = (getTransactions(this.props.transactions).concat(['BUDŻET']).map(e => getRandomColor().toString()))
 
     const chartData = {
       ...data,
-      labels: getTransactions(this.props.transactions).map(e => e.currencyCode),
+      labels: getTransactions(this.props.transactions).map(e => e.currencyCode).concat(['BUDŻET']),
       datasets: [ {
         ...data.datasets[ 0 ],
-        data: getTransactions(this.props.transactions).map(e => e.currencyAmount),
+        data: getTransactions(this.props.transactions).map(e => Math.round((e.currencyAmount * e.transactionRate))).concat([calculateBudget(this.props.budget, this.props.transactions)]),
         backgroundColor: colors,
         hoverBackgroundColor: colors
       }
@@ -47,7 +47,7 @@ class Budget extends React.Component {
     return (
       <div>
         <h3 style={{textAlign: 'center'}} >
-          Twój budżet wynosi: {calculateBudget(this.props.budget, this.props.transactions)}
+          Twój budżet wynosi: {`${calculateBudget(this.props.budget, this.props.transactions)} PLN`}
           </h3>
 
         <Doughnut data={chartData} />

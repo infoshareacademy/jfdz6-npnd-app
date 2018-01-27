@@ -6,6 +6,7 @@ import moment from 'moment'
 import { getYesterdayRates } from "./state/historicalExchangeRates";
 import { buyCurrency } from "./state/handleTransactions"
 import Octicon from 'react-octicon'
+import { calculateBudget } from './utils'
 
 class Market extends React.Component {
 
@@ -122,7 +123,7 @@ class Market extends React.Component {
             <ModalFooter>
               <Button color="success"
                       onClick={this.handleBuy}
-                      disabled={this.state.amount > 0 && this.props.budget > this.state.amount  ? false : true}>
+                      disabled={this.state.amount > 0 && calculateBudget(this.props.budget, this.props.transactions)   > this.state.result ? false : true}>
                 Kup
               </Button>
               <Button color="secondary" onClick={this.closeModal}>Zamknij</Button>

@@ -134,10 +134,19 @@ class CurrencyRates extends React.Component {
             <div>
               <FormGroup>
                 <Label for="exampleSelect">Wybierz walutę </Label>
-                <Input type="select" name="select" id="exampleSelect" placeholder="-" onChange={this.handleChange}>
+                <Input
+                  type="select"
+                  name="select"
+                  id="exampleSelect"
+                  placeholder="-"
+                  onChange={this.handleChange}
+                >
                   {this.props.rates.map(rate => <option>{rate.currency}</option>)}
                   <option selected>-</option>
                 </Input>
+                {
+                  this.props.rates.error && <p>{this.props.rates.error.message}</p>
+                }
               </FormGroup>
               <Button onClick={this.handleHistoricalRates}>
                 Pokaż kurs

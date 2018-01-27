@@ -7,17 +7,6 @@ import { getYesterdayRates } from "./state/historicalExchangeRates";
 import { buyCurrency } from "./state/handleTransactions"
 import Octicon from 'react-octicon'
 
-/*
-Zalogowany użytkownik powinien móc dodać i zarządzać swoim portfelem walut.
-
-Portfel prezentuje zmianę wartości, zysku lub straty
-
-naszego portfela w stosunku do daty zakupu (dodania wpisu do portfela).
-
-Jeśli od momentu zakupu waluta ma najwyższą wartość kursu
-użytkownik powinien zobaczyć komunikat o potencjalnej korzyści ze sprzedaży.
- */
-
 class Market extends React.Component {
 
   state = {

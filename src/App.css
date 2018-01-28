@@ -1,5 +1,5 @@
 .welcome-message {
-    font-size: 0;
+    font-size: 1em;
 }
 
 @media screen and (min-width: 576px) {

@@ -16,17 +16,17 @@ const data = {
       label: 'My First dataset',
       fill: false,
       lineTension: 0.1,
-      backgroundColor: 'rgba(75,192,192,0.4)',
-      borderColor: 'rgba(75,192,192,1)',
+      backgroundColor: 'rgba(211, 18, 18,0.4)',
+      borderColor: 'rgba(211, 18, 18,1)',
       borderCapStyle: 'butt',
       borderDash: [],
       borderDashOffset: 0.0,
       borderJoinStyle: 'miter',
-      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBorderColor: 'rgba(211, 18, 18,1)',
       pointBackgroundColor: '#fff',
       pointBorderWidth: 1,
       pointHoverRadius: 5,
-      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBackgroundColor: 'rgba(211, 18, 18,1)',
       pointHoverBorderColor: 'rgba(220,220,220,1)',
       pointHoverBorderWidth: 2,
       pointRadius: 1,
@@ -108,9 +108,9 @@ class CurrencyRates extends React.Component {
       <div
         style={{textAlign: 'center'}}
       >
-        <h2>Kursy walut</h2>
+        <h2 className="text-white">Kursy walut</h2>
 
-        Od
+        <p>Od</p>
         <DatePicker
           dateFormat="YYYY/MM/DD"
           selected={this.state.startDate}
@@ -119,7 +119,7 @@ class CurrencyRates extends React.Component {
           endDate={this.state.endDate}
           onChange={this.handleChangeStart}
         />
-        Do
+        <p>Do</p>
         <DatePicker
           dateFormat="YYYY/MM/DD"
           selected={this.state.endDate}
@@ -134,10 +134,19 @@ class CurrencyRates extends React.Component {
             <div>
               <FormGroup>
                 <Label for="exampleSelect">Wybierz walutę </Label>
-                <Input type="select" name="select" id="exampleSelect" placeholder="-" onChange={this.handleChange}>
+                <Input
+                  type="select"
+                  name="select"
+                  id="exampleSelect"
+                  placeholder="-"
+                  onChange={this.handleChange}
+                >
                   {this.props.rates.map(rate => <option>{rate.currency}</option>)}
                   <option selected>-</option>
                 </Input>
+                {
+                  this.props.rates.error && <p>{this.props.rates.error.message}</p>
+                }
               </FormGroup>
               <Button onClick={this.handleHistoricalRates}>
                 Pokaż kurs
@@ -147,16 +156,18 @@ class CurrencyRates extends React.Component {
         }
         {
           this.props.rates.filter(rate => rate.currency === this.state.selectedCurrency)
-            .map(e => <p> {e.currency} {e.mid}</p>)
+            .map(e => <p> Aktualny kurs {e.currency} {e.mid}</p>)
         }
 
         {
           this.state.selectedCurrency !== null &&
           this.state.endDate !== null &&
           this.state.startDate !== null ?
-            <Line
+            <div style={{backgroundColor: 'rgba(236, 236, 236, 0.75)'}}>
+              <Line
               data={chartData}
-            /> :
+            />
+            </div>:
             null
         }
 

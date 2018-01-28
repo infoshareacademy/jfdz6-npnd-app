@@ -13,14 +13,9 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  NavLink
 } from 'reactstrap';
 import SignOut from './SignOut'
 import './App.css';
@@ -65,7 +60,7 @@ class App extends Component {
                 <NavLink className="item-fade" tag={Link} to="/market">Rynek</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/budget">Budżet</NavLink>
+                <NavLink className="item-fade" tag={Link} to="/budget">Budżet</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

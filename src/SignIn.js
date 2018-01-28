@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { signIn } from './state/auth'
 import { connect } from 'react-redux'
-import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col } from 'reactstrap'
+import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap'
 import ModalSignUp from './ModalSignUp'
 
 class SignIn extends Component {

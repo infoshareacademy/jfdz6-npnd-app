@@ -50,7 +50,7 @@ class SignUp extends Component {
           <Col sm="12" md={{size: 10, offset: 1}}>
             <Form onSubmit={this.handleSubmit}>
               <FormGroup>
-                <Label for="name">Login</Label>
+                <Label style={{color: 'black'}} for="name">Login</Label>
                 <Input
                   name="name"
                   id="name"
@@ -58,7 +58,7 @@ class SignUp extends Component {
                   required/>
               </FormGroup>
               <FormGroup>
-                <Label for='userName'>
+                <Label style={{color: 'black'}} for='userName'>
                   Email:
                 </Label>
                 <Input
@@ -68,7 +68,7 @@ class SignUp extends Component {
                   required/>
               </FormGroup>
               <FormGroup>
-                <Label for='userPassword'>
+                <Label style={{color: 'black'}} for='userPassword'>
                   Hasło:
                 </Label>
                 <Input

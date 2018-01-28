@@ -6,17 +6,7 @@ import moment from 'moment'
 import { getYesterdayRates } from "./state/historicalExchangeRates";
 import { buyCurrency } from "./state/handleTransactions"
 import Octicon from 'react-octicon'
-
-/*
-Zalogowany użytkownik powinien móc dodać i zarządzać swoim portfelem walut.
-
-Portfel prezentuje zmianę wartości, zysku lub straty
-
-naszego portfela w stosunku do daty zakupu (dodania wpisu do portfela).
-
-Jeśli od momentu zakupu waluta ma najwyższą wartość kursu
-użytkownik powinien zobaczyć komunikat o potencjalnej korzyści ze sprzedaży.
- */
+import { calculateBudget } from './utils'
 
 class Market extends React.Component {
 
@@ -105,7 +95,9 @@ class Market extends React.Component {
   render() {
     return (
       <div>
-        <h2 style={{textAlign: 'center'}}>
+        <h2 style={{textAlign: 'center',
+          backgroundColor: 'rgba(236, 236, 236, 0.75)',
+        marginBottom:'0'}}>
           Rynek
         </h2>
 
@@ -131,7 +123,7 @@ class Market extends React.Component {
             <ModalFooter>
               <Button color="success"
                       onClick={this.handleBuy}
-                      disabled={this.state.amount > 0 && this.props.budget > this.state.amount  ? false : true}>
+                      disabled={this.state.amount > 0 && calculateBudget(this.props.budget, this.props.transactions)   > this.state.result ? false : true}>
                 Kup
               </Button>
               <Button color="secondary" onClick={this.closeModal}>Zamknij</Button>
@@ -139,7 +131,8 @@ class Market extends React.Component {
           </FormGroup>
         </Modal>
 
-        <Table hover size="sm" responsive style={{textAlign: 'center'}}>
+        <Table hover size="sm" responsive style={{textAlign: 'center',
+          backgroundColor: 'rgba(236, 236, 236, 0.75)'}}>
           <thead>
           <tr>
             <th>Waluta</th>

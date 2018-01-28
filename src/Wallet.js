@@ -96,7 +96,7 @@ class Wallet extends React.Component {
   render() {
     return (
       <div>
-        <h2 style={{textAlign: 'center'}}>
+        <h2 style={{textAlign: 'center', color: '#F0EFF0'}}>
           Mój portfel
         </h2>
 
@@ -143,7 +143,8 @@ class Wallet extends React.Component {
           </FormGroup>
         </Modal>
 
-        <Table hover size="sm" responsive style={{textAlign: 'center'}}>
+        <Table hover size="sm" responsive style={{textAlign: 'center',
+          backgroundColor: 'rgba(236, 236, 236, 0.75)'}}>
           <thead>
           <tr>
             <th>Waluta</th>
@@ -210,8 +211,8 @@ class Wallet extends React.Component {
                           (e.mid - rate.transactionRate) === 0 ?
                             'Po tyle kupiłeś!' :
                             (e.mid - rate.transactionRate) > 0 ?
-                              'Zarabiasz!' :
-                              'Tracisz!'
+                             <span style={{color: 'green'}}> Zarabiasz!</span> :
+                          <span style={{color: 'red'}}> Tracisz! </span>
                         }
                         </span>)
                   }

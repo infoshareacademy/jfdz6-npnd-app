@@ -8,7 +8,7 @@ class WelcomePage extends Component {
       <div>
         <div className="flex-container">
           <div className="description gray-background">
-            <p><span className="header-text"><b>Witaj w aplikacji, która uczyni Cię bogatym!</b></span>
+            <p><span className="header-text"><b>Witaj w aplikacji, która uczyni Cię bogatym!</b></span></p>
               <ul>
                 <li>Zawsze czułeś zawód po kliknięciu w reklamę mówiącą
                   "Pracuj godzinę dziennie i zarabiaj 10,000 zł?" i zorientowaniu się, że to zwykła ściema?
@@ -23,10 +23,9 @@ class WelcomePage extends Component {
                   Malediwy raz w miesiącu?
                 </li>
               </ul>
-            </p>
           </div>
           <div className="description black-background">
-            <p><span className="header-text"><b>Po rejestracji zyskasz dostęp do finansowych supermocy!</b></span>
+            <p><span className="header-text"><b>Po rejestracji zyskasz dostęp do finansowych supermocy!</b></span></p>
               <ul>
                 <li>Będziesz mógł przeliczać ilość dowolnej waluty na inną!
                 </li>
@@ -36,8 +35,6 @@ class WelcomePage extends Component {
                 </li>
                 <li>Zyskasz dostęp do zarządzania budżetem, by móc utrzymać kontrolę nad takimi bajońskimi kwotami.</li>
               </ul>
-            </p>
-
           </div>
           <div className='summary'>
             <p>Dzięki naszej aplikacji możesz NAPRAWDĘ stać się bogatym! Wystarczy, że

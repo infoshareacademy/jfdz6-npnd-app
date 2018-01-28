@@ -1,13 +1,24 @@
 .welcome-message {
-    font-size: 1.7em;
+    font-size: 1em;
 }
 
 @media screen and (min-width: 576px) {
     .welcome-message {
-        font-size: 2.7em;
+        font-size: 1.5em;
     }
 }
 
+@media screen and (min-width: 768px) {
+    .welcome-message {
+        font-size: 1.8em;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .welcome-message {
+        font-size: 2.5em;
+    }
+}
 
 .item-fade {
     color: #F0EFF0 !important;

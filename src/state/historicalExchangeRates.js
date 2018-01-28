@@ -1,6 +1,6 @@
 const BEGIN = 'historicalExchangeRates/GET_BEGIN'
 const SUCCESS = 'historicalExchangeRates/GET_SUCCESS'
-const FAIL = 'historicalExchangeRates/GET_FAIL'
+const FAIL_HISTORICAL = 'historicalExchangeRates/GET_FAIL_HISTORICAL'
 const RESET = 'historicalExchangeRates/GET_RESET'
 const BEGIN_YESTERDAY = 'historicalExchangeRates/GET_YESTERDAY'
 const SUCCESS_YESTERDAY = 'historicalExchangeRates/GET_YESTERDAY_SUCCESS'
@@ -15,7 +15,7 @@ export const getHistoricalCurrencies = (currencyStartDate, currencyEndDate, curr
   ).then(
     data => dispatch({type: SUCCESS, historicalData: data.rates})
   ).catch(
-    error => dispatch({type: FAIL, error})
+    error => dispatch({type: FAIL_HISTORICAL, error: new Error('Something went wrong')})
   )
 }
 
@@ -33,7 +33,7 @@ export const getYesterdayRates = (yesterdayDate) => dispatch => {
   ).then(
     data => dispatch({type: SUCCESS_YESTERDAY, yesterdayData: data[0].rates })
   ).catch(
-    error => dispatch({type: FAIL, error})
+    error => dispatch({type: FAIL_YESTERDAY, error})
   )
 }
 
@@ -59,7 +59,7 @@ export default (state = initialState, action = {}) => {
         historicalData: action.historicalData,
         getting: false
       }
-    case FAIL:
+    case FAIL_HISTORICAL:
       return {
         ...state,
         data: [],

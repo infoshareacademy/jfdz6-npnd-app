@@ -145,7 +145,7 @@ class CurrencyRates extends React.Component {
                   <option selected>-</option>
                 </Input>
                 {
-                  this.props.rates.error && <p>{this.props.rates.error.message}</p>
+                  this.props.historicalRates.error && <p>{this.props.historicalRates.error.message}</p>
                 }
               </FormGroup>
               <Button onClick={this.handleHistoricalRates}>

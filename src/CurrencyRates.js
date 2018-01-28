@@ -108,9 +108,9 @@ class CurrencyRates extends React.Component {
       <div
         style={{textAlign: 'center'}}
       >
-        <h2>Kursy walut</h2>
+        <h2 className="text-white">Kursy walut</h2>
 
-        Od
+        <p>Od</p>
         <DatePicker
           dateFormat="YYYY/MM/DD"
           selected={this.state.startDate}
@@ -119,7 +119,7 @@ class CurrencyRates extends React.Component {
           endDate={this.state.endDate}
           onChange={this.handleChangeStart}
         />
-        Do
+        <p>Do</p>
         <DatePicker
           dateFormat="YYYY/MM/DD"
           selected={this.state.endDate}

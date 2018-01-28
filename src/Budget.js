@@ -46,14 +46,14 @@ class Budget extends React.Component {
 
     return (
       <div>
-        <h3 style={{textAlign: 'center'}} >
+        <h3 style={{textAlign: 'center', color: '#F0EFF0'}} >
           Twój budżet wynosi: {`${calculateBudget(this.props.budget, this.props.transactions)} PLN`}
           </h3>
 
         <Doughnut data={chartData} />
 
 
-        <h2 style={{textAlign: 'center'}}>
+        <h2 style={{textAlign: 'center', color: '#F0EFF0'}}>
           Logi transkacji
         </h2>
         <Table size="sm" responsive style={{textAlign: 'center',

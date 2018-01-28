@@ -2,10 +2,13 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'PT Sans', sans-serif;
-  background-image: url("bgc2.png");
+  background-image: url("finance_city.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   min-width: 300px;
 }
 
+.navbar-toggler {
+  background-color: #848C95;
+}

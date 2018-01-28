@@ -96,7 +96,7 @@ class Wallet extends React.Component {
   render() {
     return (
       <div>
-        <h2 style={{textAlign: 'center'}}>
+        <h2 style={{textAlign: 'center', color: '#F0EFF0'}}>
           Mój portfel
         </h2>
 

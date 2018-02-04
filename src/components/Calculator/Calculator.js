@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-import {getCurrencies} from "./state/exchangeRates"
+import {getCurrencies} from "../../state/exchangeRates"
 
 import CalculatorInputCurrency from './CalculatorInputCurrency'
 import CalculatorOutputCurrency from './CalculatorOutputCurrency'

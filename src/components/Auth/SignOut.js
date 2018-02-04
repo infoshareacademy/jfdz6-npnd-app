@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Button } from 'reactstrap'
 import Octicon from 'react-octicon'
 
-import { signOut } from './state/auth'
+import { signOut } from '../../state/auth'
 import './SignOut.css'
 
 class SignOut extends Component {

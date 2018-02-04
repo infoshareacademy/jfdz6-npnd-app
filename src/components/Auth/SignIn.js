@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { signIn } from './state/auth'
+import { signIn } from '../../state/auth'
 import { connect } from 'react-redux'
 import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap'
 import ModalSignUp from './ModalSignUp'

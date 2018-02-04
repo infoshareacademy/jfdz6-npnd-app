@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import CurrencyRates from './CurrencyRates'
-import Wallet from './Wallet'
-import Calculator from './Calculator'
-import Market from './Market'
-import Budget from './Budget'
+import CurrencyRates from './components/CurrencyRates/CurrencyRates'
+import Wallet from './components/Wallet/Wallet'
+import Calculator from './components/Calculator/Calculator'
+import Market from './components/Market/Market'
+import Budget from './components/Budget/Budget'
 import {
   BrowserRouter as Router,
   Route,
@@ -17,7 +17,7 @@ import {
   NavItem,
   NavLink
 } from 'reactstrap';
-import SignOut from './SignOut'
+import SignOut from './components/Auth/SignOut'
 import './App.css';
 
 class App extends Component {

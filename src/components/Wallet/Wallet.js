@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getCurrencies } from "./state/exchangeRates"
+import { getCurrencies } from "../../state/exchangeRates"
 import { Table, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Input } from 'reactstrap'
-import { sellCurrency } from "./state/handleTransactions"
+import { sellCurrency } from "../../state/handleTransactions"
 import moment from 'moment'
-import { getTransactions } from './utils'
+import { getTransactions } from '../../utils'
 
 
 class Wallet extends React.Component {

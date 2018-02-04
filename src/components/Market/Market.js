@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getCurrencies } from "./state/exchangeRates"
+import { getCurrencies } from "../../state/exchangeRates"
 import { Table, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Input } from 'reactstrap'
 import moment from 'moment'
-import { getYesterdayRates } from "./state/historicalExchangeRates";
-import { buyCurrency } from "./state/handleTransactions"
+import { getYesterdayRates } from "../../state/historicalExchangeRates";
+import { buyCurrency } from "../../state/handleTransactions"
 import Octicon from 'react-octicon'
-import { calculateBudget } from './utils'
+import { calculateBudget } from '../../utils'
 
 class Market extends React.Component {
 

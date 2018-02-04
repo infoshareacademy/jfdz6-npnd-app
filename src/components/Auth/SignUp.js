@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { signUp } from './state/auth'
+import { signUp } from '../../state/auth'
 import { connect } from 'react-redux'
 import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col } from 'reactstrap'
 
@@ -28,17 +28,17 @@ class SignUp extends Component {
   handleErrorMessages = () => {
     if (this.props.auth.error.code === 'auth/invalid-email') {
       return (
-        <p>Ups, ten email jest chyba niepoprawny.</p>
+        <p style={{color: 'black'}}>Ups, ten email jest chyba niepoprawny.</p>
       )
     }
     if (this.props.auth.error.code === 'auth/weak-password') {
       return (
-        <p>Ups, to hasło jest ciut za słabe. Na pewno ma co najmniej 6 znaków?</p>
+        <p style={{color: 'black'}}>Ups, to hasło jest ciut za słabe. Na pewno ma co najmniej 6 znaków?</p>
       )
     }
     if (this.props.auth.error.code === 'auth/email-already-in-use') {
       return (
-        <p>Już znamy ten adres email. Może po prostu nie pamiętasz hasła?</p>
+        <p style={{color: 'black'}}>Już znamy ten adres email. Może po prostu nie pamiętasz hasła?</p>
       )
     }
   }

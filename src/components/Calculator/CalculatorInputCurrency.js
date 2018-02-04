@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Button, FormGroup, Form, Input, Label} from 'reactstrap'
 
-import {add, changeCurrency, changeOutputCurrency} from './state/exchangeRates'
+import {add, changeCurrency, changeOutputCurrency} from '../../state/exchangeRates'
 import './CalculatorInputCurrency.css'
 
 class CalculatorInputCurrency extends Component {

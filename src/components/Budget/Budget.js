@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Table } from 'reactstrap'
 import { Doughnut } from 'react-chartjs-2'
-import { getTransactions, getRandomColor, calculateBudget  } from './utils'
+import { getTransactions, getRandomColor, calculateBudget  } from '../../utils'
 
 const data = {
   labels: [

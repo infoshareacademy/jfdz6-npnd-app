@@ -1,12 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getCurrencies } from "../../state/exchangeRates"
 import { Table, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Input } from 'reactstrap'
 import moment from 'moment'
+import Octicon from 'react-octicon'
+
+import { calculateBudget } from '../../utils'
 import { getYesterdayRates } from "../../state/historicalExchangeRates";
 import { buyCurrency } from "../../state/handleTransactions"
-import Octicon from 'react-octicon'
-import { calculateBudget } from '../../utils'
+import { getCurrencies } from "../../state/exchangeRates"
+
+import './Market.css'
 
 class Market extends React.Component {
 
@@ -95,9 +98,7 @@ class Market extends React.Component {
   render() {
     return (
       <div>
-        <h2 style={{textAlign: 'center',
-          backgroundColor: 'rgba(236, 236, 236, 0.75)',
-        marginBottom:'0'}}>
+        <h2 className='text-center market-header-text'>
           Rynek
         </h2>
 
@@ -131,8 +132,7 @@ class Market extends React.Component {
           </FormGroup>
         </Modal>
 
-        <Table hover size="sm" responsive style={{textAlign: 'center',
-          backgroundColor: 'rgba(236, 236, 236, 0.75)'}}>
+        <Table hover size="sm" responsive className='text-center table-text'>
           <thead>
           <tr>
             <th>Waluta</th>
@@ -146,7 +146,7 @@ class Market extends React.Component {
               key={rate.code}
               onClick={this.toggleModal}
               data-item-id={rate.code}
-              style = {{cursor: 'pointer'}}
+              className='table-rows'
             >
               <td>
               {
@@ -166,8 +166,8 @@ class Market extends React.Component {
                       w => <span>
                         {
                           (rate.mid - w.mid) > 0 ?
-                      <Octicon name="arrow-up" style={{color: 'green'}} mega/> :
-                      <Octicon name="arrow-down" style={{color: 'red' }} mega/>
+                      <Octicon name="arrow-up" className='arrow-up' mega/> :
+                      <Octicon name="arrow-down" className='arrow-down' mega/>
                         }
                       </span>
                     )

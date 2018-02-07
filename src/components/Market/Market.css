@@ -1,0 +1,20 @@
+.market-header-text {
+    margin-bottom: 0;
+}
+
+.market-header-text,
+Table.table-text {
+    background-color: rgba(236, 236, 236, 0.75);
+}
+
+.table-rows {
+    cursor: pointer;
+}
+
+.arrow-up {
+    color: green;
+}
+
+.arrow-down {
+    color: red;
+}

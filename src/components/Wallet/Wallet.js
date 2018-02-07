@@ -1,11 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getCurrencies } from "../../state/exchangeRates"
 import { Table, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Input } from 'reactstrap'
-import { sellCurrency } from "../../state/handleTransactions"
 import moment from 'moment'
+
+import { sellCurrency } from "../../state/handleTransactions"
+import { getCurrencies } from "../../state/exchangeRates"
 import { getTransactions } from '../../utils'
 
+import './Wallet.css'
 
 class Wallet extends React.Component {
 
@@ -96,11 +98,9 @@ class Wallet extends React.Component {
   render() {
     return (
       <div>
-        <h2 style={{textAlign: 'center', color: '#F0EFF0'}}>
+        <h2 className='text-center wallet-text'>
           Mój portfel
         </h2>
-
-
         <Modal isOpen={this.state.modal} toggle={this.closeModal} keyboard={false}>
           <FormGroup>
             <ModalHeader toggle={this.closeModal}>Sprzedaj - {this.state.selectedCurrency}</ModalHeader>
@@ -143,8 +143,7 @@ class Wallet extends React.Component {
           </FormGroup>
         </Modal>
 
-        <Table hover size="sm" responsive style={{textAlign: 'center',
-          backgroundColor: 'rgba(236, 236, 236, 0.75)'}}>
+        <Table hover size="sm" responsive className='text-center wallet-table'>
           <thead>
           <tr>
             <th>Waluta</th>
@@ -168,7 +167,7 @@ class Wallet extends React.Component {
                 data-item-id={rate.currencyCode}
                 data-item-amount={rate.currencyAmount}
                 data-item-rate={rate.transactionRate}
-                style={{cursor: 'pointer'}}
+                className='table-rows'
               >
                 <td>
                   {
@@ -211,8 +210,8 @@ class Wallet extends React.Component {
                           (e.mid - rate.transactionRate) === 0 ?
                             'Po tyle kupiłeś!' :
                             (e.mid - rate.transactionRate) > 0 ?
-                             <span style={{color: 'green'}}> Zarabiasz!</span> :
-                          <span style={{color: 'red'}}> Tracisz! </span>
+                             <span className='earning-message'> Zarabiasz!</span> :
+                          <span className='loosing-message'> Tracisz!</span>
                         }
                         </span>)
                   }

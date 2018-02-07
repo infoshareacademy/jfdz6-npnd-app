@@ -1,0 +1,19 @@
+.wallet-text {
+    color: #F0EFF0;
+}
+
+Table.wallet-table {
+    background-color: rgba(236, 236, 236, 0.75);
+}
+
+.table-rows {
+    cursor: pointer;
+}
+
+.earning-message {
+    color: green;
+}
+
+.loosing-message {
+    color: red;
+}

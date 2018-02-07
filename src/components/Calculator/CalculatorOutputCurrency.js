@@ -1,10 +1,12 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+
+import './CalculatorOutputCurrency.css'
 
 class CalculatorOutputCurrency extends Component {
 
   calculateOutput = () => {
-    const { userValue, rates, selectValue, selectOutputValue } = this.props
+    const {userValue, rates, selectValue, selectOutputValue} = this.props
     if (userValue === null || rates.length === 0 || selectValue === null || selectOutputValue === null) {
       return
     }
@@ -20,10 +22,12 @@ class CalculatorOutputCurrency extends Component {
   render() {
     return (
       <div>
-        <p style={{marginBottom: 0, textAlign: 'center'}}>Podana kwota przeliczona z {this.props.selectValue || <em><u>(wybierz walutę, z której chcesz przeliczyć)</u></em>} na {this.props.selectOutputValue || <em><u>(wybierz walutę, na którą chcesz przeliczyć)</u></em>} wynosi:</p>
-          <p style={{fontSize: 35, textAlign: 'center'}}>
-            {this.calculateOutput() ? this.calculateOutput() : 'Proszę wpisać liczbę'}
-          </p>
+        <p className='text-center calculator-instruction'>Podana kwota przeliczona z {this.props.selectValue ||
+        <em><u>(wybierz walutę, z której chcesz przeliczyć)</u></em>} na {this.props.selectOutputValue ||
+        <em><u>(wybierz walutę, na którą chcesz przeliczyć)</u></em>} wynosi:</p>
+        <p className='text-center calculator-output-message'>
+          {this.calculateOutput() ? this.calculateOutput() : 'Proszę wpisać liczbę'}
+        </p>
       </div>
     )
   }

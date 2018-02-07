@@ -1,7 +1,8 @@
-.text-white {
+.budget-user-information {
     color: #F0EFF0;
+    text-align: center;
 }
 
-.currency-rates-chart {
+Table.budget-table {
     background-color: rgba(236, 236, 236, 0.75);
 }

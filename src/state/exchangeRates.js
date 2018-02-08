@@ -21,7 +21,7 @@ export const changeInputCurrency = currency => ({
 
 export const changeOutputCurrency = currency => ({
   type: CHANGE_OUTPUT_CURRENCY,
-  selectInputValue: currency
+  selectOutputValue: currency
 })
 
 export const getCurrencies = () => dispatch => {
@@ -89,7 +89,7 @@ export default (state = initialState, action = {}) => {
     case CHANGE_OUTPUT_CURRENCY:
       return {
         ...state,
-        selectOutputValue: action.selectInputValue
+        selectOutputValue: action.selectOutputValue
       }
     case LOG_OUT:
       return initialState

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Button, FormGroup, Form, Input, Label} from 'reactstrap'
 
-import {add, changeCurrency, changeOutputCurrency} from '../../state/exchangeRates'
+import {add, changeInputCurrency, changeOutputCurrency} from '../../state/exchangeRates'
 
 import './CalculatorInputCurrency.css'
 
@@ -16,9 +16,9 @@ class CalculatorInputCurrency extends Component {
     this.userInput.value = ''
   }
 
-  handleSelect = event => {
+  handleInputSelect = event => {
     const optionField = event.target.value
-    this.props.selectCurrency(optionField)
+    this.props.selectInputCurrency(optionField)
   }
 
   handleOutputSelect = event => {
@@ -47,8 +47,8 @@ class CalculatorInputCurrency extends Component {
               <Input type="select"
                      name="select"
                      id="inputCurrency"
-                     value={this.props.selectValue}
-                     onChange={this.handleSelect}>
+                     value={this.props.selectInputValue}
+                     onChange={this.handleInputSelect}>
                 {
                   this.props.rates.map(
                     rate => <option
@@ -97,13 +97,13 @@ const mapStateToProps = state => ({
   rates: state.exchangeRates.data,
   error: state.exchangeRates.error,
   userValue: state.exchangeRates.userValue,
-  selectValue: state.exchangeRates.selectValue,
+  selectInputValue: state.exchangeRates.selectInputValue,
   selectOutputValue: state.exchangeRates.selectOutputValue
 })
 
 const mapDispatchToProps = dispatch => ({
   addValue: (userValue) => dispatch(add(userValue)),
-  selectCurrency: (selectValue) => dispatch(changeCurrency(selectValue)),
+  selectInputCurrency: (selectValue) => dispatch(changeInputCurrency(selectValue)),
   selectOutputCurrency: (selectOutputValue) => dispatch(changeOutputCurrency(selectOutputValue))
 })
 

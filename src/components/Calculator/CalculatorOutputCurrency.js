@@ -6,12 +6,12 @@ import './CalculatorOutputCurrency.css'
 class CalculatorOutputCurrency extends Component {
 
   calculateOutput = () => {
-    const {userValue, rates, selectValue, selectOutputValue} = this.props
-    if (userValue === null || rates.length === 0 || selectValue === null || selectOutputValue === null) {
+    const {userValue, rates, selectInputValue, selectOutputValue} = this.props
+    if (userValue === null || rates.length === 0 || selectInputValue === null || selectOutputValue === null) {
       return
     }
 
-    const inPLN = userValue * rates.find(item => item.code === selectValue).mid
+    const inPLN = userValue * rates.find(item => item.code === selectInputValue).mid
     const inOther = rates.find(item => item.code === this.props.selectOutputValue).mid
 
     let result = parseFloat(inPLN) / parseFloat(inOther)
@@ -22,7 +22,7 @@ class CalculatorOutputCurrency extends Component {
   render() {
     return (
       <div>
-        <p className='text-center calculator-instruction'>Podana kwota przeliczona z {this.props.selectValue ||
+        <p className='text-center calculator-instruction'>Podana kwota przeliczona z {this.props.selectInputValue ||
         <em><u>(wybierz walutę, z której chcesz przeliczyć)</u></em>} na {this.props.selectOutputValue ||
         <em><u>(wybierz walutę, na którą chcesz przeliczyć)</u></em>} wynosi:</p>
         <p className='text-center calculator-output-message'>
@@ -36,7 +36,7 @@ class CalculatorOutputCurrency extends Component {
 const mapStateToProps = state => ({
   rates: state.exchangeRates.data,
   userValue: state.exchangeRates.userValue,
-  selectValue: state.exchangeRates.selectValue,
+  selectInputValue: state.exchangeRates.selectInputValue,
   selectOutputValue: state.exchangeRates.selectOutputValue
 })
 

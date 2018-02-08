@@ -6,7 +6,7 @@ const BEGIN = 'GET_BEGIN'
 const SUCCESS = 'GET_SUCCESS'
 const FAIL = 'GET_FAIL'
 
-const CHANGE_CURRENCY = 'CHANGE_CURRENCY'
+const CHANGE_INPUT_CURRENCY = 'CHANGE_INPUT_CURRENCY'
 const CHANGE_OUTPUT_CURRENCY = 'CHANGE_OUTPUT_CURRENCY'
 
 export const add = value => ({
@@ -14,14 +14,14 @@ export const add = value => ({
   userValue: value
 })
 
-export const changeCurrency = currency => ({
-  type: CHANGE_CURRENCY,
-  selectValue: currency
+export const changeInputCurrency = currency => ({
+  type: CHANGE_INPUT_CURRENCY,
+  selectInputValue: currency
 })
 
 export const changeOutputCurrency = currency => ({
   type: CHANGE_OUTPUT_CURRENCY,
-  selectValue: currency
+  selectInputValue: currency
 })
 
 export const getCurrencies = () => dispatch => {
@@ -44,7 +44,7 @@ const initialState = {
   removing: false,
   error: null,
   userValue: null,
-  selectValue: null,
+  selectInputValue: null,
   selectOutputValue: null
 }
 
@@ -81,15 +81,15 @@ export default (state = initialState, action = {}) => {
         getting: false,
         error: action.error
       }
-    case CHANGE_CURRENCY:
+    case CHANGE_INPUT_CURRENCY:
       return {
         ...state,
-        selectValue: action.selectValue
+        selectInputValue: action.selectInputValue
       }
     case CHANGE_OUTPUT_CURRENCY:
       return {
         ...state,
-        selectOutputValue: action.selectValue
+        selectOutputValue: action.selectInputValue
       }
     case LOG_OUT:
       return initialState

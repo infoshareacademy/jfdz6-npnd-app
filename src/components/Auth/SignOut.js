@@ -5,6 +5,7 @@ import { Button } from 'reactstrap'
 import Octicon from 'react-octicon'
 
 import { signOut } from '../../state/auth'
+import WelcomePage from '../WelcomePage/WelcomePage'
 
 import './SignOut.css'
 
@@ -12,6 +13,7 @@ class SignOut extends Component {
 
   handleSignOut = () => {
     this.props.signOut()
+    window.open('WelcomePage', '_self')
   }
 
   render() {

@@ -1,0 +1,8 @@
+.text-black {
+    color: black;
+}
+
+.sign-up-button {
+    margin-top: 30px;
+    cursor: pointer;
+}

@@ -2,7 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Table } from 'reactstrap'
 import { Doughnut } from 'react-chartjs-2'
-import { getTransactions, getRandomColor, calculateBudget  } from './utils'
+
+import { getTransactions, getRandomColor, calculateBudget  } from '../../utils'
+
+import './Budget.css'
 
 const data = {
   labels: [
@@ -27,7 +30,6 @@ const data = {
 
 class Budget extends React.Component {
 
-
   render() {
 
     const colors = (getTransactions(this.props.transactions).concat(['BUDŻET']).map(e => getRandomColor().toString()))
@@ -46,18 +48,17 @@ class Budget extends React.Component {
 
     return (
       <div>
-        <h3 style={{textAlign: 'center', color: '#F0EFF0'}} >
+        <h3 className='budget-user-information'>
           Twój budżet wynosi: {`${calculateBudget(this.props.budget, this.props.transactions)} PLN`}
           </h3>
 
         <Doughnut data={chartData} />
 
 
-        <h2 style={{textAlign: 'center', color: '#F0EFF0'}}>
+        <h2 className='budget-user-information'>
           Logi transkacji
         </h2>
-        <Table size="sm" responsive style={{textAlign: 'center',
-        backgroundColor: 'rgba(236, 236, 236, 0.75)'}}>
+        <Table size="sm" responsive className='text-center budget-table'>
 
           <thead>
           <tr>
@@ -122,7 +123,6 @@ const mapStateToProps = state => ({
   auth: state.auth,
   budget: state.handleTransactions.budget
 })
-
 
 export default connect(
   mapStateToProps,

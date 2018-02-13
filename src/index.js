@@ -7,7 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import store from './store'
 import 'bootstrap/dist/css/bootstrap.css'
 import './index.css';
-import Auth from './Auth'
+import Auth from './components/Auth/Auth'
 
 ReactDOM.render(
   <Provider store={store}>

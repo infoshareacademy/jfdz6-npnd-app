@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
 import SignIn from './SignIn'
-import WelcomePage from './WelcomePage'
-import Footer from './Footer'
+import WelcomePage from '../WelcomePage/WelcomePage'
+import Footer from '../WelcomePage/Footer'
 
 class Auth extends Component {
   render() {

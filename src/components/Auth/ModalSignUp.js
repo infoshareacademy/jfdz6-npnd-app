@@ -1,7 +1,10 @@
 import React from 'react';
-import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import {Button, Modal, ModalHeader, ModalBody} from 'reactstrap';
+import {connect} from 'react-redux'
+
 import SignUp from './SignUp'
-import { connect } from 'react-redux'
+
+import './ModalSignUp.css'
 
 class ModalSignUp extends React.Component {
   constructor(props) {
@@ -23,7 +26,7 @@ class ModalSignUp extends React.Component {
   render() {
     return (
       <div className='text-center'>
-        <Button color="danger" onClick={this.toggle} style={{cursor: 'pointer'}}>Zarejestruj się</Button>
+        <Button className='modal-button' color="danger" onClick={this.toggle}>Zarejestruj się</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Witamy!</ModalHeader>
           <ModalBody>

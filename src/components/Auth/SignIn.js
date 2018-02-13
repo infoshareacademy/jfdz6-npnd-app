@@ -1,8 +1,11 @@
-import React, { Component } from 'react'
-import { signIn } from './state/auth'
-import { connect } from 'react-redux'
-import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {Button, Form, FormGroup, Label, Input, Container, Row, Col} from 'reactstrap'
+
 import ModalSignUp from './ModalSignUp'
+import {signIn} from '../../state/auth'
+
+import './SignIn.css'
 
 class SignIn extends Component {
   state = {
@@ -45,7 +48,7 @@ class SignIn extends Component {
       <Container className='container'>
         <Row>
           <Col sm='12' md={{size: 6, offset: 3}} className='border rounded'>
-            <Form onSubmit={this.handleSubmit} style={{paddingTop: 20}}>
+            <Form className='sing-in-form' onSubmit={this.handleSubmit}>
               <FormGroup>
                 <Label for="userEmail">
                   Email:
@@ -70,10 +73,10 @@ class SignIn extends Component {
                   onChange={this.handleChange}
                   required/>
                 <div className='text-center'>
-                  <Button type='submit' color='primary' size='lg' style={{marginTop: 30, cursor: 'pointer'}}>Zaloguj się</Button>
-                  <p style={{color: 'red'}}>{this.props.auth.error ? this.handleErrorMessages() : null}</p>
+                  <Button className='sign-in-button' type='submit' color='primary' size='lg'>Zaloguj się</Button>
+                  <p>{this.props.auth.error ? this.handleErrorMessages() : null}</p>
                 </div>
-                <p style={{marginTop: 50}} className='text-center'>Nie masz jeszcze konta? Zarejestruj się teraz!</p>
+                <p className='text-center register-text'>Nie masz jeszcze konta? Zarejestruj się teraz!</p>
                 <ModalSignUp/>
               </FormGroup>
             </Form>

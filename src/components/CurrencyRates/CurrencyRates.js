@@ -1,13 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getCurrencies } from "./state/exchangeRates"
 import { FormGroup, Label, Input, Button } from 'reactstrap'
 import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
-import { getHistoricalCurrencies, resetHistoricalCurrencies } from "./state/historicalExchangeRates"
 import { Line } from 'react-chartjs-2';
-import './CurrencyRates.css'
 
+import { getHistoricalCurrencies, resetHistoricalCurrencies } from "../../state/historicalExchangeRates"
+import { getCurrencies } from "../../state/exchangeRates"
+
+import 'react-datepicker/dist/react-datepicker.css'
+import './CurrencyRates.css'
 
 const data = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -54,7 +55,6 @@ class CurrencyRates extends React.Component {
     }, () => this.handleHistoricalRates())
 
   }
-
 
   handleChangeStart = date => {
 
@@ -103,10 +103,8 @@ class CurrencyRates extends React.Component {
 
     return (
 
-
-
       <div
-        style={{textAlign: 'center'}}
+        className='text-center'
       >
         <h2 className="text-white">Kursy walut</h2>
 
@@ -163,16 +161,14 @@ class CurrencyRates extends React.Component {
           this.state.selectedCurrency !== null &&
           this.state.endDate !== null &&
           this.state.startDate !== null ?
-            <div style={{backgroundColor: 'rgba(236, 236, 236, 0.75)'}}>
+            <div className='currency-rates-chart'>
               <Line
               data={chartData}
             />
             </div>:
             null
         }
-
       </div>
-
     )
   }
 }
@@ -187,7 +183,6 @@ const mapDispatchToProps = dispatch => ({
   getHistoricalCurrencies: (currencyStartDate, currencyEndDate, currencyId) => dispatch(getHistoricalCurrencies(currencyStartDate, currencyEndDate, currencyId)),
   resetHistoricalCurrencies: () => dispatch(resetHistoricalCurrencies())
 })
-
 
 export default connect(
   mapStateToProps,
